@@ -13,7 +13,7 @@ const Layout = () => {
           }
           <Outlet />
           {
-              width<500 && <MobileNavbar/>
+              width<=500 && <MobileNavbar/>
           }
     </div>
   )

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { userAuthSlice } from "./userAuth/userAuthSlice";
+import { authSlice } from "./userAuth/userAuthSlice";
+
 
 
 
@@ -8,7 +9,7 @@ import { userAuthSlice } from "./userAuth/userAuthSlice";
 
 const store = configureStore({
   reducer: {
-   userAuth: userAuthSlice.reducer,
+   auth: authSlice.reducer,
   },
   middleware: [thunk],
 });
