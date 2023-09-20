@@ -1,0 +1,70 @@
+.h1-container {
+  display: flex;
+  justify-content: center;
+  background-color: #29c16e;
+  font-size: 12px;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.main-support-container {
+  background-color: #29c16e;
+  width: 350px;
+  height: 160px;
+  flex-shrink: 0;
+
+  & h3 {
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    margin-top: 0px;
+  }
+
+  & img {
+    display: flex;
+    margin-left: 22%;
+  }
+}
+
+.p {
+  font-size: 12px;
+}
+
+.input-comment-container {
+  display: flex;
+  flex-direction: column;
+
+  & input {
+    width: 320px;
+    height: 130px;
+
+    &::placeholder {
+      text-justify: distribute;
+      margin-top: 10px;
+      text-align: left;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  & button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 114px;
+    height: 26px;
+    border-radius: 10px;
+    background: #29c16e;
+    border: none;
+  }
+}
+
+.horario-atencion{
+    font-size: 12px;
+}
