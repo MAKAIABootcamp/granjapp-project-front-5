@@ -16,43 +16,42 @@
 //     // background-color: #70e000;
 // }
 
-  & form {
+& form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+
+  & h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  & .inputs-container {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    justify-content: center;
 
-    & h1 {
-      display: flex;
-      justify-content: center;
-    }
-
-    & .inputs-container {
-      display: flex;
-      flex-direction: column;
-
-      & input {
-        height: 30px;
-        border-radius: 8px;
-        border: 1px solid #c8c9c7;
-        margin-bottom: 20px;
-      }
-    }
-
-    & .login-button {
-      justify-content: center;
+    & input {
       height: 30px;
-      background-color: #70e000;
-      border: none;
       border-radius: 8px;
-      color: white;
+      border: 1px solid #c8c9c7;
+      margin-bottom: 20px;
     }
+  }
 
-    & .toRegister-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
+  & .login-button {
+    justify-content: center;
+    height: 30px;
+    background-color: #70e000;
+    border: none;
+    border-radius: 8px;
+    color: white;
+  }
+
+  & .toRegister-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
   }
 }
