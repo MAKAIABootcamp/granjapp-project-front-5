@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+title {
+  font-family: "Arizonia", cursive;
+  font-size: 18px;
+}
