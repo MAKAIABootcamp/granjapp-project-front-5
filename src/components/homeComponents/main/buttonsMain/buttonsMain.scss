@@ -1,0 +1,17 @@
+.buttons-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 23px;
+    & button {
+        background: none;
+        border: none;
+    }
+
+    & .buttons-right-main{
+        & button {
+            padding-right: 10px;
+        }
+    }
+}
+

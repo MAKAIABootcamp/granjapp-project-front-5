@@ -1,0 +1,23 @@
+.filter-buttons-container {
+  margin-top: 13px;
+  display: flex;
+  gap: 10px;
+  & button {
+    background-color: #29C16E;
+    display: flex;
+    border: none;
+    border-radius: 10px;
+    width: 98px;
+    height: 31px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.267px;
+    text-transform: capitalize;
+  }
+}

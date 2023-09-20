@@ -9,6 +9,7 @@ import Layout from '../components/layout/layout';
 import LoginByPhone from '../pages/login/loginByPhone';
 import { InsertCode } from '../pages/login/insertCode';
 import { useCheckAuth } from '../hooks/useCheckAuth';
+import { Support } from '../pages/support/support';
 
 const Router = () => {
 
@@ -32,6 +33,8 @@ const Router = () => {
             <Route path="register" element={<Register />} />
             <Route path="loginWithCell" element={<LoginByPhone />} />
             <Route path="/insertcode" element={<InsertCode />} />
+            <Route path="support" element={<Support/>} />
+
           </Route>
           <Route
             element={
