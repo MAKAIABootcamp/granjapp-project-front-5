@@ -1,0 +1,36 @@
+h3{
+    margin-block: 2rem;
+}
+
+.form-container {
+    padding: 0rem 0rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+.form-container div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .form-container input , select {
+    border: none;
+    outline: none;
+    padding: 15px;
+    background-color: #eee;
+    border-radius: 20px;
+  }
+  .btn-pagar {
+    margin-block: 1rem 2rem;
+    background-color: #34F43D;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    width: 100%;
+    padding: 10px 0px;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    border-radius: 20px;
+  }
