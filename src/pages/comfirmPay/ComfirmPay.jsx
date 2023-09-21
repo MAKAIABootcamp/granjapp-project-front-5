@@ -12,18 +12,18 @@ function ComfirmPay() {
             <label htmlFor="">Departamento</label>
             <select name="departamentos">
               <option value="Amazonas">Amazonas</option>
-              <option value="Atlantico">Atlantico</option>
+              <option value="Atlantico">Antioquia</option>
               <option value="Bolivar">Bolivar</option>
               <option value="Boyacá">Boyacá</option>
             </select>
           </div>
           <div className="">
-            <label htmlFor="">Municipio</label>
+            <label htmlFor="">Ciudad</label>
             <select name="municipios">
-              <option value="Calamar">Calamar</option>
+              <option value="Calamar">Bogota</option>
               <option value="Cartagena">Cartagena</option>
-              <option value="Cantagallos">Cantagallos</option>
-              <option value=">Magangué">Magangué</option>
+              <option value="Cantagallos">medellin</option>
+              <option value=">Magangué">santander</option>
             </select>
           </div>
           <div className="">
