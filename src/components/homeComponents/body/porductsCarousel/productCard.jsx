@@ -4,6 +4,7 @@ import { setActiveShop } from "../../../../store/granjApp/granjAppSlice";
 import motoIcon from "../../../../assets/icons/moto-icon.svg";
 import ubiIcon from "../../../../assets/icons/ubi-icon.svg";
 import "./productCarousel.scss";
+import { useNavigate } from "react-router";
 
 export const ProductCard = ({
   name = "",
@@ -14,9 +15,10 @@ export const ProductCard = ({
   cost,
 }) => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const onClickProduct = () => {
     dispatch(setActiveShop({ id, name, weight, rating, url, cost }));
+    navigate("/product/" + id);
   };
 
   return (

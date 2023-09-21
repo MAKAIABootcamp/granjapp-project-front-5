@@ -5,8 +5,8 @@ import { MdEdit } from "react-icons/md";
 
 const LocationTablet = () => {
   return (
-    <div className="flex w-[768px]">
-      <section className="flex bg-[#2e0986] h-5 w-[768px]">
+    <div className="flex max-w-full">
+      <section className="flex bg-[#2e0986] h-5 w-full">
         <IconContext.Provider value={{ color: "#34d116" }}>
           <FaMapMarkerAlt className="h-3 w-3 left-4 relative top-[2px]" />
         </IconContext.Provider>

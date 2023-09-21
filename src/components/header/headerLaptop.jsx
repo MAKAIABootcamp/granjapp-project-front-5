@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../store/userAuth/thunks";
 import { FiMenu } from "react-icons/fi";
 import logo from "../../assets/logo1.png";
 import LocationLaptop from "../location/locationLaptop";
@@ -6,6 +8,7 @@ import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 
 const HeaderLaptop = () => {
+  const dispatch = useDispatch();
   return (
     <div className="bg-[#34d116] h-[60px] w-[1440px] flex relative">
       <FiMenu className="flex absolute top-6 left-6" />
@@ -24,6 +27,7 @@ const HeaderLaptop = () => {
         <AiOutlineUser className="flex absolute h-6 w-6 left-[530px] top-0" />
         <BsBell className="flex absolute h-6 w-6 left-[590px] top-0" />
         <BsCart className="flex absolute h-6 w-6 left-[650px] top-0" />
+        <button onClick={() => dispatch(startLogout())}>Cerrar sesión</button>
       </div>
     </div>
   );

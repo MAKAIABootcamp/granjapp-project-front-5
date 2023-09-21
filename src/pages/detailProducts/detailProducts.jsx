@@ -24,15 +24,15 @@ const DetailProducts = () => {
 
       {width <= 380 && height <= 720 ? (
         <div className="bg-gradient-to-b from-white to-[#d69f65] w-full h-[844px] top-[-464px] left-[-214px] fondo">
-          <DetailProductsMobile />
+          <DetailProductsMobile id={params.id} />
         </div>
       ) : width > 380 && width <= 768 && height <= 1024 ? (
-        <div className="bg-gradient-to-b from-white to-[#ffbc74] w-[768px] h-[844px] top-[-464px] left-[-214px] fondo">
-          <DetailProductsTablet />
+        <div className="bg-gradient-to-b from-white to-[#ffbc74] w-full h-[844px] top-[-464px] left-[-214px] fondo">
+          <DetailProductsTablet id={params.id} />
         </div>
       ) : (
-        <div className="bg-gradient-to-b from-white to-[#ffbc74] w-[1440px] h-[844px] top-[-464px] left-[-214px] fondo">
-          <DetailProductsLaptop />
+        <div className="bg-gradient-to-b from-white to-[#ffbc74] w-full h-[844px] top-[-464px] left-[-214px] fondo">
+          <DetailProductsLaptop id={params.id} />
         </div>
       )}
     </>
