@@ -96,7 +96,7 @@ npm run dev
 ## Autores 
 
 * Nazly Zambrano: https://github.com/Nazly2023
-* Jeffrey :
+* Jeffrey Stevenson : https://github.com/jeffs22 
 * Jaime Giraldo: 
 * Christian Lamadrid: https://github.com/christianrivera98
 
