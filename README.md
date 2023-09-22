@@ -3,7 +3,7 @@
 ![Logo](https://i.ibb.co/YkDp2XK/logo.jpg)
 
 
-GranjApp es una deliveri app con el objetivo de poder ayudar a los cultivadores colombianos a vender sus productos a un precio justo sin intermediarios como lo son las cadenas de producción. Permitiendoles interactuar directamente con el consumidor.
+GranjApp es una deliveri app con el objetivo de poder ayudar a los cultivadores colombianos a vender sus productos a un precio justo sin intermediarios como lo son las cadenas de producción. Permitiéndoles interactuar directamente con el consumidor.
 
 ## Aspectos destacados del proyecto: 
 
