@@ -1,0 +1,161 @@
+$small: 360px;
+$medium: 780px;
+$large: 1440px;
+
+@mixin header {
+  background-color: #34d116;
+  display: flex;
+  height: 60px;
+  width: 100%;
+}
+
+@mixin iconos {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48px;
+}
+@mixin search {
+  background-color: #b6f1d7;
+  height: 24px;
+  display: flex;
+}
+
+@mixin searchIcon {
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (max-width: $small) {
+  body {
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0.243),
+      rgba(255, 166, 0, 0.243),
+      rgba(255, 255, 0, 0.243),
+      rgba(0, 128, 0, 0.243),
+      rgba(0, 0, 255, 0.243),
+      rgba(76, 0, 130, 0.243),
+      rgba(238, 130, 238, 0.243)
+    );
+  }
+  .mobile {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    @include header;
+  }
+  .div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .timeMobile {
+    font-size: 10px;
+    margin: 4px 4px 4px 16px;
+  }
+
+  .iconosMobile {
+    @include iconos;
+    margin: 4px 12px 0 0;
+    display: flex;
+  }
+
+  .inputSearchMobile {
+    @include search;
+    padding: 4px;
+    border-radius: 10px;
+    width: 90%;
+
+    &__inputBusq {
+      @include search;
+      border-radius: 10px;
+      align-items: center;
+      top: -4px;
+      position: relative;
+      width: 80%;
+    }
+
+    &__inputCart {
+      width: 24px;
+      display: flex;
+      float: right;
+      justify-self: flex-end;
+    }
+  }
+
+  .searchIconMobile {
+    @include searchIcon;
+    margin: 0 8px;
+    font-size: 14px;
+    display: flex;
+  }
+}
+
+@media screen and (min-width: $small) and (max-width: $medium) {
+  body {
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0.243),
+      rgba(255, 166, 0, 0.243)
+    );
+  }
+  .tablet {
+    display: flex;
+    flex-direction: column;
+    @include header;
+  }
+  .div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .timeTablet {
+    font-size: 10px;
+    margin: 4px 4px 0px 16px;
+  }
+
+  .iconosTablet {
+    @include iconos;
+    margin: 4px 12px 0 4px;
+  }
+
+  .inputSearchTablet {
+    @include search;
+    margin: 4px 4px;
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    &__inputBusq {
+      @include search;
+      position: absolute;
+      width: 80%;
+      left: 24px;
+      font-size: 14px;
+      padding-left: 8px;
+    }
+
+    &__inputCartT {
+      @include searchIcon;
+      display: flex;
+      float: right;
+      position: absolute;
+      right: 10px;
+      top: 4px;
+    }
+  }
+
+  .searchIconTablet {
+    top: 4px;
+    display: flex;
+    position: absolute;
+    left: 4px;
+    @include searchIcon;
+  }
+}

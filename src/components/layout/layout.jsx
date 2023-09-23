@@ -28,9 +28,7 @@ const Layout = () => {
         )
       )}
       <Outlet />
-      <div id="mobileNavbar">
-        <MobileNavbar />
-      </div>
+      <ButtonNavigations />
     </main>
   );
 };

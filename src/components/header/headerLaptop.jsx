@@ -24,10 +24,15 @@ const HeaderLaptop = () => {
           placeholder="Buscar en granjapp"
           className="rounded-[10px] bg-[#b6f1d7] flex absolute left-6 text-[14px] h-6 pl-2 w-[386px]"
         />
-        <AiOutlineUser className="flex absolute h-6 w-6 left-[530px] top-0" />
-        <BsBell className="flex absolute h-6 w-6 left-[590px] top-0" />
-        <BsCart className="flex absolute h-6 w-6 left-[650px] top-0" />
-        <button onClick={() => dispatch(startLogout())}>Cerrar sesión</button>
+        <AiOutlineUser className="flex absolute h-6 w-6 left-[470px] top-0" />
+        <BsBell className="flex absolute h-6 w-6 left-[520px] top-0" />
+        <BsCart className="flex absolute h-6 w-6 left-[570px] top-0" />
+        <button
+          onClick={() => dispatch(startLogout())}
+          className="flex absolute h-6 w-[30px] left-[610px] top-0 border-white border-1 rounded-[5px]"
+        >
+          Cerrar sesión
+        </button>
       </div>
     </div>
   );

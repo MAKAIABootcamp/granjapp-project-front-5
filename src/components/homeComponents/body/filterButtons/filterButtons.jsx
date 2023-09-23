@@ -8,11 +8,11 @@ export const FilterButtons = ({ mostrarShops, mostrarProductos }) => {
         <button onClick={mostrarShops}>
           <p>Tiendas</p>
         </button>
-        <button  onClick={mostrarProductos}>
+        <button onClick={mostrarProductos}>
           <p>Productos</p>
         </button>
         <button>
-          <p>Cateogrias</p>
+          <p>Categorías</p>
         </button>
       </div>
     </>
