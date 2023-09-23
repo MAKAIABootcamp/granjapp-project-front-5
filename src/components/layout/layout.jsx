@@ -6,6 +6,7 @@ import HeaderTablet from "../header/headerTablet";
 import HeaderMobile from "../header/headerMobile";
 import LocationMobile from "../location/locationMobile";
 import LocationTablet from "../location/locationTablet";
+import MobileNavbar from "../mobileNavbar/mobileNavbar";
 
 const Layout = () => {
   const { width } = useScreenSize();
@@ -26,6 +27,8 @@ const Layout = () => {
           </>
         )
       )}
+      <Outlet />
+      <NavBarFooter />
     </main>
   );
 };
