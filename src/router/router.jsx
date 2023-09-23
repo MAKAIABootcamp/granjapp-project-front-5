@@ -9,6 +9,8 @@ import { InsertCode } from "../pages/login/insertCode";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import DetailProducts from "../pages/detailProducts/detailProducts";
 import { Support } from "../pages/support/support";
+import { Favorites } from "../pages/favorites/favorites";
+import { SalesTracking } from "../pages/salesTracking/salesTracking";
 
 const Router = () => {
   const { status } = useCheckAuth();
@@ -17,20 +19,26 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           {status === "authenticated" ? (
+          <>
+            <Route path="/*" element={<Home />} />
+            <Route path="/login*" element={<Login />} /> </> ) : (
             <>
-              <Route index element={<Home />} />
-              <Route path="product/:id" element={<DetailProducts />} />
+              
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="loginWithCell" element={<LoginByPhone />} />
+            <Route path="/insertcode" element={<InsertCode />} />
+            <Route path="support" element={<Support/>} />
+            <Route path="favorites" element={<Favorites/>} />
+            <Route path="salesTracking" element={<SalesTracking/>} />
+
+         
             </>
-          ) : (
-            <>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="loginWithCell" element={<LoginByPhone />} />
-              <Route path="insertcode" element={<InsertCode />} />
-              <Route path="support" element={<Support />} />
-            </>
-          )}
-        </Route>
+         )}
+          
+       </Route>   
+          
+          
       </Routes>
     </BrowserRouter>
   );

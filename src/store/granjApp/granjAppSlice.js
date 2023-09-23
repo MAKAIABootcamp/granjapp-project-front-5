@@ -8,6 +8,8 @@ export const granjAppSlice = createSlice({
     activeShop: null,
     product: [],
     activeProduct: null,
+    promos: [],
+    activePromos:null,
 
   },
   reducers: {
@@ -26,9 +28,17 @@ export const granjAppSlice = createSlice({
     setProduct: (state, action) => {
       state.product = action.payload;
     },
+
+    setActivePromos: (state, action) => {
+      state.activePromos = action.payload;
+    },
+
+    setPromos: (state, action) => {
+      state.promos = action.payload;
+    },
   
   },
 });
 // Action creators are generated for each case reducer function
-export const { setActiveShop, setShop, setActiveProduct, setProduct } = granjAppSlice.actions;
+export const { setActiveShop, setShop, setActiveProduct, setProduct, setPromos, setActivePromos } = granjAppSlice.actions;
 

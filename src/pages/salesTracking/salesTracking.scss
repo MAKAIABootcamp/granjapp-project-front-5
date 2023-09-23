@@ -1,0 +1,316 @@
+@media (min-width: 801px) {
+  .h1-SalesTracking-container {
+    background: gainsboro;
+
+    & h1 {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      margin-left: 10px;
+    }
+  }
+
+  .h3-SalesTracking-container {
+    margin-left: 10px;
+    margin-top: 0px;
+  }
+
+  .body-salesTracking-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 200px;
+    background-color: #34d116b2;
+    padding: 20px;
+    border-radius: 20px;
+
+    .card-productSend-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: aliceblue;
+      height: 150px;
+      width: 90%;
+      border-radius: 10px;
+
+      & .info-productSend-container {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 50px;
+
+        & img {
+          border-radius: 10%;
+          width: 20%;
+        }
+      }
+
+      & .iconarrow-container {
+        & button {
+          border: none;
+          background: none;
+          margin-right: 80px;
+          width: 80px;
+
+          & img {
+            width: 40%;
+          }
+        }
+      }
+    }
+  }
+
+  .body-salesTrackingSelected-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 560px;
+    background-color: #34d116b2;
+    padding: 20px;
+    border-radius: 20px;
+
+    .card-productSend-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: aliceblue;
+      height: 150px;
+      width: 60%;
+      border-radius: 10px;
+
+      & .info-productSend-container {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 50px;
+
+        & img {
+          border-radius: 10%;
+          width: 20%;
+        }
+      }
+    }
+    .tracking-container {
+      width: 90%;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: aliceblue;
+
+      & .p-buttonSave-container {
+        display: flex;
+        justify-content: space-between;
+
+        & p {
+          font-size: 20px;
+          font-weight: 550;
+        }
+
+        & button {
+          margin-right: 20px;
+          border: none;
+          background: none;
+        }
+      }
+
+      & .status-container {
+        margin-left: 20px;
+
+        & .button-status-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+
+          & button {
+            width: 30px;
+            height: 30px;
+            background-color: #e7e7e7; /* Color original del botón */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+          }
+
+          & button.clicked {
+            background-color: #34d116b2; /* Color cuando se hace clic */
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .h1-SalesTracking-container {
+    display: flex;
+    justify-content: center;
+    background: #34d116b2;
+
+    & h1 {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      margin-left: 10px;
+      font-size: 23px;
+    }
+  }
+
+  .h3-SalesTracking-container {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .body-salesTracking-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 100px;
+    background-color: #34d116b2;
+    padding: 20px;
+    border-radius: 20px;
+
+    .card-productSend-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: aliceblue;
+      height: 100px;
+      width: 100%;
+      border-radius: 10px;
+
+      & .info-productSend-container {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+
+        & img {
+          border-radius: 50%;
+          width: 70px;
+          height: 60px;
+        }
+
+        & .section-productSend-container{
+            & h3 {
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+
+            & p{
+                font-size: 14px;
+                margin-top: 3px;
+            }
+        }
+      }
+
+      & .iconarrow-container {
+        & button {
+          border: none;
+          background: none;
+          margin-right: 30px;
+          width: 80px;
+
+          & img {
+            width: 40%;
+          }
+        }
+      }
+    }
+  }
+
+  .body-salesTrackingSelected-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 500px;
+    background-color: #34d116b2;
+    padding: 10px;
+    border-radius: 20px;
+
+    .card-productSend-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: aliceblue;
+        height: 100px;
+        width: 100%;
+        border-radius: 10px;
+
+      & .info-productSend-container {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 50px;
+
+        & img {
+            border-radius: 50%;
+            width: 70px;
+            height: 60px;
+        }
+      }
+    }
+    .tracking-container {
+      width: 90%;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: aliceblue;
+      
+
+      & .p-buttonSave-container {
+        display: flex;
+        justify-content: space-between;
+
+        & p {
+          font-size: 15px;
+          font-weight: 550;
+        }
+
+        & button {
+          margin-right: 10px;
+          border: none;
+          background: none;
+        }
+      }
+
+      & .status-container {
+        margin-left: 20px;
+        
+
+
+        & .button-status-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+
+          & button {
+            width: 30px;
+            height: 30px;
+            background-color: #e7e7e7; /* Color original del botón */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+          }
+        }
+      }
+    }
+  }
+
+  .confirm-sale-button{
+    margin-top: 10px;
+    height: 40px;
+    width: 90%;
+    border: none;
+    border-radius: 10px;
+    background-color: aliceblue ;
+    color: #34d116b2;
+    font-weight: 600;
+  }
+}

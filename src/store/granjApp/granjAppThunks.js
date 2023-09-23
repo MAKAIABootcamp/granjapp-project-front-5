@@ -1,6 +1,7 @@
 import { loadProducts } from "../../helpers/loadProducts";
+import { loadPromos } from "../../helpers/loadPromos";
 import {  loadTiendas } from "../../helpers/loadTiendas";
-import { setProduct, setShop } from "./granjAppSlice";
+import { setProduct, setPromos, setShop } from "./granjAppSlice";
 
 export const startLoadingShops = () => {
 
@@ -33,6 +34,23 @@ export const startLoadingProducts= () => {
 
     ;
 }
+
+export const startLoadingPromos= () => {
+
+    return async (dispatch, getState) => {
+
+        const { uid } = getState().auth;
+        if ( !uid ) throw new Error ('El UID del usuario no existe');
+
+        const promo = await loadPromos();
+        dispatch ( setPromos(promo));
+
+        
+    }
+
+    ;
+}
+
 
 
 
