@@ -6,12 +6,11 @@ import HeaderTablet from "../header/headerTablet";
 import HeaderMobile from "../header/headerMobile";
 import LocationMobile from "../location/locationMobile";
 import LocationTablet from "../location/locationTablet";
-import NavBarFooter from "../navBarFooter/navBarFooter";
 
 const Layout = () => {
   const { width } = useScreenSize();
   return (
-    <main>
+    <main className="container">
       {width > 768 ? (
         <HeaderLaptop />
       ) : width > 360 && width <= 768 ? (
@@ -27,8 +26,6 @@ const Layout = () => {
           </>
         )
       )}
-      <Outlet />
-      <NavBarFooter />
     </main>
   );
 };

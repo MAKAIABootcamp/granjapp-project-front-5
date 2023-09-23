@@ -12,13 +12,12 @@ const DetailProductsLaptop = ({ id }) => {
   useEffect(() => {
     const getProduct = async () => {
       const product = await getProductById(id);
-      console.log(product);
       setproduct(product);
     };
     getProduct();
   }, []);
   return (
-    <div className="ml-2 w-[768px]">
+    <div className="ml-2 w-full">
       <div key={product.id}>
         <section className="flex">
           <div className="flex-col">

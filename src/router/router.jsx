@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
 import Login from "../pages/login/login";
 import Register from "../pages/register/register";
 import Home from "../pages/home/home";
@@ -14,32 +14,29 @@ import { SalesTracking } from "../pages/salesTracking/salesTracking";
 
 const Router = () => {
   const { status } = useCheckAuth();
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {status === "authenticated" ? (
-          <>
-            <Route path="/*" element={<Home />} />
-            <Route path="/login*" element={<Login />} /> </> ) : (
-            <>
-              
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="loginWithCell" element={<LoginByPhone />} />
-            <Route path="/insertcode" element={<InsertCode />} />
-            <Route path="support" element={<Support/>} />
-            <Route path="favorites" element={<Favorites/>} />
-            <Route path="salesTracking" element={<SalesTracking/>} />
-
-         
-            </>
-         )}
-          
-       </Route>   
-          
-          
-      </Routes>
+      {status === "authenticated" ? (
+        <>
+          <Layout />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<DetailProducts />} />
+          </Routes>
+        </>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="loginWithCell" element={<LoginByPhone />} />
+          <Route path="/insertcode" element={<InsertCode />} />
+          <Route path="support" element={<Support />} />
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="salesTracking" element={<SalesTracking />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 };

@@ -15,9 +15,9 @@ const DetailProductsTablet = ({ id }) => {
     getProduct();
   });
   return (
-    <div className="flex mx-auto items-center max-w-full">
+    <div className="flex mx-auto items-center w-full">
       <div key={product.id}>
-        <section className="flex">
+        <section className="flex w-full">
           <div className="flex-col">
             <p className="mt-2 px-2">
               <a href="#" className="mr-1">
@@ -44,7 +44,7 @@ const DetailProductsTablet = ({ id }) => {
             </div>
           </div>
 
-          <div className="mt-2 flex-row items-center mx-auto max-w-full py-2">
+          <div className="mt-2 flex-row items-center mx-auto  py-2">
             <p className="">Costo: ${`${product.cost}/${product.unity}`}</p>
             <strong>Variedad:</strong>
             <div className="flex w-full mx-auto items-center justify-center p-2">

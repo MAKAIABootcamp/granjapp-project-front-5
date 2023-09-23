@@ -29,18 +29,6 @@ $large: 1440px;
 }
 
 @media screen and (max-width: $small) {
-  body {
-    background-image: linear-gradient(
-      to right,
-      rgba(255, 0, 0, 0.243),
-      rgba(255, 166, 0, 0.243),
-      rgba(255, 255, 0, 0.243),
-      rgba(0, 128, 0, 0.243),
-      rgba(0, 0, 255, 0.243),
-      rgba(76, 0, 130, 0.243),
-      rgba(238, 130, 238, 0.243)
-    );
-  }
   .mobile {
     display: flex;
     flex-direction: column;
@@ -97,13 +85,6 @@ $large: 1440px;
 }
 
 @media screen and (min-width: $small) and (max-width: $medium) {
-  body {
-    background-image: linear-gradient(
-      to right,
-      rgba(255, 0, 0, 0.243),
-      rgba(255, 166, 0, 0.243)
-    );
-  }
   .tablet {
     display: flex;
     flex-direction: column;

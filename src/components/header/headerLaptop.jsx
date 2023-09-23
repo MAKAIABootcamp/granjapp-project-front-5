@@ -1,17 +1,20 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
-import { FiMenu } from "react-icons/fi";
 import logo from "../../assets/logo1.png";
 import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
+import DropdownMenu from "../menuDropdown/menuDropdown";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
   return (
     <div className="bg-[#34d116] h-[60px] w-[1440px] flex relative">
-      <FiMenu className="flex absolute top-6 left-6" />
+      {/* <DropdownButton /> */}
+      {/* Dropdown menu */}
+      <DropdownMenu />
+      {/* End of Dropdown menu */}
       <img src={logo} className="flex absolute w-18 h-10 left-14 top-2" />
       <LocationLaptop />
       <div

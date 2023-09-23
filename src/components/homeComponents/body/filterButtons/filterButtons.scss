@@ -3,10 +3,10 @@
   display: flex;
   gap: 10px;
   & button {
-    background-color: #29C16E;
+    background-color: #29c16e;
     display: flex;
     border: none;
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     width: 98px;
     height: 31px;
     align-items: center;
@@ -19,5 +19,12 @@
     line-height: normal;
     letter-spacing: -0.267px;
     text-transform: capitalize;
+    margin-left: 10px;
+  }
+  & button:hover {
+    background-color: #34d116;
+  }
+  & p:hover {
+    color: #000;
   }
 }
