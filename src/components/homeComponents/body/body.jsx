@@ -3,6 +3,7 @@ import { SearchBar } from "./searchBar/searchBar";
 import { FilterButtons } from "./filterButtons/filterButtons";
 import { ShopsCarousel } from "./restarantsCarousel/shopsCarousel";
 import { ProductCarousel } from "./porductsCarousel/productCarousel";
+import { CarouselPromo } from "../../carouselPromo/carouselPromo";
 
 
 const Body = () => {
@@ -19,6 +20,7 @@ const Body = () => {
   return (
     <>
       <FilterButtons mostrarShops={mostrarShops} mostrarProductos={mostrarProductos} />
+      <CarouselPromo/>
       {mostrarShopsCarousel ? <ShopsCarousel /> : <ProductCarousel />}
     </>
   );
