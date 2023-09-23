@@ -1,12 +1,11 @@
 import React from "react";
 import img from "../../assets/supportMaterial/img-support.png";
 import { SelectionBar } from "../../components/supportComponents/selectionBar";
-import "./support.scss"
-import StatusBar from "../../components/statusBar/StatusBar";
+import "./support.scss";
+
 export const Support = () => {
   return (
     <>
-    <StatusBar/>
       <div className="h1-container">
         <h1>Soporte</h1>
       </div>
@@ -15,18 +14,18 @@ export const Support = () => {
         <h3>¿Cómo podemos ayudarte?</h3>
         <img src={img} alt="" />
       </div>
-
+    <div className="selectionBar">
       <SelectionBar />
+    </div>
+     
 
-      <p className="p">Cuentanos tu problema detalladamente</p>
+      <p className="p">Cuentanos tu problema detalladamente:</p>
       <div className="input-comment-container">
         <input type="text" placeholder="Comentanos aquí..." />
-
-        <button>
-          <p>Enviar</p>
-        </button>
       </div>
-
+      <button className="send-button">
+        <p>Enviar</p>
+      </button>
       <p className="horario-atencion">
         Te enviaremos la respuesta a tu e-mail en máximo 4 horas. Recuerda que
         nuestro horario de antecion es de lunes a viernes de 9am-6pm y Sabado,

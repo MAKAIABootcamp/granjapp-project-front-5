@@ -18,6 +18,13 @@ const MobileNavbar = () => {
   const onSupport = () => {
     navigate('support');
   }
+
+  const onFavorites = () => {
+    navigate('favorites');
+  }
+  const onVentas = () => {
+    navigate('salesTracking');
+  }
   return (
     <>
       <div className='mobileNavBar-container'>
@@ -41,11 +48,11 @@ const MobileNavbar = () => {
             </button>
         </div>
         <div className='right-navBar-container' >
-        <button>
+        <button onClick={onVentas}>
             <img src={ventas} alt="" />
             <p>Ventas</p>
           </button>
-          <button>
+          <button onClick={onFavorites}>
             <img src={favoritos} alt="" />
             <p>Favoritos</p>
           </button>

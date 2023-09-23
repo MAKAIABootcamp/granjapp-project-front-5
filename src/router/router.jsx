@@ -19,26 +19,24 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           {status === "authenticated" ? (
-          <>
-            <Route path="/*" element={<Home />} />
-            <Route path="/login*" element={<Login />} /> </> ) : (
             <>
-              
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="loginWithCell" element={<LoginByPhone />} />
-            <Route path="/insertcode" element={<InsertCode />} />
-            <Route path="support" element={<Support/>} />
-            <Route path="favorites" element={<Favorites/>} />
-            <Route path="salesTracking" element={<SalesTracking/>} />
-
-         
+              <Route path="/*" element={<Home />} />
+              <Route path="/login*" element={<Login />} />{" "}
+              <Route path="support" element={<Support/>} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="salesTracking" element={<SalesTracking />} />
             </>
-         )}
-          
-       </Route>   
-          
-          
+          ) : (
+            <>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="loginWithCell" element={<LoginByPhone />} />
+              <Route path="/insertcode" element={<InsertCode />} />
+
+             
+            </>
+          )}
+        </Route>
       </Routes>
     </BrowserRouter>
   );

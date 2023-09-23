@@ -1,71 +1,220 @@
-.h1-container {
-  display: flex;
-  justify-content: center;
-  background-color: #29c16e;
-  font-size: 12px;
-  text-align: center;
-  font-family: Roboto;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@500&display=swap');
 
-.main-support-container {
-  background-color: #29c16e;
-  width: 100%;
-  height: 160px;
-  flex-shrink: 0;
-  margin-top: 10px;
-
-  & h3 {
-    display: flex;
-    justify-content: center;
-    height: 20px;
- 
-  }
-
-  & img {
-    display: flex;
-    margin-left: 22%;
-  }
-}
-
-.p {
-  font-size: 12px;
-}
-
-.input-comment-container {
-  display: flex;
-  flex-direction: column;
-
-  & input {
-    width: 320px;
-    height: 130px;
-
-    &::placeholder {
-      text-justify: distribute;
-      margin-top: 10px;
-      text-align: left;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-  }
-
-  & button {
+@media (max-width: 800px){
+  .h1-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    background-color: #34D116;
+    font-size: 12px;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    & h1{
+      font-family: 'Hind Vadodara', sans-serif;
+    }
+  }
+  
+  .main-support-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #34D116;
+    width: 100%;
+    height: 160px;
+    flex-shrink: 0;
+    margin-top: 10px;
+  
+    & h3 {
+      display: flex;
+      justify-content: center;
+      height: 20px;
+      margin-bottom: 20px;
+      font-family: 'Hind Vadodara', sans-serif;
+   
+    }
+  
+  }
+  
+  .p {
+    font-size: 14px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 12px;
+    font-family: 'Hind Vadodara', sans-serif;
+  }
+  
+  .input-comment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    & input {
+      
+      width: 380px;
+      height: 130px;
+      background-color: rgb(224, 224, 224);
+      font-family: 'Hind Vadodara', sans-serif;
+  
+      &::placeholder {
+        text-justify: distribute;
+        margin-top: 10px;
+        margin-left: 5px;
+        text-align: left;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+  }
+  
+  .horario-atencion{
+    padding: 10px;
+      font-size: 12px;
+      text-align: justify;
+      font-family: 'Hind Vadodara', sans-serif;
+  }
+
+  .send-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
     width: 114px;
     height: 26px;
     border-radius: 10px;
-    background: #29c16e;
+    background: #34D116;
     border: none;
+    
+    & p {
+      font-family: 'Hind Vadodara', sans-serif;
+    }
+  }
+  
+}
+
+@media (min-width: 780px){
+  #mobileNavbar{
+    display: none;
+  }
+
+  .h1-container {
+    display: flex;
+    background-color: none;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    margin-left: 20%;
+    width: 50%;
+    height: 70px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    & h1{
+      font-family: 'Hind Vadodara', sans-serif;
+      font-size: 40px;
+    }
+  }
+  
+  .main-support-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    width: 50%;
+    height: 160px;
+    margin-top: 10px;
+    margin-left: 20%;
+  
+    & h3 {
+      display: flex;
+      justify-content: center;
+      height: 20px;
+      margin-bottom: 20px;
+      font-family: 'Hind Vadodara', sans-serif;
+      font-size: 20px;
+   
+    }
+
+    & img{
+      width: 20%;
+    } 
+  
+  }
+
+  .selectionBar{
+    display: flex;
+    margin-left: 38%;
+    margin-bottom: 40px;
+  }
+  
+  .p {
+    font-size: 20px;
+    margin-top: 15px;
+    margin-left: 20%;
+    margin-bottom: 12px;
+    font-family: 'Hind Vadodara', sans-serif;
+  }
+  
+  .input-comment-container {
+ margin-left: 20%;
+  
+    & input {
+      
+      width: 880px;
+      height: 200px;
+      background-color: rgb(224, 224, 224);
+      font-family: 'Hind Vadodara', sans-serif;
+  
+      &::placeholder {
+        text-justify: distribute;
+        margin-top: 10px;
+        margin-left: 5px;
+        text-align: left;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+
+  }
+  
+  .horario-atencion{
+    width: 850px;
+    padding: 10px;
+      font-size: 18px;
+      text-align: justify;
+      font-family: 'Hind Vadodara', sans-serif;
+      margin-left: 20%;
+  }
+
+  .send-button{
+    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20%;
+    width: 140px;
+    height: 36px;
+    border-radius: 10px;
+    background: #34D116;
+    border: none;
+    
+    & p {
+      font-family: 'Hind Vadodara', sans-serif;
+    }
   }
 }
 
-.horario-atencion{
-    font-size: 12px;
-}

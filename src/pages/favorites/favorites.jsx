@@ -5,12 +5,8 @@ import StatusBar from '../../components/statusBar/StatusBar'
 
 export const Favorites = () => {
   return (
-    <>  
-    <div id='statusBar'>
-        <StatusBar/>
-    </div>
-        
-        <div className='h1-favorites-container'>
+    <>          
+      <div className='h1-favorites-container'>
             <h1>Favoritos</h1>
         </div>
         <section className='section-favorites-container'>
