@@ -2,6 +2,7 @@ import React from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 import { MdEdit } from "react-icons/md";
+// import GeoLocation from "../../services/geolocalization";
 
 const LocationMobile = () => {
   return (
@@ -15,7 +16,7 @@ const LocationMobile = () => {
             Recibelo en
           </strong>
           <span className="h-4 text-[13px] leading-[16.41px] text-center text-[#fff]">
-            882 Well St. New-York
+            Rionegro, Antioquia
           </span>
           <IconContext.Provider value={{ color: "#34d116" }}>
             <MdEdit className="h-4 w-4 " />

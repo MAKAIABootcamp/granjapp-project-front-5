@@ -1,6 +1,5 @@
 import React from "react";
 import useScreenSize from "../../hooks/useScreenSize";
-import ButtonNavigations from "../../components/buttonNavigations/buttonNavigations";
 import HeaderMobile from "../../components/header/headerMobile";
 import HeaderTablet from "../../components/header/headerTablet";
 import HeaderLaptop from "../../components/header/headerLaptop";

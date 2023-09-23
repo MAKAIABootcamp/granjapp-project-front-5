@@ -2,6 +2,7 @@ import React from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { IconContext } from "react-icons";
 import { MdKeyboardArrowRight } from "react-icons/md";
+// import GeoLocation from "../../services/geolocalization";
 
 const LocationLaptop = () => {
   return (
@@ -15,7 +16,7 @@ const LocationLaptop = () => {
             Compra y recoge:
           </strong>
           <span className="relative w-[146px] h-4 top-[13px] left-[91px] text-[14px] leading-[16.41px] text-center text-[#414141]">
-            882 Well St. New-York
+            Rionegro, Antioquia
           </span>
           <MdKeyboardArrowRight className="absolute w-6 top-[14px] left-[310px]" />
         </div>

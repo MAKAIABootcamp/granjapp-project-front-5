@@ -1,0 +1,48 @@
+.footer {
+  display: flex;
+  width: 323px;
+  height: 37px;
+  margin-bottom: 0;
+  margin-left: 34px;
+  background-color: transparent;
+  margin-top: 800px;
+  position: absolute;
+}
+
+@mixin icons() {
+  display: flex;
+  position: absolute;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+.home {
+  @include icons();
+  left: 0;
+}
+
+.forum {
+  @include icons();
+  left: 100px;
+}
+
+.support {
+  @include icons();
+  left: 194px;
+}
+
+.ship {
+  @include icons();
+  left: 291px;
+}
+
+.likes {
+  @include icons();
+  left: 300px;
+}
+
+.user {
+  @include icons();
+  left: 332px;
+}
