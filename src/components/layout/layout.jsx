@@ -1,22 +1,36 @@
-import React from 'react';
-import useScreenSize from '../../hooks/useScreenSize';
-import MobileNavbar from '../mobileNavbar/mobileNavbar';
-import DesktopNavbar from '../desktopNavbar/desktopNavbar';
-import { Outlet } from 'react-router-dom';
+import React from "react";
+import { Outlet } from "react-router-dom";
+import useScreenSize from "../../hooks/useScreenSize";
+import HeaderLaptop from "../header/headerLaptop";
+import HeaderTablet from "../header/headerTablet";
+import HeaderMobile from "../header/headerMobile";
+import LocationMobile from "../location/locationMobile";
+import LocationTablet from "../location/locationTablet";
+import ButtonNavigations from "../buttonNavigations/buttonNavigations";
 
 const Layout = () => {
-    const { width} = useScreenSize();
+  const { width } = useScreenSize();
   return (
-      <div>
-          {
-              width>500 && <DesktopNavbar/>
-          }
-          <Outlet />
-          {
-              width<=500 && <MobileNavbar/>
-          }
-    </div>
-  )
-}
+    <main>
+      {width > 768 ? (
+        <HeaderLaptop />
+      ) : width > 360 && width <= 768 ? (
+        <>
+          <HeaderTablet />
+          <LocationTablet />
+        </>
+      ) : (
+        width <= 360 && (
+          <>
+            <HeaderMobile />
+            <LocationMobile />
+          </>
+        )
+      )}
+      <Outlet />
+      <ButtonNavigations />
+    </main>
+  );
+};
 
-export default Layout
+export default Layout;

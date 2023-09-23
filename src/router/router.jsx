@@ -1,57 +1,47 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import PublicRouter from './publicRouter';
-import PrivateRouter from './privateRouter';
-import Login from '../pages/login/login';
-import Register from '../pages/register/register';
-import Home from '../pages/home/home';
-import Layout from '../components/layout/layout';
-import LoginByPhone from '../pages/login/loginByPhone';
-import { InsertCode } from '../pages/login/insertCode';
-import { useCheckAuth } from '../hooks/useCheckAuth';
-import { Support } from '../pages/support/support';
-import { Favorites } from '../pages/favorites/favorites';
-import { SalesTracking } from '../pages/salesTracking/salesTracking';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "../pages/login/login";
+import Register from "../pages/register/register";
+import Home from "../pages/home/home";
+import Layout from "../components/layout/layout";
+import LoginByPhone from "../pages/login/loginByPhone";
+import { InsertCode } from "../pages/login/insertCode";
+import { useCheckAuth } from "../hooks/useCheckAuth";
+import DetailProducts from "../pages/detailProducts/detailProducts";
+import { Support } from "../pages/support/support";
+import { Favorites } from "../pages/favorites/favorites";
+import { SalesTracking } from "../pages/salesTracking/salesTracking";
 
 const Router = () => {
-
-  const {status} = useCheckAuth();
-
+  const { status } = useCheckAuth();
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* {status === "authenticated" ? (
+          {status === "authenticated" ? (
+          <>
             <Route path="/*" element={<Home />} />
-          ) : (
-            <Route path="/login*" element={<Login />} />
-          )} */}
-          <Route
-            element={
-              <PublicRouter isAuthenticate={status === "authenticated"} />
-            }
-          >
+            <Route path="/login*" element={<Login />} /> </> ) : (
+            <>
+              
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="loginWithCell" element={<LoginByPhone />} />
             <Route path="/insertcode" element={<InsertCode />} />
             <Route path="support" element={<Support/>} />
-            <Route path="favorites" element={<Favorites />} />
-            <Route path="salesTracking" element={<SalesTracking />} />
+            <Route path="favorites" element={<Favorites/>} />
+            <Route path="salesTracking" element={<SalesTracking/>} />
 
-          </Route>
-          <Route
-            element={
-              <PrivateRouter isAuthenticate={status === "authenticated"} />
-            }
-          >
-            <Route path="home" element={<Home />} />
-            
-          </Route>
-        </Route>
+         
+            </>
+         )}
+          
+       </Route>   
+          
+          
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default Router;
