@@ -57,7 +57,7 @@ $large: 1440px;
     @include search;
     padding: 4px;
     border-radius: 10px;
-    width: 90%;
+    // width: 70%;
 
     &__inputBusq {
       @include search;
@@ -81,6 +81,18 @@ $large: 1440px;
     margin: 0 8px;
     font-size: 14px;
     display: flex;
+  }
+  .divUser {
+    justify-self: flex-end;
+    position: relative;
+    margin-left: 7px;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+  }
+  .userName {
+    font-size: 10px;
+    text-align: center;
   }
 }
 

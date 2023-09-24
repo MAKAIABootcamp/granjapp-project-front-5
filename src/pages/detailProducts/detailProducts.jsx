@@ -1,6 +1,5 @@
 import React from "react";
 import useScreenSize from "../../hooks/useScreenSize";
-
 import DetailProductsMobile from "./mainProducts/DetailProductsMobile";
 import DetailProductsTablet from "./mainProducts/DetailProductsTablet";
 import DetailProductsLaptop from "./mainProducts/DetailProductsLaptop";

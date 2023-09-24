@@ -22,7 +22,7 @@ const Router = () => {
           {status === "authenticated" ? (
             <>
               <Route path="/*" element={<Home />} />
-              <Route path="/login*" element={<Login />} />{" "}
+              <Route path="/login" element={<Login />} />{" "}
               <Route path="support" element={<Support />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="salesTracking" element={<SalesTracking />} />

@@ -6,16 +6,26 @@ import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
+import { useNavigate } from "react-router";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onHome = () => {
+    navigate("/");
+  };
   return (
     <div className="bg-[#34d116] h-[60px] w-[1440px] flex relative">
       {/* <DropdownButton /> */}
       {/* Dropdown menu */}
       <DropdownMenu />
       {/* End of Dropdown menu */}
-      <img src={logo} className="flex absolute w-18 h-10 left-14 top-2" />
+      <img
+        src={logo}
+        className="flex absolute w-18 h-10 left-14 top-2 cursor-pointer"
+        onClick={onHome}
+      />
       <LocationLaptop />
       <div
         className="bg-[#b6f1d7] h-6

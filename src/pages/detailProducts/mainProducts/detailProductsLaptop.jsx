@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { imgsProducts } from "../../../components/imgs/imgs";
 import { FaFacebookF, FaLinkedin, FaPinterest } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
 import { BsCart3 } from "react-icons/bs";
@@ -22,9 +21,9 @@ const DetailProductsLaptop = ({ id }) => {
         <section className="flex">
           <div className="flex-col">
             <p className="mt-2">
-              <a href="#" className="mr-1">
+              <Link to="/" className="mr-1">
                 Inicio/
-              </a>
+              </Link>
               <a href="#" className="mr-1">
                 Productos/
               </a>

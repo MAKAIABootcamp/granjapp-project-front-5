@@ -13,7 +13,7 @@ const LocationMobile = () => {
         </IconContext.Provider>
         <div className="flex items-center space-x-2">
           <strong className="text-[#fff]  h-3 text-[13px] items-center flex text-center whitespace-nowrap">
-            Recibelo en
+            Recíbelo en
           </strong>
           <span className="h-4 text-[13px] leading-[16.41px] text-center text-[#fff]">
             Rionegro, Antioquia

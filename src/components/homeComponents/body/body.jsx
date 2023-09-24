@@ -3,11 +3,9 @@ import { SearchBar } from "./searchBar/searchBar";
 import { FilterButtons } from "./filterButtons/filterButtons";
 import { ShopsCarousel } from "./restarantsCarousel/shopsCarousel";
 import { ProductCarousel } from "./porductsCarousel/productCarousel";
-import { CarouselPromo } from "../../carouselPromo/carouselPromo";
-
+import CarouselPromo from "../../carouselPromo/carouselPromo";
 
 const Body = () => {
-
   const [mostrarShopsCarousel, setMostrarShopsCarousel] = useState(true);
 
   const mostrarShops = () => {
@@ -19,8 +17,11 @@ const Body = () => {
   };
   return (
     <>
-      <FilterButtons mostrarShops={mostrarShops} mostrarProductos={mostrarProductos} />
-      <CarouselPromo/>
+      <FilterButtons
+        mostrarShops={mostrarShops}
+        mostrarProductos={mostrarProductos}
+      />
+      <CarouselPromo />
       {mostrarShopsCarousel ? <ShopsCarousel /> : <ProductCarousel />}
     </>
   );

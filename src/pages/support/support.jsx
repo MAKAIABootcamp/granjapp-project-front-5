@@ -14,22 +14,21 @@ export const Support = () => {
         <h3>¿Cómo podemos ayudarte?</h3>
         <img src={img} alt="" />
       </div>
-    <div className="selectionBar">
-      <SelectionBar />
-    </div>
-     
+      <div className="selectionBar">
+        <SelectionBar />
+      </div>
 
-      <p className="p">Cuentanos tu problema detalladamente:</p>
+      <p className="p">Cuéntanos tu problema de manera detallada:</p>
       <div className="input-comment-container">
-        <input type="text" placeholder="Comentanos aquí..." />
+        <input type="text" placeholder="Coméntanos aquí..." />
       </div>
       <button className="send-button">
         <p>Enviar</p>
       </button>
       <p className="horario-atencion">
-        Te enviaremos la respuesta a tu e-mail en máximo 4 horas. Recuerda que
-        nuestro horario de antecion es de lunes a viernes de 9am-6pm y Sabado,
-        Doingo y festivos 9am-4pm.
+        Te enviaremos la respuesta a tu e-mail en el menor tiempo posible.
+        Recuerda que nuestro horario de atención es de lunes a viernes de 9am -
+        6pm y sábado - domingo y festivos 9am - 4pm.
       </p>
     </>
   );
