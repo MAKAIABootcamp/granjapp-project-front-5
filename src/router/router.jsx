@@ -19,6 +19,7 @@ import LocationMobile from "../components/location/locationMobile";
 import ButtonNavigations from "../components/buttonNavigations/buttonNavigations";
 import MetodoPago from "../pages/metodoPago/MetodoPago";
 import ComfirmPay from "../pages/comfirmPay/ComfirmPay";
+import Foro from "../pages/foro/Foro";
 const Router = () => {
   const { status } = useCheckAuth();
   const { width } = useScreenSize();
@@ -53,6 +54,7 @@ const Router = () => {
             <Route path="/insertcode" element={<InsertCode />} />
             <Route path="/metodoPago" element={<MetodoPago />} />
             <Route path="metodoPago/comfirmPay" element={<ComfirmPay />} />
+            <Route path="foro" element={<Foro />} />
           </>
         )}
       </Routes>
