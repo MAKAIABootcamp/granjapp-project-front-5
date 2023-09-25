@@ -3,14 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const granjAppSlice = createSlice({
   name: "granjApp",
   initialState: {
-    
     shop: [],
     activeShop: null,
     product: [],
     activeProduct: null,
     promos: [],
-    activePromos:null,
-
+    activePromos: null,
+    posts: [],
+    activePost: null,
+    isSaving: false,
+    newPost: [],
   },
   reducers: {
     setActiveShop: (state, action) => {
@@ -36,9 +38,51 @@ export const granjAppSlice = createSlice({
     setPromos: (state, action) => {
       state.promos = action.payload;
     },
-  
+
+    setActivePost: (state, action) => {
+      state.activePost = action.payload;
+    },
+
+    setPosts: (state, action) => {
+      state.posts = action.payload;
+    },
+
+    savingNewPost: (state) => {
+      state.isSaving = true;
+    },
+
+    addNewEmptyPost: (state, action) => {
+      state.newPost.push(action.payload);
+      state.isSaving = false;
+    },
+
+    updatePost: (state, action) => {
+      state.isSaving = false;
+      state.newPost = state.newPost.map( post => {
+
+          if (post.id === action.payload.id) {
+
+              return action.payload;
+
+          }
+
+          return post;
+      });
+      // state.messageSaved = `${ action.payload.ti}`
+ },
   },
 });
 // Action creators are generated for each case reducer function
-export const { setActiveShop, setShop, setActiveProduct, setProduct, setPromos, setActivePromos } = granjAppSlice.actions;
-
+export const {
+  setActiveShop,
+  setShop,
+  setActiveProduct,
+  setProduct,
+  setPromos,
+  setActivePromos,
+  setActivePost,
+  setPosts,
+  savingNewPost,
+  addNewEmptyPost,
+  updatePost,
+} = granjAppSlice.actions;

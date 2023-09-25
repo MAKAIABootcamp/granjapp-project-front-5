@@ -11,6 +11,8 @@ import DetailProducts from "../pages/detailProducts/detailProducts";
 import { Support } from "../pages/support/support";
 import { Favorites } from "../pages/favorites/favorites";
 import { SalesTracking } from "../pages/salesTracking/salesTracking";
+import ShopDetails from "../pages/shopDetails/shopDetails";
+import { Foro } from "../pages/foro/foro";
 
 const Router = () => {
   const { status } = useCheckAuth();
@@ -23,9 +25,12 @@ const Router = () => {
             <>
               <Route path="/*" element={<Home />} />
               <Route path="/login" element={<Login />} />{" "}
-              <Route path="support" element={<Support />} />
-              <Route path="favorites" element={<Favorites />} />
-              <Route path="salesTracking" element={<SalesTracking />} />
+              <Route path="soporte" element={<Support />} />
+              <Route path="favoritos" element={<Favorites />} />
+              <Route path="seguimientoVentas" element={<SalesTracking />} />
+              <Route path="detallesTienda" element={<ShopDetails/>} />
+              <Route path="Foro" element={<Foro/>} />
+              
             </>
           ) : (
             <>

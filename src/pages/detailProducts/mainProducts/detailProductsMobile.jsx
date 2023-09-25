@@ -29,7 +29,7 @@ const DetailProductsMobile = ({ id }) => {
             Productos/
           </a>
           <a href="#" className="mr-1">
-            {product.variety}/
+            tipo
           </a>
           <a href="#" className="mr-1">
             {product.name}

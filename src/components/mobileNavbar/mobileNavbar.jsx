@@ -8,32 +8,46 @@ import perfil from '../../assets/mobileNavBar/Profile.svg';
 import cruz from '../../assets/mobileNavBar/cruz.svg';
 import './mobileNavBar.scss';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { startNewPost } from '../../store/granjApp/granjAppThunks';
+import { setActivePost } from '../../store/granjApp/granjAppSlice';
 
-const MobileNavbar = () => {
+const MobileNavbar = ({id, image='', description= ''}) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {isSaving} = useSelector(state => state.granjApp);
   const onHome = () => {
     navigate('home');
   }
   const onSupport = () => {
-    navigate('support');
+    navigate('soporte');
   }
 
   const onFavorites = () => {
-    navigate('favorites');
+    navigate('favoritos');
   }
   const onVentas = () => {
-    navigate('salesTracking');
+    navigate('seguimientoVentas');
+  }
+
+  const onForo = () => {
+    navigate('foro');
+  }
+
+  const onNewPost = () => {
+    dispatch(startNewPost());
+    dispatch (setActivePost({ id, image, description}))
   }
   return (
     <>
-      <div className='mobileNavBar-container'>
+      <div id='mobileNavbar' className='mobileNavBar-container'>
         <div className='left-navBar-container'>
           <button onClick={onHome}>
             <img src={inicio} alt="" />
             <p>Inicio</p>
           </button>
-          <button>
+          <button onClick={onForo}>
             <img src={foro} alt="" />
             <p>Foro</p>
           </button>
@@ -43,7 +57,8 @@ const MobileNavbar = () => {
           </button>
         </div>
         <div className='button-add-container'>
-            <button>
+            <button onClick={onNewPost}
+            disabled={isSaving}>
               <img src={cruz} alt="" />
             </button>
         </div>
