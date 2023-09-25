@@ -11,32 +11,35 @@ import DetailProducts from "../pages/detailProducts/detailProducts";
 import { Support } from "../pages/support/support";
 import { Favorites } from "../pages/favorites/favorites";
 import { SalesTracking } from "../pages/salesTracking/salesTracking";
+import SearchPage from "../pages/searchPage/searchPage";
 
 const Router = () => {
   const { status } = useCheckAuth();
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {status === "authenticated" ? (
-            <>
-              <Route path="/*" element={<Home />} />
-              <Route path="/login" element={<Login />} />{" "}
+      {status === "authenticated" ? (
+        <>
+          <Layout />
+          <main className="mx-5 pt-2">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product/:id" element={<DetailProducts />} />
               <Route path="support" element={<Support />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="salesTracking" element={<SalesTracking />} />
-            </>
-          ) : (
-            <>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="loginWithCell" element={<LoginByPhone />} />
-              <Route path="/insertcode" element={<InsertCode />} />
-            </>
-          )}
-        </Route>
-      </Routes>
+              <Route path="search" element={<SearchPage />} />
+            </Routes>
+          </main>
+        </>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="loginWithCell" element={<LoginByPhone />} />
+          <Route path="/insertcode" element={<InsertCode />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 };

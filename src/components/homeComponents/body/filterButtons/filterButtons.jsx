@@ -4,7 +4,7 @@ import "./filterButtons.scss";
 export const FilterButtons = ({ mostrarShops, mostrarProductos }) => {
   return (
     <>
-      <div className="filter-buttons-container">
+      <div className="filter-buttons-container flex mx-auto w-full items-center justify-center space-x-2">
         <button onClick={mostrarShops}>
           <p>Tiendas</p>
         </button>

@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import Swal from "sweetalert2";
@@ -7,8 +6,6 @@ import { useDispatch } from "react-redux";
 import { FirebaseAuth } from "../../firebase/firebaseConfig";
 import "./loginByPhone.scss";
 import imgLogin from "../../assets/img-login.png";
-// import logo from '../../assets/Logo.svg';
-
 
 const LoginByPhone = () => {
   const navigate = useNavigate();
@@ -62,7 +59,6 @@ const LoginByPhone = () => {
     generateRecaptcha(data.phone);
     const appVerifier = window.recaptchaVerifier;
     sendSms(data.phone, appVerifier);
-    
   };
 
   return (
@@ -88,7 +84,6 @@ const LoginByPhone = () => {
         <div id="recaptch-container"></div>
       </div>
     </main>
-   
   );
 };
 
