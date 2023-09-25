@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-image: url("assets/campo_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 title {
   font-family: "Arizonia", cursive;
   font-size: 18px;

@@ -1,52 +1,55 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
-import logo from "../../assets/logo1.png";
+import logo from "../../assets/logo_fixed.png";
 import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onHome = () => {
-    navigate("/");
+  const onSearch = () => {
+    navigate("search");
   };
   return (
-    <div className="bg-[#34d116] h-[60px] w-[1440px] flex relative">
+    <div className="bg-[#34d116] h-15 w-full flex mx-auto justify-center items-center">
       {/* <DropdownButton /> */}
       {/* Dropdown menu */}
+
       <DropdownMenu />
+
       {/* End of Dropdown menu */}
-      <img
-        src={logo}
-        className="flex absolute w-18 h-10 left-14 top-2 cursor-pointer"
-        onClick={onHome}
-      />
+      <NavLink to="/">
+        <img src={logo} width={150} height={150} className="p-2 flex" />
+      </NavLink>
+
       <LocationLaptop />
-      <div
-        className="bg-[#b6f1d7] h-6
-       top-5 flex relative left-[480px] rounded-[10px] w-[410px] "
-      >
-        <BsSearch className="w-4 h-4 top-1 flex absolute left-1" />
+      <div className="bg-[#b6f1d7] mx-auto flex items-center justify-stretch rounded-[10px] w-full ">
+        <BsSearch className="w-4 h-4 mx-2" />
+
         <input
           type="text"
           placeholder="Buscar en granjapp"
-          className="rounded-[10px] bg-[#b6f1d7] flex absolute left-6 text-[14px] h-6 pl-2 w-[386px]"
+          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
+          onClick={onSearch}
+          name="searchText"
         />
-        <AiOutlineUser className="flex absolute h-6 w-6 left-[470px] top-0" />
-        <BsBell className="flex absolute h-6 w-6 left-[520px] top-0" />
-        <BsCart className="flex absolute h-6 w-6 left-[570px] top-0" />
-        <button
-          onClick={() => dispatch(startLogout())}
-          className="flex absolute h-6 w-[30px] left-[610px] top-0 border-white border-1 rounded-[5px]"
-        >
-          Cerrar sesión
-        </button>
       </div>
+      <div className="flex items-center justify-between space-x-3 p-2 ">
+        <AiOutlineUser className=" h-6 w-6" />
+        <BsBell className="h-6 w-6" />
+        <BsCart className="h-6 w-6" />
+      </div>
+      <button
+        onClick={() => dispatch(startLogout())}
+        className="border p-2 m-2 ml-5 border-green-800 bg-[#29c16e] border-1 rounded-[10px] text-[10px] text-white"
+      >
+        Cerrar sesión
+      </button>
     </div>
   );
 };

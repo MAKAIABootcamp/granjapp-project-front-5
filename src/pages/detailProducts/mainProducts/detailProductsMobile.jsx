@@ -1,68 +1,99 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaFacebookF, FaLinkedin, FaPinterest } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
 import { BsCart3 } from "react-icons/bs";
 import "./detailProductsMobile.scss";
 import "firebase/firestore";
-import { getProductById } from "../../../firebase/Products";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { IoReturnUpBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
-const DetailProductsMobile = ({ id }) => {
-  const [product, setproduct] = useState({});
+const DetailProductsMobile = ({ product }) => {
+  const [countProcut, setCountProcut] = useState(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const collectionFruver = await getProductById(id);
-      setproduct(collectionFruver);
-    };
+  const navigate = useNavigate();
 
-    fetchData();
-  }, []);
+  const handleMinusButton = () => {
+    if (countProcut > 0) {
+      setCountProcut(countProcut - 1);
+    }
+  };
+
+  const handlePlusButton = () => {
+    setCountProcut(countProcut + 1);
+  };
+
+  const handleNavigate = () => {
+    navigate("/");
+  };
 
   return (
-    <div className="ml-2">
-      <div key={product.id}>
-        <p className="mt-2">
-          <a href="#" className="mr-1">
-            Inicio/
-          </a>
-          <a href="#" className="mr-1">
-            Productos/
-          </a>
-          <a href="#" className="mr-1">
-            tipo
-          </a>
-          <a href="#" className="mr-1">
-            {product.name}
-          </a>
-        </p>
-        <strong>{`${product.name} ${product.weight}`}</strong>
-        <img src={product.rating} className="h-7 w-16 mt-1" />
-        <img
-          src={product.url}
-          alt={product.name}
-          className="rounded-full h-17 flex left-10 relative"
-        />
-        <p className="mt-1">Costo: ${`${product.cost}/${product.unity}`}</p>
-        <p className="text-[12px] text-left w-auto flex">
-          <strong>Variedad:</strong> {product.description}
-        </p>
-        <section>
-          <button className="border-[1px] rounded-[45px] h-5 w-5 absolute top-[515px] left-3 text-white bg-[#34d116] text-[13px] font-bold btn">
-            -
+    <div className="flex-col ml-2 w-full h-full">
+      <div className="p-2">
+        <div key={product.id}>
+          <p className="mt-2 flex items-center mx-auto justify-center">
+            <a href="#" className="mr-1">
+              Inicio/
+            </a>
+            <a href="#" className="mr-1">
+              Productos/
+            </a>
+            <a href="#" className="mr-1">
+              {product.variety}/
+            </a>
+            <a href="#" className="mr-1">
+              {product.name}
+            </a>
+          </p>
+          <div className="text-center items-center justify-center">
+            <strong>{`${product.name} ${product.weight}`}</strong>
+            <img
+              src={product.rating}
+              className="h-20 flex mx-auto justify-center items-center"
+            />
+          </div>
+          <img
+            src={product.url}
+            alt={product.name}
+            className="rounded-full w-full flex items-center justify-center mx-auto"
+          />
+        </div>
+
+        <div className="mx-auto items-center justify-center mt-5">
+          <p className="text-center p-2">
+            <strong>Costo: ${`${product.cost}/${product.unity}`}</strong>
+          </p>
+          <p className="text-[15px] w-full">{product.description}</p>
+        </div>
+        <section className="bg-transparent w-full rounded-[15px] flex items-center justify-start space-x-3 mt-2">
+          <button
+            onClick={handleMinusButton}
+            className="border-[1px] rounded-[45px] h-8 w-8 text-white bg-[#34d116] text-lg font-bold btn"
+          >
+            <AiOutlineMinus className="text-center" />
           </button>
-          <strong className="flex left-8 relative top-[1px]">0</strong>
-          <button className="border-[1px] rounded-[45px] h-5 w-5 absolute top-[515px] left-14 text-white bg-[#34d116] text-[13px] font-bold btn">
-            +
+          <strong className="flex text-center items-center justify-center mx-auto">
+            {countProcut}
+          </strong>
+          <button
+            onClick={handlePlusButton}
+            className="border-[1px] rounded-[45px] h-8 w-8 text-white bg-[#34d116] text-[13px] font-bold btn"
+          >
+            <AiOutlinePlus className="text-center" />
+          </button>
+          <button className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center w-full h-10 p-1">
+            <BsCart3 className="h-5" />
+            <p className="ml-3 ">Agregar a la canasta</p>
           </button>
         </section>
-        <button className="flex bg-[#34d116] rounded-[15px] w-[200px] top-[-16px] left-20 relative text-white text-left justify-center">
-          <BsCart3 className="flex left-2 absolute top-1" />
-          Agregar a la canasta
+        <button
+          onClick={handleNavigate}
+          className="flex mt-5 bg-[#57b145] rounded-[15px] text-white text-left mx-auto justify-center p-1 items-center"
+        >
+          <IoReturnUpBack className="w-5 h-5" />
+          <p className="ml-3">Volver</p>
         </button>
-        <button className="flex bg-[#34d116] rounded-[15px] w-[80px] top-[-8px] left-0 relative text-white text-left justify-center">
-          Volver
-        </button>
-        <section className="flex align-baseline">
+        <section className="flex align-baseline mt-10 items-center mx-auto justify-center">
           Comparte:
           <FaFacebookF className="mr-2 top-1 relative" />
           <FaLinkedin className="mr-2 top-1 relative" />

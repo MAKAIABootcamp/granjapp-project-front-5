@@ -12,36 +12,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startNewPost } from '../../store/granjApp/granjAppThunks';
 import { setActivePost } from '../../store/granjApp/granjAppSlice';
 
-const MobileNavbar = ({id, image='', description= ''}) => {
+const MobileNavbar = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isSaving} = useSelector(state => state.granjApp);
   const onHome = () => {
-    navigate('home');
-  }
+    navigate("/");
+  };
   const onSupport = () => {
-    navigate('soporte');
+    navigate('support');
   }
 
   const onFavorites = () => {
-    navigate('favoritos');
+    navigate('favorites');
   }
   const onVentas = () => {
-    navigate('seguimientoVentas');
-  }
-
-  const onForo = () => {
-    navigate('foro');
-  }
-
-  const onNewPost = () => {
-    dispatch(startNewPost());
-    dispatch (setActivePost({ id, image, description}))
+    navigate('salesTracking');
   }
   return (
     <>
-      <div id='mobileNavbar' className='mobileNavBar-container'>
+      <div className='mobileNavBar-container'>
         <div className='left-navBar-container'>
           <button onClick={onHome}>
             <img src={inicio} alt="" />
@@ -57,13 +48,12 @@ const MobileNavbar = ({id, image='', description= ''}) => {
           </button>
         </div>
         <div className='button-add-container'>
-            <button onClick={onNewPost}
-            disabled={isSaving}>
+            <button>
               <img src={cruz} alt="" />
             </button>
         </div>
-        <div className='right-navBar-container' >
-        <button onClick={onVentas}>
+        <div className="right-navBar-container">
+          <button onClick={onVentas}>
             <img src={ventas} alt="" />
             <p>Ventas</p>
           </button>
@@ -77,9 +67,8 @@ const MobileNavbar = ({id, image='', description= ''}) => {
           </button>
         </div>
       </div>
-    
     </>
-  )
-}
+  );
+};
 
-export default MobileNavbar
+export default MobileNavbar;

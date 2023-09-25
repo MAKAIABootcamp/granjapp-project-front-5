@@ -1,25 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { IconContext } from "react-icons";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import Map from "../MapComponent/Map";
+import { selectAddress, setAddress } from "../../store/userAuth/userAuthSlice";
 // import GeoLocation from "../../services/geolocalization";
 
 const LocationLaptop = () => {
+  const [showLocation, setShowLocation] = useState(false);
+  const dispatch = useDispatch();
+  const addressState =
+    localStorage.getItem("address") || useSelector(selectAddress);
+
+  useEffect(() => {
+    if (addressState) {
+      localStorage.setItem("address", addressState);
+    }
+  }, [addressState]);
+
+  const handleDisplayLocation = () => {
+    setShowLocation(!showLocation);
+  };
+
+  const handleAddress = (address) => {
+    dispatch(setAddress(address));
+    setShowLocation(!showLocation);
+
+    // Save the address to localStorage
+    localStorage.setItem("address", address);
+  };
   return (
-    <div>
-      <section className="flex left-[130px] absolute top-3">
-        <IconContext.Provider value={{ color: "#2e0986" }}>
-          <CiDeliveryTruck className="left-4 relative top-[8px] w-6 h-6" />
-        </IconContext.Provider>
-        <div className="flex ">
-          <strong className="text-[#2e0986] relative w-[54px] h-3 top-[14px] left-6 text-[14px] leading-[11.72px] text-center whitespace-nowrap">
+    <div className="w-full min-w-[200px] max-w-[400px]">
+      {showLocation && (
+        <div className="">
+          <button
+            onClick={handleDisplayLocation}
+            className="absolute top-16 right-2 hover:bg-gray-500 z-40 "
+          >
+            <IoIosCloseCircle width={50} height={50} />
+          </button>
+          <div className="w-full">
+            <Map handleAddress={handleAddress} />
+          </div>
+        </div>
+      )}
+      <section className="flex-col w-auto items-center justify-center mx-auto">
+        <div className="w-full flex mx-auto items-center justify-center">
+          <IconContext.Provider value={{ color: "#2e0986" }}>
+            <CiDeliveryTruck className="w-6 h-6 mx-2" />
+          </IconContext.Provider>
+          <strong className="text-[#2e0986] text-[14px]  ">
             Compra y recoge:
           </strong>
-          <span className="relative w-[146px] h-4 top-[13px] left-[91px] text-[14px] leading-[16.41px] text-center text-[#414141]">
-            Rionegro, Antioquia
-          </span>
-          <MdKeyboardArrowRight className="absolute w-6 top-[14px] left-[310px]" />
         </div>
+        <button
+          className="flex items-center mx-auto justify-center hover:bg-transparent"
+          onClick={handleDisplayLocation}
+        >
+          <div>
+            <p className="text-[14px]  text-[#414141]">{addressState}</p>
+          </div>
+          <MdKeyboardArrowRight className="w-6" />
+        </button>
       </section>
     </div>
   );

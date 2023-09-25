@@ -3,23 +3,36 @@ import { FaFacebookF, FaLinkedin, FaPinterest } from "react-icons/fa";
 import { RiWhatsappFill } from "react-icons/ri";
 import { BsCart3 } from "react-icons/bs";
 import "./detailProductsMobile.scss";
-import { getProductById } from "../../../firebase/Products";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { IoReturnUpBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
-const DetailProductsTablet = ({ id }) => {
-  const [product, setProduct] = useState({});
-  useEffect(() => {
-    const getProduct = async () => {
-      const product = await getProductById(id);
-      setProduct(product);
-    };
-    getProduct();
-  });
+const DetailProductsTablet = ({ product }) => {
+  const [countProcut, setCountProcut] = useState(0);
+  const navigate = useNavigate();
+
+  const handleMinusButton = () => {
+    if (countProcut > 0) {
+      setCountProcut(countProcut - 1);
+    }
+  };
+
+  const handlePlusButton = () => {
+    setCountProcut(countProcut + 1);
+  };
+
+  const handleNavigate = () => {
+    navigate("/");
+  };
   return (
-    <div className="flex mx-auto items-center w-full">
-      <div key={product.id}>
-        <section className="flex w-full">
+    <div className="mt-10 w-full h-full flex ">
+      <div
+        className="flex-col w-full p-3 justify-center mx-auto"
+        key={product.id}
+      >
+        <section className="flex w-full rounded-md border border-[#8f50b6] p-5">
           <div className="flex-col">
-            <p className="mt-2 px-2">
+            <p className="mt-2 px-3">
               <a href="#" className="mr-1">
                 Inicio/
               </a>
@@ -51,34 +64,44 @@ const DetailProductsTablet = ({ id }) => {
               <p className="text-[12px] ">{product.description}</p>
             </div>
 
-            <section className="bg-transparent relative top-[60px] rounded-[15px] align-[2px]">
-              <button className="border-[1px] rounded-[45px] h-5 w-5 absolute top-[0px] text-white bg-[#34d116] text-[13px] font-bold btn">
-                -
+            <section className="bg-transparent w-full rounded-[15px] flex items-center justify-start space-x-3">
+              <button
+                onClick={handleMinusButton}
+                className="border-[1px] rounded-[45px] h-10 w-10 text-white bg-[#34d116] text-lg font-bold btn"
+              >
+                <AiOutlineMinus className="text-center" />
               </button>
-              <strong className="flex left-8 relative top-[-2px]">0</strong>
-              <button className="border-[1px] rounded-[45px] h-5 w-5 absolute top-[0px] left-14 text-white bg-[#34d116] text-[13px] font-bold btn">
-                +
+              <strong className="flex text-center items-center justify-center mx-auto">
+                {countProcut}
+              </strong>
+              <button
+                onClick={handlePlusButton}
+                className="border-[1px] rounded-[45px] h-10 w-10 text-white bg-[#34d116] text-[13px] font-bold btn"
+              >
+                <AiOutlinePlus className="text-center" />
+              </button>
+              <button className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-1">
+                <BsCart3 className="w-5 h-5" />
+                <p className="ml-3">Agregar a la canasta</p>
               </button>
             </section>
 
-            <button className="flex bg-[#34d116] rounded-[15px] w-[200px] top-[35px] left-[100px] relative text-white text-left justify-center">
-              <BsCart3 className="flex left-2 absolute top-1" />
-              Agregar a la canasta
-            </button>
-            <button className="flex bg-[#34d116] rounded-[15px] w-[80px] top-[50px] left-0 relative text-white text-left justify-center">
-              Volver
+            <button
+              onClick={handleNavigate}
+              className="flex mt-5 bg-[#57b145] rounded-[15px] text-white text-left justify-center p-2 items-center"
+            >
+              <IoReturnUpBack className="w-5 h-5" />
+              <p className="ml-3">Volver</p>
             </button>
           </div>
         </section>
-
-        <section className="flex item-center justify-center mx-auto left-[290px] top-[-60px]">
-          Comparte:
-          <FaFacebookF className="mr-2 top-1 " />
-          <FaLinkedin className="mr-2 top-1 " />
-          <RiWhatsappFill className="mr-2 top-1 " />
-          <FaPinterest className="mr-2 top-1 " />
+        <section className="flex item-center text-center justify-center mt-2 space-x-5">
+          <p className="mr-5">Comparte:</p>
+          <FaFacebookF className="w-6 h-6 " />
+          <FaLinkedin className=" w-6 h-6" />
+          <RiWhatsappFill className="w-6 h-6 " />
+          <FaPinterest className="w-6 h-6 " />
         </section>
-        <hr className="flex top-3 relative" />
       </div>
     </div>
   );
