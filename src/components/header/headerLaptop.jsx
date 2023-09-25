@@ -6,10 +6,15 @@ import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onSearch = () => {
+    navigate("search");
+  };
   return (
     <div className="bg-[#34d116] h-15 w-full flex mx-auto justify-center items-center">
       {/* <DropdownButton /> */}
@@ -30,6 +35,8 @@ const HeaderLaptop = () => {
           type="text"
           placeholder="Buscar en granjapp"
           className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
+          onClick={onSearch}
+          name="searchText"
         />
       </div>
       <div className="flex items-center justify-between space-x-3 p-2 ">

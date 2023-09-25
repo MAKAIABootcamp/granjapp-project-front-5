@@ -3,10 +3,12 @@ import { currentTime } from "../../services/currentTime.js";
 import { BsFillBarChartFill, BsSearch, BsCart } from "react-icons/bs";
 import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
+import { useNavigate } from "react-router-dom";
+import SearchPage from "../../pages/searchPage/searchPage.jsx";
 
 const HeaderMobile = () => {
   const [time, setTime] = useState(currentTime());
-
+  const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(currentTime());
@@ -14,6 +16,10 @@ const HeaderMobile = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const onSearch = () => {
+    navigate("search");
+  };
 
   return (
     <section className="mobile">
@@ -28,11 +34,7 @@ const HeaderMobile = () => {
 
       <div className="inputSearchMobile">
         <BsSearch className="searchIconMobile" />
-        <input
-          type="text"
-          placeholder="Buscar en granjapp"
-          className="inputSearchMobile__inputBusq"
-        />
+        <SearchPage />
         <BsCart className="inputSearchMobile__inputCart" />
       </div>
     </section>
