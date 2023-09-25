@@ -19,10 +19,22 @@ const SearchPage = () => {
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`?q=${searchText}`);
+    navigate(`?q=${searchText.toLowerCase().trim()}`);
   };
 
-  return <div className="result">resultados</div>;
+  return (
+    <div className="result" onSubmit={onSearchSubmit}>
+      <input
+        type="text"
+        placeholder="Buscar en granjapp"
+        className="inputSearchMobile__inputBusq"
+        name="searchText"
+        autoComplete="off"
+        value={searchText}
+        onChange={onInputChange}
+      />
+    </div>
+  );
 };
 
 export default SearchPage;

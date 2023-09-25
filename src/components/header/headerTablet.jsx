@@ -3,9 +3,11 @@ import { currentTime } from "../../services/currentTime.js";
 import { BsFillBarChartFill, BsSearch, BsCart } from "react-icons/bs";
 import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
+import { useNavigate } from "react-router-dom";
 
 const HeaderTablet = () => {
   const [time, setTime] = useState(currentTime());
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -14,6 +16,10 @@ const HeaderTablet = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const onSearch = () => {
+    navigate("search");
+  };
 
   return (
     <div className="tablet">
@@ -32,6 +38,8 @@ const HeaderTablet = () => {
           type="text"
           placeholder="Buscar en granjapp"
           className="inputSearchTablet__inputBusq"
+          onClick={onSearch}
+          name="searchText"
         />
         <BsCart className="inputSearchTablet__inputCartT " />
       </div>

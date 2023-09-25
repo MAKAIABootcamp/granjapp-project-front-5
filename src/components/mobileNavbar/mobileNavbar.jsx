@@ -1,34 +1,33 @@
-import React from 'react'
-import inicio from '../../assets/mobileNavBar/Home.svg';
-import foro from '../../assets/mobileNavBar/foro.svg';
-import soporte from '../../assets/mobileNavBar/soporte.svg';
-import ventas from '../../assets/mobileNavBar/Ventas.svg';
-import favoritos from '../../assets/mobileNavBar/favoritos.svg';
-import perfil from '../../assets/mobileNavBar/Profile.svg';
-import cruz from '../../assets/mobileNavBar/cruz.svg';
-import './mobileNavBar.scss';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import inicio from "../../assets/mobileNavBar/Home.svg";
+import foro from "../../assets/mobileNavBar/foro.svg";
+import soporte from "../../assets/mobileNavBar/soporte.svg";
+import ventas from "../../assets/mobileNavBar/Ventas.svg";
+import favoritos from "../../assets/mobileNavBar/favoritos.svg";
+import perfil from "../../assets/mobileNavBar/Profile.svg";
+import cruz from "../../assets/mobileNavBar/cruz.svg";
+import "./mobileNavBar.scss";
+import { useNavigate } from "react-router-dom";
 
 const MobileNavbar = () => {
-
   const navigate = useNavigate();
   const onHome = () => {
-    navigate('home');
-  }
+    navigate("/");
+  };
   const onSupport = () => {
-    navigate('support');
-  }
+    navigate("support");
+  };
 
   const onFavorites = () => {
-    navigate('favorites');
-  }
+    navigate("favorites");
+  };
   const onVentas = () => {
-    navigate('salesTracking');
-  }
+    navigate("salesTracking");
+  };
   return (
     <>
-      <div className='mobileNavBar-container'>
-        <div className='left-navBar-container'>
+      <div className="mobileNavBar-container w-full">
+        <div className="left-navBar-container">
           <button onClick={onHome}>
             <img src={inicio} alt="" />
             <p>Inicio</p>
@@ -42,13 +41,13 @@ const MobileNavbar = () => {
             <p>Soporte</p>
           </button>
         </div>
-        <div className='button-add-container'>
-            <button>
-              <img src={cruz} alt="" />
-            </button>
+        <div className="button-add-container">
+          <button>
+            <img src={cruz} alt="" />
+          </button>
         </div>
-        <div className='right-navBar-container' >
-        <button onClick={onVentas}>
+        <div className="right-navBar-container">
+          <button onClick={onVentas}>
             <img src={ventas} alt="" />
             <p>Ventas</p>
           </button>
@@ -62,9 +61,8 @@ const MobileNavbar = () => {
           </button>
         </div>
       </div>
-    
     </>
-  )
-}
+  );
+};
 
-export default MobileNavbar
+export default MobileNavbar;
