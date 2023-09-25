@@ -10,6 +10,7 @@ export const authSlice = createSlice({
     photoURL: null,
     numberCell: null,
     errorMessage: null,
+    address: "Rionegro, Antioquia",
   },
   reducers: {
     login: (state, { payload }) => {
@@ -41,6 +42,9 @@ export const authSlice = createSlice({
     setUserLogged: (state, action) => {
       state.userLogged = action.payload;
     },
+    setAddress: (state, action) => {
+      state.address = action.payload;
+    },
     setError: (state, action) => {
       state.error = action.payload;
     },
@@ -53,5 +57,11 @@ export const {
   chekingCredentials,
   setIsLogged,
   setUserLogged,
+  setAddress,
   setError,
 } = authSlice.actions;
+
+// Export the selector to access the address
+export const selectAddress = (state) => state.auth.address;
+
+export default authSlice.reducer;

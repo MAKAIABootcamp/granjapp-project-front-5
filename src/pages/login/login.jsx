@@ -39,10 +39,10 @@ const Login = () => {
 
   return (
     <>
-      <div className="all-container">
-        <img className="img-farmer" src={imgLogin} alt="" />
+      <div className="all-container flex-col mx-auto justify-center py-3 h-auto items-center ">
+        <img className="img-farmer rounded-lg p-2" src={imgLogin} alt="" />
         <form onSubmit={onSubmit}>
-          <h1>Login</h1>
+          <h1>Iniciar sesión</h1>
           <div className="inputs-container">
             <input
               type="email"
@@ -76,11 +76,18 @@ const Login = () => {
             disabled={isAuthenticating}
             type="submit"
           >
-            Login
+            Iniciar sesión
           </button>
-          <div className="toRegister-container">
-            <p>No tienes una cuenta?</p>
-            <Link component={RouterLink} color="inherit" to="/register">
+          <div className="toRegister-container flex-col">
+            <p className="align-center flex text-[16px]">
+              ¿No tienes una cuenta?
+            </p>
+            <Link
+              component={RouterLink}
+              className="m-2"
+              color="inherit"
+              to="/register"
+            >
               Crear una cuenta
             </Link>
           </div>
@@ -108,7 +115,7 @@ const Login = () => {
                 fullWidth
               >
                 <Phone />
-                <Typography sx={{ ml: 1 }}>Google</Typography>
+                <Typography sx={{ ml: 1 }}>Teléfono</Typography>
               </Button>
             </Grid>
           </div>

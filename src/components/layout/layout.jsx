@@ -1,36 +1,32 @@
 import React from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import useScreenSize from "../../hooks/useScreenSize";
 import HeaderLaptop from "../header/headerLaptop";
 import HeaderTablet from "../header/headerTablet";
 import HeaderMobile from "../header/headerMobile";
 import LocationMobile from "../location/locationMobile";
 import LocationTablet from "../location/locationTablet";
-import MobileNavbar from "../mobileNavbar/mobileNavbar";
 
 const Layout = () => {
   const { width } = useScreenSize();
-  const params = useParams();
   return (
-    <main className="container">
+    <>
       {width > 768 ? (
-        <HeaderLaptop id={params.id} />
+        <HeaderLaptop />
       ) : width > 360 && width <= 768 ? (
         <>
-          <HeaderTablet id={params.id} />
+          <HeaderTablet />
           <LocationTablet />
         </>
       ) : (
         width <= 360 && (
           <>
-            <HeaderMobile id={params.id} />
+            <HeaderMobile />
             <LocationMobile />
           </>
         )
       )}
-      <Outlet />
-      <MobileNavbar />
-    </main>
+    </>
   );
 };
 

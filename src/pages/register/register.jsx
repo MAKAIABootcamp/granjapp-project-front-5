@@ -92,7 +92,7 @@ const Register = () => {
         "Excelente!",
         "Su cuenta se ha creado exitosamente",
         "success"
-      ).then(() => Navigate("/"));
+      ).then(() => navigate("/"));
     } else {
       console.log(
         "Aquí se debe mostrar un mensaje de error para el usuario indicándole que no fue exitoso la creación de su cuenta"
