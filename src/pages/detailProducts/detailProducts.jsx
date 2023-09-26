@@ -20,7 +20,7 @@ const DetailProducts = () => {
       setproduct(productData);
     };
     getProduct();
-  }, []);
+  }, [params.id]);
 
   // console.log(`width: ${width}, height: ${height}`);
 

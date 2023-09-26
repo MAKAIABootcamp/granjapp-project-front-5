@@ -4,6 +4,7 @@ import { BsFillBarChartFill, BsSearch, BsCart } from "react-icons/bs";
 import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
 import { useNavigate } from "react-router-dom";
+import SearchPage from "../../pages/searchPage/searchPage.jsx";
 
 const HeaderTablet = () => {
   const [time, setTime] = useState(currentTime());
@@ -37,7 +38,7 @@ const HeaderTablet = () => {
         <input
           type="text"
           placeholder="Buscar en granjapp"
-          className="inputSearchTablet__inputBusq"
+          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
           onClick={onSearch}
           name="searchText"
         />

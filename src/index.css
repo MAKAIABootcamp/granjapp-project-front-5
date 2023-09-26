@@ -3,10 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-image: url("assets/campo_bg.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-image: linear-gradient(to right, wheat, rgba(60, 255, 0, 0.338));
 }
 
 title {

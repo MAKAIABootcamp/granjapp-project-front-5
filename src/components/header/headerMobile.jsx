@@ -5,6 +5,7 @@ import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
 import { useNavigate } from "react-router-dom";
 import SearchPage from "../../pages/searchPage/searchPage.jsx";
+import DropdownMenu from "../menuDropdown/menuDropdown.jsx";
 
 const HeaderMobile = () => {
   const [time, setTime] = useState(currentTime());
@@ -33,8 +34,15 @@ const HeaderMobile = () => {
       </div>
 
       <div className="inputSearchMobile">
-        <BsSearch className="searchIconMobile" />
-        <SearchPage />
+        <DropdownMenu className="" />
+        <input
+          type="text"
+          placeholder="Buscar en granjapp"
+          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
+          onClick={onSearch}
+          name="searchText"
+        />
+        <BsSearch className="searchIconMobile cursor-pointer" />
         <BsCart className="inputSearchMobile__inputCart" />
       </div>
     </section>

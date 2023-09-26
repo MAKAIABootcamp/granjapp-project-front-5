@@ -5,7 +5,8 @@ import { BsCart3 } from "react-icons/bs";
 import "./detailProductsMobile.scss";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoReturnUpBack } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const DetailProductsLaptop = ({ product }) => {
   const [countProcut, setCountProcut] = useState(0);
@@ -36,18 +37,15 @@ const DetailProductsLaptop = ({ product }) => {
           <section className="flex items-center w-full mx-auto justify-center rounded-md border border-[#8f50b6] p-5">
             <div className="flex-col">
               <p className="mt-2">
-                <a href="#" className="mr-1">
+                <Link to="/" className="mr-1">
                   Inicio/
-                </a>
-                <a href="#" className="mr-1">
+                </Link>
+                <Link to="#" className="mr-1">
                   Productos/
-                </a>
-                <a href="#" className="mr-1">
+                </Link>
+                <Link to="#" className="mr-1">
                   {product.variety}/
-                </a>
-                <a href="#" className="mr-1">
-                  {product.name}
-                </a>
+                </Link>
               </p>
               <strong className="items-center m-3 text-lg justify-center mx-auto flex">{`${product.name} ${product.weight}`}</strong>
               <img src={product.rating} className="h-20 w-full px-5" />
