@@ -55,13 +55,9 @@ const CarouselPromo = () => {
       {/* Carousel wrapper */}
       <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
         {/* Item 1 */}
-        <div
-          className="duration-200 ease-linear flex"
-          data-carousel-item
-          key={promos.id}
-        >
+        <div className="duration-200 ease-linear flex" data-carousel-item>
           {promos.map((promo) => (
-            <img src={promo.image} className="w-full h-full" />
+            <img key={promo.id} src={promo.image} className="w-full h-full" />
           ))}
         </div>
       </div>

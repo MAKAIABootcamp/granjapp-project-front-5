@@ -10,7 +10,10 @@ import {
 export const getDiscounts = async () => {
   const discounts = collection(FirebaseDB, "promociones");
   const productsSnapshot = await getDocs(discounts);
-  const discountList = productsSnapshot.docs.map((doc) => doc.data());
+  const discountList = productsSnapshot.docs.map((doc) => {
+    const id = doc.id;
+    return { id, ...doc.data() };
+  });
   return discountList;
 };
 
