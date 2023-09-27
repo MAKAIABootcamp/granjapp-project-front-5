@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
 import logo from "../../assets/logo_fixed.png";
@@ -6,15 +6,23 @@ import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import SearchPage from "../../pages/searchPage/searchPage";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const inputRef = useRef();
+
+  const [inputSearch, setInputSearch] = useState();
 
   const onSearch = () => {
-    navigate("search");
+    if (inputRef.current.value !== "") {
+      setInputSearch(inputRef.current.value);
+    } else {
+      setInputSearch("");
+    }
   };
+
   return (
     <div className="bg-[#34d116] h-15 w-full flex mx-auto justify-center items-center">
       {/* <DropdownButton /> */}
@@ -28,16 +36,21 @@ const HeaderLaptop = () => {
       </NavLink>
 
       <LocationLaptop />
-      <div className="bg-[#b6f1d7] mx-auto flex items-center justify-stretch rounded-[10px] w-full ">
-        <BsSearch className="w-4 h-4 mx-2" />
+      <div className="flex-col w-full">
+        <div className="bg-[#b6f1d7] mx-auto flex items-center justify-stretch rounded-[10px] w-full ">
+          <BsSearch className="w-4 h-4 mx-2" />
 
-        <input
-          type="text"
-          placeholder="Buscar en granjapp"
-          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
-          onClick={onSearch}
-          name="searchText"
-        />
+          <div className="flex-col w-full">
+            <input
+              type="text"
+              placeholder="Buscar en granjapp"
+              className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
+              onChange={onSearch}
+              ref={inputRef}
+            />
+          </div>
+        </div>
+        {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
       </div>
       <div className="flex items-center justify-between space-x-3 p-2 ">
         <AiOutlineUser className=" h-6 w-6" />

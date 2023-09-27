@@ -1,38 +1,70 @@
-import React from "react";
-import queryString from "query-string";
-import { useForm } from "../../hooks/useForm";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getSearchesStores, getSearchProduct } from "../../firebase/search";
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
+import { getSearchProduct, getSearchesStores } from "../../firebase/search";
+import { useNavigate } from "react-router";
 
-const SearchPage = () => {
+const SearchPage = ({ searchInput }) => {
+  const [products, setProducts] = useState([]);
+  const [stores, setStores] = useState([]);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const { q = "" } = queryString.parse(location.search);
-  const store = getSearchesStores(q);
-  const product = getSearchProduct(q);
+  useEffect(() => {
+    if (searchInput === "") {
+      setProducts([]);
+    }
 
-  const showSearch = q.length === 0;
-  const showError = q.length > 0 && store.length === 0 && product.length === 0;
+    const fetchData = async () => {
+      const fireProducts = await getSearchProduct(searchInput);
+      const fireStores = await getSearchesStores(searchInput);
 
-  const { searchText, onInputChange } = useForm({ searchText: q });
+      setProducts(fireProducts);
+      setStores(fireStores);
+    };
 
-  const onSearchSubmit = (e) => {
-    e.preventDefault();
-    navigate(`?q=${searchText.toLowerCase().trim()}`);
+    fetchData();
+  }, [searchInput]);
+
+  const handleSearchProduct = (selectedOption) => {
+    if (selectedOption) {
+      if (selectedOption.value.id.includes("prod")) {
+        setProducts([]);
+        setStores([]);
+        navigate("/product/" + selectedOption.value.id);
+      }
+    }
   };
 
+  // Create an array of options with images and labels.
+  const productOptions = products.map((product) => ({
+    value: product,
+    label: (
+      <div>
+        <img src={product.url} alt={product.name} className="w-6 h-6 mr-2" />
+        {product.name}
+      </div>
+    ),
+  }));
+
+  // Create an array of options with images and labels.
+  const storesOptions = stores.map((store) => ({
+    value: store,
+    label: (
+      <div>
+        <img src={store.logo} alt={store.title} className="w-6 h-6 mr-2" />
+        {store.title}
+      </div>
+    ),
+  }));
+
   return (
-    <div className="result" onSubmit={onSearchSubmit}>
-      <input
-        type="text"
-        placeholder="Buscar en granjapp"
-        className="inputSearchMobile__inputBusq"
-        name="searchText"
-        autoComplete="off"
-        value={searchText}
-        onChange={onInputChange}
-      />
+    <div className="flex w-full mx-auto items-center justify-center">
+      {products.length > 0 && (
+        <Select
+          options={[...productOptions, ...storesOptions]}
+          onChange={handleSearchProduct}
+          placeholder="Seleccione una opcion..."
+        />
+      )}
     </div>
   );
 };

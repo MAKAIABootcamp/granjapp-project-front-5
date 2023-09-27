@@ -6,7 +6,7 @@ import "./detailProductsMobile.scss";
 import "firebase/firestore";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoReturnUpBack } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const DetailProductsMobile = ({ product }) => {
   const [countProcut, setCountProcut] = useState(0);
@@ -32,18 +32,15 @@ const DetailProductsMobile = ({ product }) => {
       <div className="p-2">
         <div key={product.id}>
           <p className="mt-2 flex items-center mx-auto justify-center">
-            <a href="#" className="mr-1">
+            <Link to="/" className="mr-1">
               Inicio/
-            </a>
-            <a href="#" className="mr-1">
+            </Link>
+            <Link to="#" className="mr-1">
               Productos/
-            </a>
-            <a href="#" className="mr-1">
+            </Link>
+            <Link to="#" className="mr-1">
               {product.variety}/
-            </a>
-            <a href="#" className="mr-1">
-              {product.name}
-            </a>
+            </Link>
           </p>
           <div className="text-center items-center justify-center">
             <strong>{`${product.name} ${product.weight}`}</strong>

@@ -124,6 +124,7 @@ $large: 1440px;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 
     &__inputBusq {
       @include search;

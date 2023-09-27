@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { currentTime } from "../../services/currentTime.js";
 import { BsFillBarChartFill, BsSearch, BsCart } from "react-icons/bs";
 import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
-import { useNavigate } from "react-router-dom";
+import SearchPage from "../../pages/searchPage/searchPage.jsx";
+import DropdownMenu from "../menuDropdown/menuDropdown.jsx";
 
 const HeaderTablet = () => {
   const [time, setTime] = useState(currentTime());
-  const navigate = useNavigate();
+  const [inputSearch, setInputSearch] = useState();
+  const inputRef = useRef();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,11 +20,15 @@ const HeaderTablet = () => {
   }, []);
 
   const onSearch = () => {
-    navigate("search");
+    if (inputRef.current.value !== "") {
+      setInputSearch(inputRef.current.value);
+    } else {
+      setInputSearch("");
+    }
   };
 
   return (
-    <div className="tablet">
+    <div className="tablet flex-col">
       <div className="div">
         <section className="timeTablet">{time}</section>
         <section className="iconosTablet">
@@ -32,17 +38,22 @@ const HeaderTablet = () => {
         </section>
       </div>
 
-      <div className="inputSearchTablet">
-        <BsSearch className="searchIconTablet " />
-        <input
-          type="text"
-          placeholder="Buscar en granjapp"
-          className="inputSearchTablet__inputBusq"
-          onClick={onSearch}
-          name="searchText"
-        />
-        <BsCart className="inputSearchTablet__inputCartT " />
-      </div>
+      <section className="flex justify-between w-full">
+        <DropdownMenu className="justify-start w-4 flex relative" />
+        <div className="inputSearchTablet items-baseline">
+          <input
+            type="text"
+            placeholder="Buscar en granjapp"
+            className="rounded-[10px] bg-[#b6f1d7] flex mx-auto text-[14px] cursor-pointer inputSearchTablet__inputBusq focus:ring-1 focus:outline-none"
+            onClick={onSearch}
+            name="searchText"
+            ref={inputRef}
+          />
+          {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
+          <BsSearch className="searchIconTablet " />
+          <BsCart className="inputSearchTablet__inputCartT " />
+        </div>
+      </section>
     </div>
   );
 };
