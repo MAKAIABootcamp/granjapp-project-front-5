@@ -3,7 +3,7 @@ import { loadPosts } from "../../helpers/loadPosts";
 import { loadProducts } from "../../helpers/loadProducts";
 import { loadPromos } from "../../helpers/loadPromos";
 import {  loadTiendas } from "../../helpers/loadTiendas";
-import { addNewEmptyPost, savingNewPost, setActivePost, setPosts, setProduct, setPromos, setShop, updatePost } from "./granjAppSlice";
+import { addNewEmptyPost, savingNewPost, setActivePost, setPosts, setProduct, setPromos, setSaving, setShop, updatePost } from "./granjAppSlice";
 import { FirebaseDB } from "../../firebase/firebaseConfig";
 
 export const startLoadingShops = () => {
@@ -101,6 +101,7 @@ export const startSavePost = () => {
 
         dispatch (setSaving());
 
+        
         const {activePost:post} = getState().granjApp;
 
         const postToFireStore = { ...post };

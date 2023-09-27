@@ -1,6 +1,10 @@
 $font-text: "Roboto", sans-serif;
 
-
+.carouselProducts-container{
+  margin-left: 10px;
+  margin-bottom: 20px;
+  
+}
 p,
 .cost {
   font-family: $font-text;
@@ -10,7 +14,8 @@ p,
 .card-product-container {
   align-items: center;
   width: 95%;
-  height: 150px;
+  height: 130px;
+  padding: 10px;
   flex-shrink: 0;
   display: flex;
   border-radius: 8.887px;

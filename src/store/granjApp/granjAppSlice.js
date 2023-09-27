@@ -70,6 +70,10 @@ export const granjAppSlice = createSlice({
       });
       // state.messageSaved = `${ action.payload.ti}`
  },
+
+ setSaving: (state) => {
+  state.isSaving = true;
+ }
   },
 });
 // Action creators are generated for each case reducer function
@@ -85,4 +89,5 @@ export const {
   savingNewPost,
   addNewEmptyPost,
   updatePost,
+  setSaving,
 } = granjAppSlice.actions;

@@ -34,7 +34,7 @@ const HeaderLaptop = () => {
       <DropdownMenu />
 
       {/* End of Dropdown menu */}
-      <NavLink to="/">
+      <NavLink to="/*">
         <img src={logo} width={150} height={150} className="p-2 flex" />
       </NavLink>
 

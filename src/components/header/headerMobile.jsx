@@ -38,7 +38,7 @@ const HeaderMobile = () => {
         <input
           type="text"
           placeholder="Buscar en granjapp"
-          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
+          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px]"
           onClick={onSearch}
           name="searchText"
         />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import inicio from '../../assets/mobileNavBar/Home.svg';
 import foro from '../../assets/mobileNavBar/foro.svg';
 import soporte from '../../assets/mobileNavBar/soporte.svg';
@@ -11,14 +11,15 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { startNewPost } from '../../store/granjApp/granjAppThunks';
 import { setActivePost } from '../../store/granjApp/granjAppSlice';
+import { useForm } from '../../hooks/useForm';
 
-const MobileNavbar = () => {
+const MobileNavbar = (id, image= '', description='') => {
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {isSaving} = useSelector(state => state.granjApp);
+  
+   const {activePost: post} = useSelector(state => state.granjApp);
   const onHome = () => {
-    navigate("/");
+    navigate("/*");
   };
   const onSupport = () => {
     navigate('support');
@@ -29,6 +30,18 @@ const MobileNavbar = () => {
   }
   const onVentas = () => {
     navigate('salesTracking');
+  }
+
+  const onForo = () => {
+    navigate('foro');
+  }
+
+  const dispatch = useDispatch();
+  const {isSaving} = useSelector(state => state.granjApp);
+
+  const onAddNewPost = () => {
+    dispatch(startNewPost());
+    dispatch(setActivePost({id, image, description}))
   }
   return (
     <>
@@ -48,7 +61,9 @@ const MobileNavbar = () => {
           </button>
         </div>
         <div className='button-add-container'>
-            <button>
+            <button 
+            disabled={isSaving}
+            onClick={onAddNewPost}>
               <img src={cruz} alt="" />
             </button>
         </div>

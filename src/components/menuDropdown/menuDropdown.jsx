@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import "./menuDropdown.scss";
+import { startLogout } from "../../store/userAuth/thunks";
+import { useDispatch } from "react-redux";
 
 function DropdownMenu() {
+  
+  const dispatch = useDispatch();
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  const onLogout = () => {
+    dispatch(startLogout());
+  }
 
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
 
@@ -75,7 +84,7 @@ function DropdownMenu() {
                       <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                         <li>
                           <Link
-                            tp="/fruits"
+                            to="/fruits"
                             className="block px-4 py-2 dark:hover:bg-[#29c16e] dark:hover:text-white text-[14px] hover:bg-[#7c67b1]"
                             onClick={toggleDropdown}
                           >
@@ -137,14 +146,12 @@ function DropdownMenu() {
                 </Link>
               </li>
 
-              <li>
-                <Link
-                  to="Logout"
+              <li 
                   className="flex items-center justify-between w-full px-4 py-2  dark:hover:bg-[#b6f1d7] dark:hover:text-black text-[14px] hover:bg-[#b6d1f7]"
-                  onClick={toggleDropdown}
-                >
+                  onClick={onLogout}>
+              
                   Cerrar sesión
-                </Link>
+                
               </li>
             </ul>
           </div>

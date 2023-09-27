@@ -29,6 +29,7 @@ const Layout = () => {
           </>
         )
       )}
+      <Outlet/>
     </>
   );
 };
