@@ -11,9 +11,11 @@ import { Support } from "../pages/support/support";
 import { Favorites } from "../pages/favorites/favorites";
 import { SalesTracking } from "../pages/salesTracking/salesTracking";
 import ShopDetails from "../pages/shopDetails/shopDetails";
-import DetailProduct from "../pages/detailProducts/detailProducts";
-import ForoPage from "../pages/foro/foro";
 import Login from "../pages/login/login";
+import ForoPage from "../pages/foro/foro";
+import DetailProduct from "../pages/detailProducts/detailProducts";
+import { ShopsCarousel } from "../components/homeComponents/body/restarantsCarousel/shopsCarousel";
+import { ProductCarousel } from "../components/homeComponents/body/porductsCarousel/productCarousel";
 
 
 
@@ -32,17 +34,27 @@ const Router = () => {
               <Route path="support" element={<Support />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="salesTracking" element={<SalesTracking />} />
-            </>
+              <Route path="foro" element={<ForoPage />} />
+              <Route path="detailStore" element={<ShopDetails />} />
+              <Route path="/product/:id" element={<DetailProduct />} />
+              <Route path="store" element={<ShopsCarousel />} />
+              <Route path="products" element={<ProductCarousel />} />
+              <Route path="fruits" element={<ProductCarousel categorie = {"Frutas"}/>} />
+              <Route path="vegetables" element={<ProductCarousel categorie = {"Hortalizas"}/>} />
+
+
+            </Routes>
+            </main>
+        </>
           ) : (
-            <>
+          <Routes> 
+            
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="loginWithCell" element={<LoginByPhone />} />
               <Route path="/insertcode" element={<InsertCode />} />
-            </>
+          </Routes>
           )}
-        </Route>
-      </Routes>
     </BrowserRouter>
   );
 };

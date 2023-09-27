@@ -18,7 +18,7 @@ const MobileNavbar = () => {
   const dispatch = useDispatch();
   const {isSaving} = useSelector(state => state.granjApp);
   const onHome = () => {
-    navigate("/*");
+    navigate("/");
   };
   const onSupport = () => {
     navigate("support");
@@ -30,6 +30,9 @@ const MobileNavbar = () => {
   const onVentas = () => {
     navigate('salesTracking');
   }
+  const onForo = () => {
+    navigate('foro');
+  }
   return (
     <>
       <div className="mobileNavBar-container">
@@ -38,7 +41,7 @@ const MobileNavbar = () => {
             <img src={inicio} alt="" />
             <p>Inicio</p>
           </button>
-          <button onClick={onForum}>
+          <button onClick={onForo}>
             <img src={foro} alt="" />
             <p>Foro</p>
           </button>

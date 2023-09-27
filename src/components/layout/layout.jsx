@@ -28,7 +28,7 @@ const Layout = () => {
           </>
         )
       )}
-      <Outlet/>
+      {/* <Outlet/> */}
     </>
   );
 };
