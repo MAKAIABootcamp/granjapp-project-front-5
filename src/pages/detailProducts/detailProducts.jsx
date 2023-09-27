@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById } from "../../firebase/Products";
 
-const DetailProducts = () => {
+const DetailProduct = () => {
   const { width, height } = useScreenSize();
   const params = useParams();
 
@@ -44,4 +44,4 @@ const DetailProducts = () => {
   );
 };
 
-export default DetailProducts;
+export default DetailProduct;

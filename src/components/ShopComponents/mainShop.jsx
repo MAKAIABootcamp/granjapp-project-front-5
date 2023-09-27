@@ -3,6 +3,9 @@ import "../../pages/shopDetails/shopStyle.scss";
 import stars from '../../assets/Stars4.png'
 import { useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
+import "./mainShop.scss"
+
+
 export const MainShop = () => {
 
   const { activeShop } = useSelector(
@@ -26,11 +29,12 @@ const {  title, logo, description, workTime } = useForm(activeShop);
               {description}
             </p>
             <p>{workTime}</p>
-          </section>
-          <div className="stars-container">
+            <div className="stars-container">
             <img src={stars} alt="" />
           </div>
-          <p>Prodcutos en venta: </p>
+          </section>
+          
+          <p className="p-productos-en-venta">Productos en venta: </p>
         </div>
       </div>
     </>

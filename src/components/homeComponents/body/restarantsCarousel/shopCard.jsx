@@ -17,7 +17,7 @@ export const ShopCard = ({
 
   const onClickShop = () => {
     dispatch(setActiveShop({ id, title, description, workingTime, logo }));
-    navigate('detallesTienda');
+    navigate('tienda');
   };
 
   return (

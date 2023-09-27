@@ -66,6 +66,13 @@ $large: 1440px;
       top: -4px;
       position: relative;
       width: 80%;
+     
+    }
+
+    & .search-input{
+      &::placeholder{
+        margin-left: 10px;
+      }
     }
 
     &__inputCart {
@@ -74,6 +81,8 @@ $large: 1440px;
       float: right;
       justify-self: flex-end;
     }
+
+
   }
 
   .searchIconMobile {
@@ -94,6 +103,7 @@ $large: 1440px;
     font-size: 10px;
     text-align: center;
   }
+  
 }
 
 @media screen and (min-width: $small) and (max-width: $medium) {

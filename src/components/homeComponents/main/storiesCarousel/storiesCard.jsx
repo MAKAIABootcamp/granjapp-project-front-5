@@ -5,7 +5,7 @@ export const StoriesCard = ({
     logo = "",
   }) => {
   return (
-    <div className="carousel-container">
+    <div className="cardCarousel-container">
     <div  className= "story-avatar" >
          <img src={logo} alt="" />
        </div>

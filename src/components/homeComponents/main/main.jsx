@@ -6,8 +6,8 @@ import StoriesCarousel from "./storiesCarousel/storiesCarousel";
 const Main = () => {
   return (
     <>
-      <StatusBar />
-      <ButtonsMain/>  
+      {/* <StatusBar /> */}
+      {/* <ButtonsMain/>   */}
       <StoriesCarousel/>
     </>
   );

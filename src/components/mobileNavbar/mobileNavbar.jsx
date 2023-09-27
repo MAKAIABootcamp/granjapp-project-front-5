@@ -13,11 +13,12 @@ import { startNewPost } from "../../store/granjApp/granjAppThunks";
 import { setActivePost } from "../../store/granjApp/granjAppSlice";
 
 const MobileNavbar = () => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isSaving } = useSelector((state) => state.granjApp);
+  const {isSaving} = useSelector(state => state.granjApp);
   const onHome = () => {
-    navigate("/");
+    navigate("/*");
   };
   const onSupport = () => {
     navigate("support");
@@ -27,11 +28,8 @@ const MobileNavbar = () => {
     navigate("favorites");
   };
   const onVentas = () => {
-    navigate("salesTracking");
-  };
-  const onForum = () => {
-    navigate("foro");
-  };
+    navigate('salesTracking');
+  }
   return (
     <>
       <div className="mobileNavBar-container">
@@ -49,10 +47,10 @@ const MobileNavbar = () => {
             <p>Soporte</p>
           </button>
         </div>
-        <div className="button-add-container">
-          <button>
-            <img src={cruz} alt="" />
-          </button>
+        <div className='button-add-container'>
+            <button>
+              <img src={cruz} alt="" />
+            </button>
         </div>
         <div className="right-navBar-container">
           <button onClick={onVentas}>

@@ -8,7 +8,7 @@ export const ProductCarousel = () => {
     const {product} = useSelector ( state => state.granjApp);
 
   return (
-    <div>
+    <div className='carouselProducts-container'>
 
     {
 

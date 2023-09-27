@@ -12,21 +12,27 @@ import { SaveOutlined } from "@mui/icons-material";
 
 export const NewPost = () => {
 
-    const {activePost: post} = useSelector(state => state.granjApp);
+    const {activePost} = useSelector(state => state.granjApp);
 
-    const {description, image, onInputChange, formState} = useForm(post);
+    const {description, image, onInputChange, formState} = useForm(activePost);
 
     const dispatch  = useDispatch();
     
-    const [shouldDispatchActivePost, setShouldDispatchActivePost] = useState(false);
+    // const [shouldDispatchActivePost, setShouldDispatchActivePost] = useState(false);
 
-    useEffect(() => {
-      if (shouldDispatchActivePost) {
+    // useEffect(() => {
+    //   if (shouldDispatchActivePost) {
+    //     dispatch(setActivePost(formState));
+    //     setShouldDispatchActivePost(false); // Restablecer la variable de estado
+    //   }
+    // }, [formState, shouldDispatchActivePost, dispatch]);
+
+    useEffect(() => {   
+
         dispatch(setActivePost(formState));
-        setShouldDispatchActivePost(false); // Restablecer la variable de estado
-      }
-    }, [formState, shouldDispatchActivePost, dispatch]);
-
+    
+    }, [formState])
+    
      const onSavePost = () => {
          dispatch ( startSavePost());
         }

@@ -6,7 +6,7 @@ import { AspectRatio, Box, Card, Typography } from "@mui/joy";
 export const PromoCard = ({ image = "", id }) => {
   return (
     <>
-      <AspectRatio ratio="3" sx={{ minWidth: 1 }}>
+      <AspectRatio ratio="3" sx={{ minWidth: 3 }}>
         <img
           key={image.id}
           className="img-promo"
