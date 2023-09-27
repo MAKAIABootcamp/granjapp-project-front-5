@@ -11,35 +11,34 @@ import DetailProducts from "../pages/detailProducts/detailProducts";
 import { Support } from "../pages/support/support";
 import { Favorites } from "../pages/favorites/favorites";
 import { SalesTracking } from "../pages/salesTracking/salesTracking";
-import SearchPage from "../pages/searchPage/searchPage";
+import ShopDetails from "../pages/shopDetails/shopDetails";
+import { Foro } from "../pages/foro/foro";
 
 const Router = () => {
   const { status } = useCheckAuth();
 
   return (
     <BrowserRouter>
-      {status === "authenticated" ? (
-        <>
-          <Layout />
-          <main className="mx-5 pt-2">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/product/:id" element={<DetailProducts />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {status === "authenticated" ? (
+            <>
+              <Route path="/*" element={<Home />} />
+              <Route path="/login" element={<Login />} />{" "}
               <Route path="support" element={<Support />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="salesTracking" element={<SalesTracking />} />
-              <Route path="search" element={<SearchPage />} />
-            </Routes>
-          </main>
-        </>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="loginWithCell" element={<LoginByPhone />} />
-          <Route path="/insertcode" element={<InsertCode />} />
-        </Routes>
-      )}
+            </>
+          ) : (
+            <>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="loginWithCell" element={<LoginByPhone />} />
+              <Route path="/insertcode" element={<InsertCode />} />
+            </>
+          )}
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { FirebaseAuth } from "../firebase/firebaseConfig";
 import { login, logout } from "../store/userAuth/userAuthSlice";
-import { startLoadingProducts, startLoadingPromos, startLoadingShops } from "../store/granjApp/granjAppThunks";
+import { startLoadingPosts, startLoadingProducts, startLoadingPromos, startLoadingShops } from "../store/granjApp/granjAppThunks";
 
 
 export const useCheckAuth = () => {
@@ -21,6 +21,7 @@ export const useCheckAuth = () => {
       dispatch(startLoadingShops());
       dispatch(startLoadingProducts());
       dispatch(startLoadingPromos());
+      dispatch(startLoadingPosts())
     });
   }, []);
 

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setActiveShop } from "../../../../store/granjApp/granjAppSlice";
 import start4 from "../../../../assets/Stars4.png";
 import "./shopsCarousel.scss";
+import { useNavigate } from "react-router-dom";
 
 export const ShopCard = ({
   title = "",
@@ -12,9 +13,11 @@ export const ShopCard = ({
   workingTime = "",
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onClickShop = () => {
     dispatch(setActiveShop({ id, title, description, workingTime, logo }));
+    navigate('detallesTienda');
   };
 
   return (

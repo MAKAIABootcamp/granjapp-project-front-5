@@ -1,0 +1,105 @@
+@media (min-width: 780px) {
+
+    #mobileNavbar {
+        display: none;
+      }
+
+    .shop-container{
+        display: flex;
+        align-items: center;
+        margin-top: 40px;
+        .img-logoShop-container{
+
+            display: flex;
+            margin-top: 20px;
+            margin-left: 5%;
+            
+           
+            & img{
+                width: 230px;
+                border-radius: 100px;
+                
+            }
+        }
+
+        .info-shopContanier{
+            margin-left: 10%;
+
+            & .section-infoShop-container{
+                width: 500px;
+                
+
+                & h1{
+                    font-size: 40px;
+                    font-family: "Hind Vadodara", sans-serif;
+                    margin-bottom: 20px;
+                }
+
+                & p{
+                    margin-bottom: 10px;
+                    text-align: justify;
+                }
+            }
+
+            & .stars-container{
+                margin-top: 20px;
+
+                img {
+                    width: 100px;
+                }
+            }
+        }
+    }
+   
+
+}
+
+@media (max-width: 1440px) {
+    .shop-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        .img-logoShop-container{
+
+            display: flex;
+            margin-bottom: 10px;
+            
+            & img{
+                width: 150px;
+                border-radius: 100px;
+                
+            }
+        }
+
+        .info-shopContanier{
+            // margin-left: 10%;
+
+            & .section-infoShop-container{
+                width: 370px;
+                
+
+                & h1{
+                    font-size: 30px;
+                    font-family: "Hind Vadodara", sans-serif;
+                    margin-bottom: 20px;
+                }
+
+                & p{
+                    margin-bottom: 10px;
+                    text-align: justify;
+                }
+            }
+
+            & .stars-container{
+                margin-top: 20px;
+                margin-bottom: 20px;
+
+                img {
+                    width: 100px;
+                }
+            }
+        }
+    }
+   
+}
