@@ -8,9 +8,14 @@ import perfil from "../../assets/mobileNavBar/Profile.svg";
 import cruz from "../../assets/mobileNavBar/cruz.svg";
 import "./mobileNavBar.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { startNewPost } from "../../store/granjApp/granjAppThunks";
+import { setActivePost } from "../../store/granjApp/granjAppSlice";
 
 const MobileNavbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isSaving } = useSelector((state) => state.granjApp);
   const onHome = () => {
     navigate("/");
   };
@@ -26,13 +31,13 @@ const MobileNavbar = () => {
   };
   return (
     <>
-      <div className="mobileNavBar-container w-full">
+      <div className="mobileNavBar-container">
         <div className="left-navBar-container">
           <button onClick={onHome}>
             <img src={inicio} alt="" />
             <p>Inicio</p>
           </button>
-          <button>
+          <button onClick={onForo}>
             <img src={foro} alt="" />
             <p>Foro</p>
           </button>
