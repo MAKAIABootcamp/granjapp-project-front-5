@@ -29,6 +29,9 @@ const MobileNavbar = () => {
   const onVentas = () => {
     navigate("salesTracking");
   };
+  const onForum = () => {
+    navigate("foro");
+  };
   return (
     <>
       <div className="mobileNavBar-container">
@@ -37,7 +40,7 @@ const MobileNavbar = () => {
             <img src={inicio} alt="" />
             <p>Inicio</p>
           </button>
-          <button onClick={onForo}>
+          <button onClick={onForum}>
             <img src={foro} alt="" />
             <p>Foro</p>
           </button>

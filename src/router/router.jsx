@@ -19,26 +19,29 @@ const Router = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {status === "authenticated" ? (
-            <>
-              <Route path="/*" element={<Home />} />
-              <Route path="/login" element={<Login />} />{" "}
+      {status === "authenticated" ? (
+        <>
+          <Layout />
+          <main className="mx-5 pt-2">
+            <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="support" element={<Support />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="salesTracking" element={<SalesTracking />} />
-            </>
-          ) : (
-            <>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="loginWithCell" element={<LoginByPhone />} />
-              <Route path="/insertcode" element={<InsertCode />} />
-            </>
-          )}
-        </Route>
-      </Routes>
+              <Route path="foro" element={<Foro />} />
+              <Route path="detailStore" element={<ShopDetails />} />
+              <Route path="/product/:id" element={<DetailProducts />} />
+            </Routes>
+          </main>
+        </>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="loginWithCell" element={<LoginByPhone />} />
+          <Route path="/insertcode" element={<InsertCode />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 };
