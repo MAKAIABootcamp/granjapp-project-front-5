@@ -1,39 +1,38 @@
-import React from 'react'
-import inicio from '../../assets/mobileNavBar/Home.svg';
-import foro from '../../assets/mobileNavBar/foro.svg';
-import soporte from '../../assets/mobileNavBar/soporte.svg';
-import ventas from '../../assets/mobileNavBar/Ventas.svg';
-import favoritos from '../../assets/mobileNavBar/favoritos.svg';
-import perfil from '../../assets/mobileNavBar/Profile.svg';
-import cruz from '../../assets/mobileNavBar/cruz.svg';
-import './mobileNavBar.scss';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { startNewPost } from '../../store/granjApp/granjAppThunks';
-import { setActivePost } from '../../store/granjApp/granjAppSlice';
+import React from "react";
+import inicio from "../../assets/mobileNavBar/Home.svg";
+import foro from "../../assets/mobileNavBar/foro.svg";
+import soporte from "../../assets/mobileNavBar/soporte.svg";
+import ventas from "../../assets/mobileNavBar/Ventas.svg";
+import favoritos from "../../assets/mobileNavBar/favoritos.svg";
+import perfil from "../../assets/mobileNavBar/Profile.svg";
+import cruz from "../../assets/mobileNavBar/cruz.svg";
+import "./mobileNavBar.scss";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { startNewPost } from "../../store/granjApp/granjAppThunks";
+import { setActivePost } from "../../store/granjApp/granjAppSlice";
 
 const MobileNavbar = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {isSaving} = useSelector(state => state.granjApp);
+  const { isSaving } = useSelector((state) => state.granjApp);
   const onHome = () => {
     navigate("/");
   };
   const onSupport = () => {
-    navigate('support');
-  }
+    navigate("support");
+  };
 
   const onFavorites = () => {
-    navigate('favorites');
-  }
+    navigate("favorites");
+  };
   const onVentas = () => {
-    navigate('salesTracking');
-  }
+    navigate("salesTracking");
+  };
   return (
     <>
-      <div className='mobileNavBar-container'>
-        <div className='left-navBar-container'>
+      <div className="mobileNavBar-container">
+        <div className="left-navBar-container">
           <button onClick={onHome}>
             <img src={inicio} alt="" />
             <p>Inicio</p>
@@ -47,10 +46,10 @@ const MobileNavbar = () => {
             <p>Soporte</p>
           </button>
         </div>
-        <div className='button-add-container'>
-            <button>
-              <img src={cruz} alt="" />
-            </button>
+        <div className="button-add-container">
+          <button>
+            <img src={cruz} alt="" />
+          </button>
         </div>
         <div className="right-navBar-container">
           <button onClick={onVentas}>
