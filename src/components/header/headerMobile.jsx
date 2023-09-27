@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { currentTime } from "../../services/currentTime.js";
 import { BsFillBarChartFill, BsSearch, BsCart } from "react-icons/bs";
 import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
-import "./header.scss";
-import { useNavigate } from "react-router-dom";
-import SearchPage from "../../pages/searchPage/searchPage.jsx";
 import DropdownMenu from "../menuDropdown/menuDropdown.jsx";
+import SearchPage from "../../pages/searchPage/searchPage.jsx";
+import "./header.scss";
 
 const HeaderMobile = () => {
   const [time, setTime] = useState(currentTime());
-  const navigate = useNavigate();
+  const inputRef = useRef();
+  // const inputRefClean = useRef();
+
+  const [inputSearch, setInputSearch] = useState();
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(currentTime());
@@ -19,11 +22,31 @@ const HeaderMobile = () => {
   }, []);
 
   const onSearch = () => {
-    navigate("search");
+    if (inputRef.current.value !== "") {
+      setInputSearch(inputRef.current.value);
+    } else {
+      setInputSearch("");
+    }
   };
 
+  // const handleBlur = () => {
+  //   setInputSearch("");
+  // };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setInputSearch("");
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <section className="mobile">
+    <section className="mobile flex-col">
       <div className="div">
         <section className="timeMobile">{time}</section>
         <section className="iconosMobile">
@@ -32,19 +55,24 @@ const HeaderMobile = () => {
           <IoBatteryFullSharp />
         </section>
       </div>
-
-      <div className="inputSearchMobile">
-        <DropdownMenu className="" />
-        <input
-          type="text"
-          placeholder="Buscar en granjapp"
-          className="rounded-[10px] bg-[#b6f1d7] w-full flex mx-auto text-[14px] "
-          onClick={onSearch}
-          name="searchText"
-        />
-        <BsSearch className="searchIconMobile cursor-pointer" />
+      <section className="flex justify-between w-full">
+        <DropdownMenu className="justify-start w-4 flex relative" />
+        <div className="inputSearchMobile">
+          <input
+            type="text"
+            placeholder="Buscar en granjapp"
+            className="rounded-[10px] bg-[#b6f1d7] flex mx-auto text-[14px]focus:ring-1 focus:outline-none inputSearchMobile__inputBusq"
+            onClick={onSearch}
+            name="searchText"
+            ref={inputRef}
+            // onChange={onSearch}
+            // onBlur={handleBlur}
+          />
+          {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
+          <BsSearch className="searchIconMobile cursor-pointer" />
+        </div>
         <BsCart className="inputSearchMobile__inputCart" />
-      </div>
+      </section>
     </section>
   );
 };

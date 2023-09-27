@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
 import "./menuDropdown.scss";
 
 function DropdownMenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const dropDownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const closeDropDown = () => {
+    setIsDropdownOpen(false);
+  };
+
+  const handleDocumentClick = (e) => {
+    if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
+      closeDropDown();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      document.addEventListener("click", handleDocumentClick);
+    };
+  }, []);
 
   return (
-    <div className="flex items-start">
+    <div className="flex items-start" ref={dropDownRef}>
       <div className="">
         <button
           className="bg-[#34d116] hover:bg-[#29c16e] focus:ring-1 mx-2 focus:outline-none font-medium rounded-[5px] relative p-1  focus:ring-[#b6f1d7] dark:bg-[#34d116] dark:hover:bg-[#29c16e] dark:focus:ring-[#22870f]"
@@ -71,12 +89,12 @@ function DropdownMenu() {
                   </svg>
                   {/* Double Dropdown */}
                   {isCategoryDropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 left-40 top-16">
+                    <div className="absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-[#29c16e] left-[117px] top-[48px]">
                       <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                         <li>
                           <Link
                             tp="/fruits"
-                            className="block px-4 py-2 dark:hover:bg-[#29c16e] dark:hover:text-white text-[14px] hover:bg-[#7c67b1]"
+                            className="block px-4 py-2 dark:hover:bg-[#b6f1d7] dark:hover:text-black text-[14px]"
                             onClick={toggleDropdown}
                           >
                             Frutas
@@ -85,7 +103,7 @@ function DropdownMenu() {
                         <li>
                           <Link
                             to="/vegetables"
-                            className="block px-4 py-2 dark:hover:bg-[#29c16e] dark:hover:text-white text-[14px] hover:bg-[#7c67b1]"
+                            className="block px-4 py-2 dark:hover:bg-[#b6f1d7] dark:hover:text-black text-[14px] "
                             onClick={toggleDropdown}
                           >
                             Verduras
@@ -94,7 +112,7 @@ function DropdownMenu() {
                         <li>
                           <Link
                             to="eggs&dairies"
-                            className="block px-4 py-2 dark:hover:bg-[#29c16e] dark:hover:text-white text-[14px] hover:bg-[#7c67b1]"
+                            className="block px-4 py-2 dark:hover:bg-[#b6f1d7] dark:hover:text-black text-[14px]"
                             onClick={toggleDropdown}
                           >
                             Lácteos y huevos

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
 import logo from "../../assets/logo_fixed.png";
@@ -6,17 +6,14 @@ import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useRef } from "react";
+import { NavLink } from "react-router-dom";
 import SearchPage from "../../pages/searchPage/searchPage";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const inputRef = useRef();
 
-  const [inputSearch, setInputSearch] = useState("");
+  const [inputSearch, setInputSearch] = useState();
 
   const onSearch = () => {
     if (inputRef.current.value !== "") {
