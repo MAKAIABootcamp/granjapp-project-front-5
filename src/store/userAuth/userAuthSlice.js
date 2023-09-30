@@ -64,4 +64,6 @@ export const {
 // Export the selector to access the address
 export const selectAddress = (state) => state.auth.address;
 
+export const selectUser = (state) => state.auth;
+
 export default authSlice.reducer;
