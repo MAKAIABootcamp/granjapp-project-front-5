@@ -1,12 +1,12 @@
 import React from "react";
 import useScreenSize from "../../hooks/useScreenSize";
 
-import DetailProductsMobile from "./mainProducts/DetailProductsMobile";
-import DetailProductsTablet from "./mainProducts/DetailProductsTablet";
 import DetailProductsLaptop from "./mainProducts/detailProductsLaptop";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById } from "../../firebase/Products";
+import DetailProductsMobile from "./mainProducts/detailProductsMobile";
+import DetailProductsTablet from "./mainProducts/detailProductsTablet";
 
 const DetailProduct = () => {
   const { width, height } = useScreenSize();

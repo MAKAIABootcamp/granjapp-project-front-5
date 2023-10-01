@@ -7,6 +7,7 @@ export const authSlice = createSlice({
     uid: null,
     email: null,
     displayName: null,
+    userType: "comprador",
     photoURL: null,
     numberCell: null,
     errorMessage: null,
@@ -18,6 +19,7 @@ export const authSlice = createSlice({
       state.uid = payload.uid;
       state.email = payload.email;
       state.displayName = payload.displayName;
+      state.userType = payload.userType;
       state.photoURL = payload.photoURL;
       state.numberCell = payload.numberCell;
       state.errorMessage = payload.errorMessage;
@@ -28,6 +30,7 @@ export const authSlice = createSlice({
       state.uid = null;
       state.email = null;
       state.displayName = null;
+      state.userType = null;
       state.photoURL = null;
       state.numberCell = null;
       state.errorMessage = payload?.errorMessage;
@@ -45,6 +48,10 @@ export const authSlice = createSlice({
     setAddress: (state, action) => {
       state.address = action.payload;
     },
+
+    setUserType: (state, action) => {
+      state.userType = action.payload
+    },
     setError: (state, action) => {
       state.error = action.payload;
     },
@@ -58,6 +65,7 @@ export const {
   setIsLogged,
   setUserLogged,
   setAddress,
+  setUserType,
   setError,
 } = authSlice.actions;
 

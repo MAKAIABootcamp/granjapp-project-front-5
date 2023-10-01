@@ -12,7 +12,10 @@ import {
 export const getProducts = async () => {
   const products = collection(FirebaseDB, "productos");
   const productsSnapshot = await getDocs(products);
-  const productsList = productsSnapshot.docs.map((doc) => doc.data());
+  const productsList = productsSnapshot.docs.map((doc) => {
+    const id = doc.id;
+    return { id, ...doc.data()}
+  });
   return productsList;
 };
 
@@ -33,7 +36,10 @@ export const getProductByCategorie = async (productCategorie) => {
   
   const products = query(collection(FirebaseDB, "productos"),where("variety", "==", productCategorie));
   const productsSnapshot = await getDocs(products);
-  const productsList = productsSnapshot.docs.map((doc) => doc.data());
+  const productsList = productsSnapshot.docs.map((doc) => {
+    const id = doc.id;
+    return { id, ...doc.data()}
+  });
 
   return productsList;
 } 

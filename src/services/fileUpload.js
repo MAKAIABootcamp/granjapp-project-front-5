@@ -19,7 +19,6 @@ const fileUpload = async (file) => {
     const data = await resp.json();
     return data.secure_url;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };

@@ -6,11 +6,13 @@ import ventas from "../../assets/mobileNavBar/Ventas.svg";
 import favoritos from "../../assets/mobileNavBar/favoritos.svg";
 import perfil from "../../assets/mobileNavBar/Profile.svg";
 import cruz from "../../assets/mobileNavBar/cruz.svg";
-import "./mobileNavBar.scss";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { startNewPost } from "../../store/granjApp/granjAppThunks";
 import { setActivePost } from "../../store/granjApp/granjAppSlice";
+
+// import "../../styles/mobileNavBar.scss"
 
 const MobileNavbar = () => {
 

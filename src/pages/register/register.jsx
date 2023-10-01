@@ -6,7 +6,7 @@ import fileUpload from "../../services/fileUpload";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
-import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
+import { Alert, Button, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import imgLogin from "../../assets/img-login.png";
 import "./register.scss";
@@ -15,12 +15,14 @@ const formData = {
   email: "",
   password: "",
   displayName: "",
-
+  userType:"comprador",
   photoURL: "",
 };
 
+const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+
 const formValidations = {
-  email: [(value) => value.includes("@"), "El correo debe contener una @"],
+  email: [(value) => regexEmail.test(value), "Ingrese un correo válido"],
   password: [
     (value) => value.length >= 6,
     "La contraseña debe contener mas de 6 caracteres.",
@@ -62,6 +64,7 @@ const Register = () => {
     displayName,
     email,
     password,
+    userType,
     // photoURL,
     onInputChange,
     isFormValid,
@@ -74,35 +77,33 @@ const Register = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-
+    console.log(userType)
     if (!isFormValid) return;
     const photoURL = await fileUpload(image[0]);
-    if (photoURL) {
-      console.log({
-        ...formState,
-        photoURL,
-      });
-      dispatch(
+
+      const valur = await dispatch(
         startCreatingUserWithEmailPassword({
           ...formState,
           photoURL,
+          userType
         })
       );
-      Swal.fire(
-        "Excelente!",
-        "Su cuenta se ha creado exitosamente",
-        "success"
-      ).then(() => navigate("/"));
-    } else {
-      console.log(
-        "Aquí se debe mostrar un mensaje de error para el usuario indicándole que no fue exitoso la creación de su cuenta"
-      );
-    }
+      if (valur.type == "auth/logout"){
+        Swal.fire({
+          title:"Error de creación",
+          text:valur.payload,
+          timer:3000,
+          icon: "error"
+        })
+      }
+      else{
+        navigate("/")
+      }
   };
 
   return (
     <>
-      <div className="all-container-register">
+      <div className="all-container-register mx-auto w-[40%] h-full">
         <img className="img-farmer" src={imgLogin} alt="" />
         <h1 className="register-title">Registro </h1>
         <form onSubmit={onSubmit}>
@@ -166,7 +167,7 @@ const Register = () => {
                 variant="contained"
                 startIcon={<CloudUploadIcon />}
               >
-                Upload file
+                Ingrese Foto
                 <VisuallyHiddenInput
                   type="file"
                   // value={image}
@@ -176,6 +177,31 @@ const Register = () => {
                   }}
                 />
               </Button>
+            </Grid>
+            <Grid item xs={12} sx={{ mt: 2 }}>
+              <FormLabel id="row-radio-buttons-group">
+                Tipo de usuario
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="row-radio-buttons-group-label"
+                name="userType"
+                value={userType}
+                onChange={onInputChange}
+              >
+                <FormControlLabel
+                  defaultChecked
+                  defaultValue
+                  value="comprador"
+                  control={<Radio />}
+                  label="Comprador"
+                />
+                <FormControlLabel
+                  value="vendedor"
+                  control={<Radio />}
+                  label="Vendedor"
+                />
+              </RadioGroup>
             </Grid>
 
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
@@ -195,20 +221,19 @@ const Register = () => {
                 </Button>
               </Grid>
             </Grid>
-
-            <Grid container direction="row" justifyContent="end">
-              <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
-              <Link
-                component={RouterLink}
-                className="ingresar"
-                color="inherit"
-                to="/login"
-              >
-                ingresar
-              </Link>
-            </Grid>
           </Grid>
         </form>
+        <Grid container direction="column" alignItems={"center"} justifyContent="center" padding={2}>
+          <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
+          <Link
+            component={RouterLink}
+            className="ingresar mx-auto border-b-2 hover:bg-green-700 p-2"
+            color="inherit"
+            to="/login"
+          >
+            ingresar
+          </Link>
+        </Grid>
       </div>
     </>
   );

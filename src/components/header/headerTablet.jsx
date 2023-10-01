@@ -5,19 +5,30 @@ import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
 import SearchPage from "../../pages/searchPage/searchPage.jsx";
 import DropdownMenu from "../menuDropdown/menuDropdown.jsx";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userAuth/userAuthSlice.js";
 
 const HeaderTablet = () => {
   const [time, setTime] = useState(currentTime());
   const [inputSearch, setInputSearch] = useState();
+  /** @type string */
+  const [userName, setUserName] = useState("");
+
+  const userState = useSelector(selectUser);
+
   const inputRef = useRef();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(currentTime());
     }, 1000);
-
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    setUserName(userState.displayName);
+  }, [userState]);
+
 
   const onSearch = () => {
     if (inputRef.current.value !== "") {
@@ -53,6 +64,12 @@ const HeaderTablet = () => {
           <BsSearch className="searchIconTablet " />
           <BsCart className="inputSearchTablet__inputCartT " />
         </div>
+        {userName && (
+          <div className="flex-col items-center text-center mx-auto px-2 text-[15px]">
+            <p>Bienvenido</p>
+            <strong>{userName.split(" ")[0]}</strong>
+          </div>
+        )}
       </section>
     </div>
   );

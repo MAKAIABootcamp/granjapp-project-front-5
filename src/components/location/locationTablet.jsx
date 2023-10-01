@@ -26,7 +26,7 @@ const LocationTablet = () => {
     localStorage.setItem("address", address);
   };
   return (
-    <div className="max-w-full">
+    <div className="max-w-full block">
       {showLocation && (
         <div className="">
           <button

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
 import logo from "../../assets/logo_fixed.png";
 import LocationLaptop from "../location/locationLaptop";
@@ -8,12 +8,21 @@ import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
 import { NavLink } from "react-router-dom";
 import SearchPage from "../../pages/searchPage/searchPage";
+import { selectUser } from "../../store/userAuth/userAuthSlice";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
 
   const [inputSearch, setInputSearch] = useState();
+  /** @type string */
+  const [userName, setUserName] = useState();
+
+  const userState = useSelector(selectUser);
+
+  useEffect(() => {
+    setUserName(userState.displayName);
+  }, [userState]);
 
   const onSearch = () => {
     if (inputRef.current.value !== "") {
@@ -52,9 +61,15 @@ const HeaderLaptop = () => {
         </div>
         {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
       </div>
-      <div className="flex items-center justify-between space-x-3 p-2 ">
-        <AiOutlineUser className=" h-6 w-6" />
-        <BsBell className="h-6 w-6" />
+      <div className="flex items-center justify-center text-center space-x-3 p-2 text-[15px] ">
+        {/* <AiOutlineUser className=" h-6 w-6" /> */}
+        {/* <BsBell className="h-6 w-6" /> */}
+        {userName && (
+          <div className="flex-col items-center mx-auto w-full">
+            <p>Bienvenido</p>
+            <strong className="text-center">{userName.split(" ")[0]}</strong>
+          </div>
+        )}
         <BsCart className="h-6 w-6" />
       </div>
       <button
