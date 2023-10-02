@@ -61,23 +61,15 @@ const HeaderLaptop = () => {
         </div>
         {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
       </div>
-      <div className="flex items-center justify-center text-center space-x-3 p-2 text-[15px] ">
-        {/* <AiOutlineUser className=" h-6 w-6" /> */}
-        {/* <BsBell className="h-6 w-6" /> */}
-        {userName && (
-          <div className="flex-col items-center mx-auto w-full">
-            <p>Bienvenido</p>
+      {userName && (
+          <div className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2" onClick={() => dispatch(startLogout())}>
+            <img className="object-cover h-12 w-12 rounded-full flex items-center mx-auto" src={userState.photoURL} />
             <strong className="text-center">{userName.split(" ")[0]}</strong>
           </div>
         )}
+      <div className="flex items-center justify-center text-center space-x-3 p-2 mx-3 text-[15px] ">
         <BsCart className="h-6 w-6" />
       </div>
-      <button
-        onClick={() => dispatch(startLogout())}
-        className="border p-2 m-2 ml-5 border-green-800 bg-[#29c16e] border-1 rounded-[10px] text-[10px] text-white"
-      >
-        Cerrar sesión
-      </button>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { FirebaseAuth, FirebaseDB } from "./firebaseConfig";
 import {
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   setDoc,
@@ -88,13 +89,20 @@ export const loginWithEmailPassword = async ({ email, password }) => {
       password
     );
     const { uid, photoURL, displayName } = resp.user;
-
-    return {
-      ok: true,
-      uid,
-      photoURL,
-      displayName,
-    };
+    const userCol = doc(FirebaseDB, "usuarios",uid)
+    const userDoc = await getDoc(userCol)
+    if (userDoc.exists()){
+      const userType = userDoc.data().userType
+      return {
+        ok: true,
+        uid,
+        photoURL,
+        displayName,
+        userType
+      };
+    }
+    return { ok: false, errorMessage: "No existe el usuario" };
+    
   } catch (error) {
     console.log(error);
     return { ok: false, errorMessage: error.message };

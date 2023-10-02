@@ -38,6 +38,15 @@ export const startLoadingProducts= () => {
     ;
 }
 
+export const saveProducts= () => {
+
+    return async (shop,dispatch) => {
+        dispatch (setProduct(shop));
+    }
+
+    ;
+}
+
 export const startLoadingPromos= () => {
 
     return async (dispatch, getState) => {

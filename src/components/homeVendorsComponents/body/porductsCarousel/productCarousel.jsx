@@ -3,24 +3,27 @@ import { useSelector } from 'react-redux';
 import "./productCarousel.scss"
 import { ProductCard } from './productCard';
 import { getProductByCategorie } from '../../../../firebase/Products';
-import { async } from '@firebase/util';
 
 export const ProductCarousel = (prop) => {
 
     const {product} = useSelector ( state => state.granjApp);
   useEffect(() =>  {
-    if (!prop.categorie){ setProducts(product) }
-    else {
+    if (!prop.categorie && !prop.products) {
+      setProducts(product);
+    } else if (!prop.products) {
       const getProducts = async () => {
-        const productsCategorie = await (getProductByCategorie(prop.categorie))
-        console.log(productsCategorie);
-        setProducts (productsCategorie);
-      }
-  
+        const productsCategorie = await getProductByCategorie(prop.categorie);
+        setProducts(productsCategorie);
+      };
+
       getProducts();
     }
     
   },[,prop.categorie]) 
+
+  useEffect(() =>  {
+    if (!prop.products){ setProducts(product) }
+  },[prop.products]) 
 
   const [products, setProducts] = useState(product);
   return (
