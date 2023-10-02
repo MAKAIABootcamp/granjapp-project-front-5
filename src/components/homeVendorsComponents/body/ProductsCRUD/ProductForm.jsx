@@ -3,25 +3,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
-import { Alert, Button, Grid,  MenuItem, Select, TextField } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useForm } from "../../../../hooks/useForm"
+import { useForm } from "../../../../hooks/useForm";
 import { Textarea } from "@mui/joy";
 import { addProduct } from "../../../../firebase/Products";
-
+import fileUpload from "../../../../services/fileUpload";
 
 const formData = {
   name: "",
   cost: undefined,
   description: "",
-  unity:"Kg",
-  variety:"Frutas",
-  weight:undefined
+  unity: "Kg",
+  variety: "Frutas",
+  weight: undefined,
 };
 
-
 const formValidations = {
-  name: [(value) => value.length > 1, "El nombre debe contener al menos 2 caracteres"],
+  name: [
+    (value) => value.length > 1,
+    "El nombre debe contener al menos 2 caracteres",
+  ],
   description: [
     (value) => value.length >= 20,
     "La descripción debe contener mas de 20 caracteres.",
@@ -29,7 +38,7 @@ const formValidations = {
   variety: [(value) => value.length > 0, "Este es un campo obligatorio."],
   cost: [(value) => value > 50, "Este es un campo obligatorio."],
   unity: [(value) => value.length >= 1, "Este es un campo obligatorio."],
-  weight: [(value) => value >0, "Este es un campo obligatorio."],
+  weight: [(value) => value > 0, "Este es un campo obligatorio."],
 };
 
 const VisuallyHiddenInput = styled("input")({
@@ -44,7 +53,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const ProductForm = ( { storeId }) => {
+const ProductForm = ({ storeId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -76,22 +85,24 @@ const ProductForm = ( { storeId }) => {
     // photoURLValid,
   } = useForm(formData, formValidations);
 
-  
-
   const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
+
     if (!isFormValid) return;
-    if (image){
-        await addProduct({name,
-            description,
-            cost,
-            storeId,
-            unity,
-            image,
-            variety,
-            weight,}
-          ).then(() => navigate("/"));
+    if (image) {
+      const imageProduct = await fileUpload(image);
+      console.log(imageProduct);
+      await addProduct({
+        name,
+        description,
+        cost,
+        storeId,
+        unity,
+        url: imageProduct,
+        variety,
+        weight,
+      });
     }
   };
 
@@ -205,7 +216,7 @@ const ProductForm = ( { storeId }) => {
                     type="file"
                     // value={image}
                     onChange={(e) => {
-                        setImage(e.target.files[0]);
+                      setImage(e.target.files[0]);
                     }}
                   />
                 </Button>

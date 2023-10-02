@@ -41,17 +41,17 @@ const uploadProduct = async (uid, imageUpload) => {
         })
         .catch((error) => {
           Swal.fire({
-            title:error.message,
-            icon:"error",
-            timer:2000
+            title: error.message,
+            icon: "error",
+            timer: 2000,
           });
         });
     })
     .catch((error) => {
       Swal.fire({
-        title:error.message,
-        icon:"error",
-        timer:2000
+        title: error.message,
+        icon: "error",
+        timer: 2000,
       });
     });
 };
@@ -67,17 +67,18 @@ export const addProduct = async ({
   weight,
 }) => {
   const docRef = doc(collection(FirebaseDB, "productos"));
-  console.log(docRef)
-  await setDoc(docRef,{
+  console.log(docRef);
+  await setDoc(docRef, {
     name,
     description,
     cost,
     storeId,
+    url,
     unity,
     variety,
     weight,
   });
-  await uploadProduct(docRef.id, url);
+  // await uploadProduct(docRef.id, url);
 };
 
 export const getProductById = async (productId) => {

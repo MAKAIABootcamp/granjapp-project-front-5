@@ -6,7 +6,17 @@ import fileUpload from "../../services/fileUpload";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
-import { Alert, Button, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Button,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import imgLogin from "../../assets/img-login.png";
 import "./register.scss";
@@ -15,7 +25,7 @@ const formData = {
   email: "",
   password: "",
   displayName: "",
-  userType:"comprador",
+  userType: "comprador",
   photoURL: "",
 };
 
@@ -77,28 +87,27 @@ const Register = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
-    console.log(userType)
+    console.log(userType);
     if (!isFormValid) return;
     const photoURL = await fileUpload(image[0]);
 
-      const valur = await dispatch(
-        startCreatingUserWithEmailPassword({
-          ...formState,
-          photoURL,
-          userType
-        })
-      );
-      if (valur.type == "auth/logout"){
-        Swal.fire({
-          title:"Error de creación",
-          text:valur.payload,
-          timer:3000,
-          icon: "error"
-        })
-      }
-      else{
-        navigate("/")
-      }
+    const valur = dispatch(
+      startCreatingUserWithEmailPassword({
+        ...formState,
+        photoURL,
+        userType,
+      })
+    );
+    if (valur.type == "auth/logout") {
+      Swal.fire({
+        title: "Error de creación",
+        text: valur.payload,
+        timer: 3000,
+        icon: "error",
+      });
+    } else {
+      navigate("/");
+    }
   };
 
   return (
@@ -223,7 +232,13 @@ const Register = () => {
             </Grid>
           </Grid>
         </form>
-        <Grid container direction="column" alignItems={"center"} justifyContent="center" padding={2}>
+        <Grid
+          container
+          direction="column"
+          alignItems={"center"}
+          justifyContent="center"
+          padding={2}
+        >
           <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
           <Link
             component={RouterLink}

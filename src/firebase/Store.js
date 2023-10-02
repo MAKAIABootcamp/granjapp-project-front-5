@@ -1,4 +1,3 @@
-
 import { FirebaseDB } from "./firebaseConfig";
 import {
   collection,
@@ -14,17 +13,22 @@ export const getStores = async () => {
   const productsSnapshot = await getDocs(products);
   const productsList = productsSnapshot.docs.map((doc) => {
     const id = doc.id;
-    return { id, ...doc.data()}
+    return { id, ...doc.data() };
   });
   return productsList;
 };
 
 export const getStoreByUser = async (userId) => {
-  const productRef = query(collection(FirebaseDB, "Tiendas"), where("userId","==", userId));
+  const productRef = query(
+    collection(FirebaseDB, "Tiendas"),
+    where("userId", "==", userId)
+  );
   const productSnapshot = await getDocs(productRef);
-  console.log(productSnapshot)
   if (!productSnapshot.empty) {
-    const productData = {id:productSnapshot.docs[0].id, ...productSnapshot.docs[0].data()};
+    const productData = {
+      id: productSnapshot.docs[0].id,
+      ...productSnapshot.docs[0].data(),
+    };
     return productData;
   } else {
     // El documento con el ID especificado no existe
