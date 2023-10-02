@@ -122,7 +122,7 @@ const Register = () => {
                 label="Nombre completo"
                 type="text"
                 placeholder="Nombre completo"
-                fullWidth
+                // fullWidth
                 name="displayName"
                 value={displayName}
                 onChange={onInputChange}
@@ -136,7 +136,7 @@ const Register = () => {
                 label="Correo"
                 type="email"
                 placeholder="correo@google.com"
-                fullWidth
+                // fullWidth
                 name="email"
                 value={email}
                 onChange={onInputChange}
@@ -150,7 +150,7 @@ const Register = () => {
                 label="Contraseña"
                 type="password"
                 placeholder="Contraseña"
-                fullWidth
+                // fullWidth
                 name="password"
                 value={password}
                 onChange={onInputChange}
@@ -224,7 +224,7 @@ const Register = () => {
                   sx={{ background: "#70e000" }}
                   type="submit"
                   variant="contained"
-                  fullWidth
+                  // fullWidth
                 >
                   Crear cuenta
                 </Button>

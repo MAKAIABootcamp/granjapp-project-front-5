@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { styled } from "@mui/material/styles";
 import {
   Alert,
@@ -16,12 +15,14 @@ import { useForm } from "../../../../hooks/useForm";
 import { Textarea } from "@mui/joy";
 import { addProduct } from "../../../../firebase/Products";
 import fileUpload from "../../../../services/fileUpload";
+import Swal from "sweetalert2";
+// import "@sweetalert/themes/default.css";
 
 const formData = {
   name: "",
   cost: undefined,
   description: "",
-  unity: "Kg",
+  unity: "kg",
   variety: "Frutas",
   weight: undefined,
 };
@@ -103,15 +104,23 @@ const ProductForm = ({ storeId }) => {
         variety,
         weight,
       });
+      Swal.fire({
+        icon: "success",
+        title: "El producto ha sido guardado con éxito!",
+        showConfirmButton: false,
+        timer: 1000,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/");
+        }
+      });
     }
   };
 
   return (
     <>
       <div className="all-container-register mx-auto w-[60%] h-full">
-        <h1 className="register-title text-xl py-2">
-          Ingresar nuevo producto{" "}
-        </h1>
+        <h1 className="register-title text-xl py-2">Ingresar nuevo producto</h1>
         <form onSubmit={onSubmit}>
           <Grid container>
             <Grid item xs={12}>
@@ -165,15 +174,15 @@ const ProductForm = ({ storeId }) => {
                 <Select
                   labelId="variety"
                   id="variety"
-                  fullWidth
-                  value={variety}
+                  // fullWidth
                   name={variety}
+                  value={variety}
                   label="Categoria del producto"
                   onChange={onInputChange}
                 >
                   <MenuItem value={"Frutas"}>Frutas</MenuItem>
                   <MenuItem value={"Hortalizas"}>Hortalizas</MenuItem>
-                  <MenuItem value={"Huevo_lac"}>Huevos y Lacteos</MenuItem>
+                  <MenuItem value={"Huevo_lac"}>Huevos y Lácteos</MenuItem>
                 </Select>
               </Grid>
               <Grid item xs={3}>
@@ -181,7 +190,7 @@ const ProductForm = ({ storeId }) => {
                   label="Cantidad por unidad"
                   type="number"
                   placeholder="Cantidad por unidad"
-                  fullWidth
+                  // fullWidth
                   name="weight"
                   value={weight}
                   onChange={onInputChange}
@@ -198,11 +207,12 @@ const ProductForm = ({ storeId }) => {
                   label="Unidad del producto"
                   onChange={onInputChange}
                 >
-                  <MenuItem value={"Kg"}>Kg</MenuItem>
-                  <MenuItem value={"Gr"}>Gr</MenuItem>
+                  <MenuItem value={"kg"}>kg</MenuItem>
+                  <MenuItem value={"gr"}>gr</MenuItem>
+                  <MenuItem value={"lb"}>lb</MenuItem>
                   <MenuItem value={"L"}>L</MenuItem>
-                  <MenuItem value={"Ml"}>Ml</MenuItem>
-                  <MenuItem value={"UN"}>UN</MenuItem>
+                  <MenuItem value={"ml"}>ml</MenuItem>
+                  <MenuItem value={"unid"}>unid</MenuItem>
                 </Select>
               </Grid>
               <Grid item xs={3}>
@@ -214,7 +224,6 @@ const ProductForm = ({ storeId }) => {
                   Ingrese Imagen
                   <VisuallyHiddenInput
                     type="file"
-                    // value={image}
                     onChange={(e) => {
                       setImage(e.target.files[0]);
                     }}

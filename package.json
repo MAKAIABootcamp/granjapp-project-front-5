@@ -35,7 +35,7 @@
     "react-select": "^5.7.5",
     "react-slick": "^0.29.0",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.6.13"
+    "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

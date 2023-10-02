@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { FilterButtons } from "./filterButtons/filterButtons";
 import { ProductCarousel } from "./porductsCarousel/productCarousel";
 import "./body.scss";
@@ -14,7 +13,7 @@ import {
 } from "../../../store/granjApp/granjAppSlice";
 import ProductForm from "./ProductsCRUD/ProductForm";
 
-const BodyVendors = () => {
+const BodySellers = () => {
   const [isProduct, setIsProduct] = useState(true);
   const [isAdd, setIsAdd] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -85,4 +84,4 @@ const BodyVendors = () => {
   );
 };
 
-export default BodyVendors;
+export default BodySellers;

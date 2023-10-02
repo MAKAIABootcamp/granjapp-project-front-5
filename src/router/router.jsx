@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
 
 import Register from "../pages/register/register";
 import Home from "../pages/home/home";
-import HomeVendors from "../pages/home/HomeVendors";
 import Layout from "../components/layout/layout";
 import LoginByPhone from "../pages/login/loginByPhone";
 import { InsertCode } from "../pages/login/insertCode";
@@ -19,14 +18,12 @@ import { ShopsCarousel } from "../components/homeComponents/body/restarantsCarou
 import { ProductCarousel } from "../components/homeComponents/body/porductsCarousel/productCarousel";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/userAuth/userAuthSlice";
-
-
-
+import HomeSellers from "../pages/home/HomeSellers";
 
 const Router = () => {
   const userState = useSelector(selectUser);
   const { status } = useCheckAuth();
- console.log(status);
+  console.log(status);
   return (
     <BrowserRouter>
       {status === "authenticated" ? (
@@ -36,7 +33,7 @@ const Router = () => {
             <Routes>
               {userState.userType == "comprador" ? (
                 <>
-                <Route path="/" element={<Home />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="support" element={<Support />} />
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="salesTracking" element={<SalesTracking />} />
@@ -45,13 +42,18 @@ const Router = () => {
                   <Route path="/product/:id" element={<DetailProduct />} />
                   <Route path="store" element={<ShopsCarousel />} />
                   <Route path="/products" element={<ProductCarousel />} />
-                  <Route path="fruits" element={<ProductCarousel categorie = {"Frutas"}/>} />
-                  <Route path="vegetables" element={<ProductCarousel categorie = {"Hortalizas"}/>} />
+                  <Route
+                    path="fruits"
+                    element={<ProductCarousel categorie={"Frutas"} />}
+                  />
+                  <Route
+                    path="vegetables"
+                    element={<ProductCarousel categorie={"Hortalizas"} />}
+                  />
                 </>
-                  
               ) : (
                 <>
-                <Route path="/" element={<HomeVendors />} />
+                  <Route path="/" element={<HomeSellers />} />
                   <Route path="support" element={<Support />} />
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="salesTracking" element={<SalesTracking />} />
@@ -60,26 +62,28 @@ const Router = () => {
                   <Route path="/product/:id" element={<DetailProduct />} />
                   <Route path="store" element={<ShopsCarousel />} />
                   <Route path="/products" element={<ProductCarousel />} />
-                  <Route path="fruits" element={<ProductCarousel categorie = {"Frutas"}/>} />
-                  <Route path="vegetables" element={<ProductCarousel categorie = {"Hortalizas"}/>} />
+                  <Route
+                    path="fruits"
+                    element={<ProductCarousel categorie={"Frutas"} />}
+                  />
+                  <Route
+                    path="vegetables"
+                    element={<ProductCarousel categorie={"Hortalizas"} />}
+                  />
                 </>
               )}
-              
-
-
             </Routes>
-            </main>
+          </main>
         </>
-          ) : (
-          <Routes> 
-            
-              <Route path="/" element={<Login />} />
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="loginWithCell" element={<LoginByPhone />} />
-              <Route path="/insertcode" element={<InsertCode />} />
-          </Routes>
-          )}
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="loginWithCell" element={<LoginByPhone />} />
+          <Route path="/insertcode" element={<InsertCode />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 };
