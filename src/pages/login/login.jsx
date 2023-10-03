@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { Link, Link as RouterLink } from "react-router-dom";
+import React, { useMemo, useState } from "react";
+import { Link, Link as RouterLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import {
@@ -7,13 +7,15 @@ import {
   startLoginWithEmailPassword,
 } from "../../store/userAuth/thunks";
 import { Google, Phone } from "@mui/icons-material";
-import { Alert, Button, Grid, Typography } from "@mui/material";
+import { Alert, Button, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Typography } from "@mui/material";
 import imgLogin from "../../assets/img-login.png";
 import "./login.scss";
+import { selectUser } from "../../store/userAuth/userAuthSlice";
+import Swal from "sweetalert2";
 
 const formData = {
   email: "",
-  password: "",
+  password: ""
 };
 
 const Login = () => {
@@ -21,16 +23,31 @@ const Login = () => {
   const { email, password, onInputChange } = useForm(formData);
   const isAuthenticating = useMemo(() => status === "checking", [status]);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  const onSubmit = (event) => {
+
+
+  const onSubmit = async (event) => {
     event.preventDefault();
-
-    dispatch(startLoginWithEmailPassword({ email, password }));
+    const valur =await dispatch(startLoginWithEmailPassword({ email, password }));
+    if (valur.type == "auth/logout"){
+      Swal.fire({
+        title:"Datos incorrectos",
+        text:valur.payload,
+        timer:3000,
+        icon: "error"
+      })
+    }
+    else{
+      navigate("/")
+    }
+    
   };
 
   const onGoogleSignIn = () => {
     console.log("onGoogleSignIn");
     dispatch(startGoogleSignIn());
+    
   };
 
   const redirectToLogin = () => {
@@ -39,7 +56,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="all-container flex-col mx-auto justify-center py-3 h-auto items-center ">
+      <div className="all-container flex-col mx-auto justify-center py-3 mt-10 h-full lg:w-[30%] md:w-[50%] sm:w-[80%] items-center ">
         <img className="img-farmer rounded-lg p-2" src={imgLogin} alt="" />
         <form onSubmit={onSubmit}>
           <h1>Iniciar sesión</h1>

@@ -34,7 +34,7 @@ const LocationLaptop = () => {
     localStorage.setItem("address", address);
   };
   return (
-    <div className="w-full min-w-[200px] max-w-[400px]">
+    <div className="w-[40%] min-w-[200px] max-w-[400px]">
       {showLocation && (
         <div className="">
           <button

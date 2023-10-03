@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
 import logo from "../../assets/logo_fixed.png";
@@ -8,6 +8,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
 import { NavLink, useNavigate } from "react-router-dom";
 import SearchPage from "../../pages/searchPage/searchPage";
+import { selectUser } from "../../store/userAuth/userAuthSlice";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
@@ -15,8 +16,6 @@ const HeaderLaptop = () => {
   const navigate = useNavigate();
 
   const [inputSearch, setInputSearch] = useState();
-
-  const cart = useSelector((state) => state.granjApp.cart);
 
   const onSearch = () => {
     if (inputRef.current.value !== "") {
@@ -62,21 +61,8 @@ const HeaderLaptop = () => {
       <div className="flex items-center justify-between space-x-3 p-2 ">
         <AiOutlineUser className=" h-6 w-6" />
         <BsBell className="h-6 w-6" />
-        <div className="relative">
-          <BsCart onClick={onCart} className="h-6 w-6 cursor-pointer" />
-          {cart.length > 0 && (
-            <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px]">
-              {cart.length}
-            </div>
-          )}
-        </div>
+        <BsCart onClick={onCart} className="h-6 w-6" />
       </div>
-      <button
-        onClick={() => dispatch(startLogout())}
-        className="border p-2 m-2 ml-5 border-green-800 bg-[#29c16e] border-1 rounded-[10px] text-[10px] text-white"
-      >
-        Cerrar sesión
-      </button>
     </div>
   );
 };

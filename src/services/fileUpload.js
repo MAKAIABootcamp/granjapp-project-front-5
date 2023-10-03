@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const fileUpload = async (file) => {
   const cloudName = "dmsbhk0px";
   const uploadPreset = "granjapp";
@@ -8,18 +10,20 @@ const fileUpload = async (file) => {
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
   formData.append("cloud_name", cloudName);
+  console.log("form data");
   try {
     const resp = await fetch(urlCloudinary, {
       method: "post",
       body: formData,
     });
 
+    // const resp = await axios.post(urlCloudinary);
+    // console.log("response", resp);
     if (!resp.ok) return null;
 
     const data = await resp.json();
     return data.secure_url;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };

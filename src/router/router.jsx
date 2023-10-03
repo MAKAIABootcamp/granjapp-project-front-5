@@ -20,13 +20,14 @@ import PrivateRoutes from "./privateRoutes";
 import PublicRoutes from "./publicRoutes";
 import { ShoppingCart } from "../pages/shoppingCart/shoppingCart";
 import MetodoPagos from "../pages/metodoPago/metodoPago";
-
-
-
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/userAuth/userAuthSlice";
+import HomeSellers from "../pages/home/HomeSellers";
 
 const Router = () => {
-  const { status } = useCheckAuth();
- console.log(status);
+  
+  const { status,user } = useCheckAuth();
+  const userState = useSelector(selectUser);
   return (
     <BrowserRouter>
       <Routes>
@@ -55,26 +56,44 @@ const Router = () => {
         </Route>
 
       </Routes>
-      {/* {status === "authenticated" ? (
+      {/* /* {status === "authenticated" ? (
         <>
           <Layout />
           <main className="mx-5 pt-2">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="support" element={<Support />} />
-              <Route path="favorites" element={<Favorites />} />
-              <Route path="salesTracking" element={<SalesTracking />} />
-              <Route path="foro" element={<ForoPage />} />
-              <Route path="detailStore" element={<ShopDetails />} />
-              <Route path="/product/:id" element={<DetailProduct />} />
-              <Route path="store" element={<ShopsCarousel />} />
-              <Route path="products" element={<ProductCarousel />} />
-              <Route path="fruits" element={<ProductCarousel categorie = {"Frutas"}/>} />
-              <Route path="vegetables" element={<ProductCarousel categorie = {"Hortalizas"}/>} />
-
-
+              {user.userType && user.userType == "comprador" ? (
+                <>
+                  <Route path="/" element={<Home />} />
+                  <Route path="support" element={<Support />} />
+                  <Route path="favorites" element={<Favorites />} />
+                  <Route path="salesTracking" element={<SalesTracking />} />
+                  <Route path="foro" element={<ForoPage />} />
+                  <Route path="detailStore" element={<ShopDetails />} />
+                  <Route path="/product/:id" element={<DetailProduct />} />
+                  <Route path="store" element={<ShopsCarousel />} />
+                  <Route path="/products" element={<ProductCarousel />} />
+                  <Route
+                    path="fruits"
+                    element={<ProductCarousel categorie={"Frutas"} />}
+                  />
+                  <Route
+                    path="vegetables"
+                    element={<ProductCarousel categorie={"Hortalizas"} />}
+                  />
+                </>
+              ) : (
+                <>
+                  <Route path="/" element={<HomeSellers />} />
+                  <Route path="support" element={<Support />} />
+                  <Route path="favorites" element={<Favorites />} />
+                  <Route path="salesTracking" element={<SalesTracking />} />
+                  <Route path="foro" element={<ForoPage />} />
+                  <Route path="store" element={<ShopsCarousel />} />
+                  <Route path="/products" element={<ProductCarousel />} />
+                </>
+              )}
             </Routes>
-            </main>
+          </main>
         </>
           ) : (
           <Routes> 

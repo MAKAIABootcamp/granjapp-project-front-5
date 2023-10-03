@@ -139,6 +139,8 @@ updateCartItemTotal: (state, action) => {
  
   },
 });
+
+export const selectProducts = (state) => state.granjApp.product
 // Action creators are generated for each case reducer function
 export const {
   setActiveShop,
