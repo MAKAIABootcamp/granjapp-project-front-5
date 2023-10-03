@@ -1,99 +1,207 @@
 $font-text: "Roboto", sans-serif;
 
-.carouselProducts-container{
-  margin-left: 10px;
-  margin-bottom: 20px;
+@media (min-width: 780px) {
+  .carouselProducts-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-top: 30px;
+    margin-left: 10%;
+  }
+  p,
+  .cost {
+    font-family: $font-text;
+    font-weight: 300;
+  }
+  
+  .card-product-container {
+    align-items: center;
+    width: 100%;
+    height: 180px;
+    padding: 10px;
+    display: flex;
+    border-radius: 8.887px;
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  
+    & .img-logo{
+      width: 80px;
+      height: 80px;
+      padding: 5px;
+    }
+  
+    & .infoProduct-card-container{
+      
+      align-items: center;
+      height: 100px;
+      width: 200px;
+      
+      & .h3-title{
+        margin-top:1px;
+        margin-bottom: 5px;
+        font-family: $font-text;
+        font-weight: 400;
+      }
+  
+      & .workTime{
+        margin-top: 5px;
+      }
+  
+      & .stars{
+          margin: 0;
+          width: 70px;
+          height: 30px;
+      }
+  
+      & .lil-info{
+          margin-top: 0px;
+          margin-bottom: 5px;
+          
+      }
+  
+      & .domi-info{
+          display: flex;
+          margin: 0;
+          height: 20px;
+          
+  
+          & .cost-domi-section{
+              display: flex;
+              align-items: center;
+              margin-right: 10%;
+              height: 20px;
+            
+  
+              & p {
+                  margin: 0;
+              }
+          }
+  
+          & .dist-domi-section{
+              display: flex;
+              align-items: center;
+              margin-right: 10%;
+              height: 20px;
+  
+              & p{
+                  margin: 0;
+              }
+  
+              & img{
+                  width: 15px;
+                  height: 20px;
+              }
+          }
+      }
+      
+    }
+  }
   
 }
-p,
-.cost {
-  font-family: $font-text;
-  font-weight: 300;
-}
 
-.card-product-container {
-  align-items: center;
-  width: 95%;
-  height: 130px;
-  padding: 10px;
-  flex-shrink: 0;
-  display: flex;
-  border-radius: 8.887px;
-  background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  gap: 10px;
-  margin-bottom: 10px;
-  margin-top: 15px;
-
-  & .img-logo{
-    width: 80px;
-    height: 80px;
-    padding: 5px;
+@media (max-width: 800px) {
+  .carouselProducts-container{
+    margin-left: 10px;
+    margin-bottom: 20px;
+    
   }
-
-  & .infoProduct-card-container{
-    
+  p,
+  .cost {
+    font-family: $font-text;
+    font-weight: 300;
+  }
+  
+  .card-product-container {
     align-items: center;
-    height: 100px;
-    width: 200px;
-    
-    & .h3-title{
-      margin-top:1px;
-      margin-bottom: 5px;
-      font-family: $font-text;
-      font-weight: 400;
+    width: 95%;
+    height: 130px;
+    padding: 10px;
+    flex-shrink: 0;
+    display: flex;
+    border-radius: 8.887px;
+    background: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  
+    & .img-logo{
+      width: 80px;
+      height: 80px;
+      padding: 5px;
     }
-
-    & .workTime{
-      margin-top: 5px;
-    }
-
-    & .stars{
-        margin: 0;
-        width: 70px;
-        height: 30px;
-    }
-
-    & .lil-info{
-        margin-top: 0px;
+  
+    & .infoProduct-card-container{
+      
+      align-items: center;
+      height: 100px;
+      width: 200px;
+      
+      & .h3-title{
+        margin-top:1px;
         margin-bottom: 5px;
-        
-    }
-
-    & .domi-info{
-        display: flex;
-        margin: 0;
-        height: 20px;
-        
-
-        & .cost-domi-section{
-            display: flex;
-            align-items: center;
-            margin-right: 10%;
-            height: 20px;
+        font-family: $font-text;
+        font-weight: 400;
+      }
+  
+      & .workTime{
+        margin-top: 5px;
+      }
+  
+      & .stars{
+          margin: 0;
+          width: 70px;
+          height: 30px;
+      }
+  
+      & .lil-info{
+          margin-top: 0px;
+          margin-bottom: 5px;
           
-
-            & p {
-                margin: 0;
-            }
-        }
-
-        & .dist-domi-section{
-            display: flex;
-            align-items: center;
-            margin-right: 10%;
-            height: 20px;
-
-            & p{
-                margin: 0;
-            }
-
-            & img{
-                width: 15px;
-                height: 20px;
-            }
-        }
+      }
+  
+      & .domi-info{
+          display: flex;
+          margin: 0;
+          height: 20px;
+          
+  
+          & .cost-domi-section{
+              display: flex;
+              align-items: center;
+              margin-right: 10%;
+              height: 20px;
+            
+  
+              & p {
+                  margin: 0;
+              }
+          }
+  
+          & .dist-domi-section{
+              display: flex;
+              align-items: center;
+              margin-right: 10%;
+              height: 20px;
+  
+              & p{
+                  margin: 0;
+              }
+  
+              & img{
+                  width: 15px;
+                  height: 20px;
+              }
+          }
+      }
+      
     }
-    
   }
 }

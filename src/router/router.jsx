@@ -16,6 +16,10 @@ import ForoPage from "../pages/foro/foro";
 import DetailProduct from "../pages/detailProducts/detailProducts";
 import { ShopsCarousel } from "../components/homeComponents/body/restarantsCarousel/shopsCarousel";
 import { ProductCarousel } from "../components/homeComponents/body/porductsCarousel/productCarousel";
+import PrivateRoutes from "./privateRoutes";
+import PublicRoutes from "./publicRoutes";
+import { ShoppingCart } from "../pages/shoppingCart/shoppingCart";
+import MetodoPagos from "../pages/metodoPago/metodoPago";
 
 
 
@@ -25,7 +29,33 @@ const Router = () => {
  console.log(status);
   return (
     <BrowserRouter>
-      {status === "authenticated" ? (
+      <Routes>
+        <Route element={<PrivateRoutes isAuthenticate={status === "authenticated"} />}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+              <Route path="support" element={<Support />} />
+              <Route path="favorites" element={<Favorites />} />
+              <Route path="salesTracking" element={<SalesTracking />} />
+              <Route path="foro" element={<ForoPage />} />
+              <Route path="detailStore" element={<ShopDetails />} />
+              <Route path="product/:id" element={<DetailProduct />} />
+              <Route path="store" element={<ShopsCarousel />} />
+              <Route path="products" element={<ProductCarousel />} />
+              <Route path="fruits" element={<ProductCarousel categorie = {"Frutas"}/>} />
+              <Route path="vegetables" element={<ProductCarousel categorie = {"Hortalizas"}/>} />
+              <Route path="shoppingCart" element={<ShoppingCart />} />
+              <Route path="shoppingCart/shopping" element={<MetodoPagos />} />
+          </Route>
+        </Route>
+        <Route path="/" element={<PublicRoutes isAuthenticate={status === "authenticated"} />}>
+          <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+              <Route path="loginWithCell" element={<LoginByPhone />} />
+              <Route path="insertcode" element={<InsertCode />} />
+        </Route>
+
+      </Routes>
+      {/* {status === "authenticated" ? (
         <>
           <Layout />
           <main className="mx-5 pt-2">
@@ -54,7 +84,7 @@ const Router = () => {
               <Route path="loginWithCell" element={<LoginByPhone />} />
               <Route path="/insertcode" element={<InsertCode />} />
           </Routes>
-          )}
+          )} */}
     </BrowserRouter>
   );
 };

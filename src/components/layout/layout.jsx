@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import useScreenSize from "../../hooks/useScreenSize";
 import HeaderLaptop from "../header/headerLaptop";
 import HeaderTablet from "../header/headerTablet";
@@ -28,7 +29,7 @@ const Layout = () => {
           </>
         )
       )}
-      {/* <Outlet/> */}
+      <Outlet/>
     </>
   );
 };

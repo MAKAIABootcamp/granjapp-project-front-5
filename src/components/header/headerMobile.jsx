@@ -5,10 +5,12 @@ import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import DropdownMenu from "../menuDropdown/menuDropdown.jsx";
 import SearchPage from "../../pages/searchPage/searchPage.jsx";
 import "./header.scss";
+import { useNavigate } from "react-router-dom";
 
 const HeaderMobile = () => {
   const [time, setTime] = useState(currentTime());
   const inputRef = useRef();
+  const navigate = useNavigate();
   // const inputRefClean = useRef();
 
   const [inputSearch, setInputSearch] = useState();
@@ -45,6 +47,11 @@ const HeaderMobile = () => {
     };
   }, []);
 
+  const onCart = () => {
+    navigate("shoppingCart")
+   
+  }
+
   return (
     <section className="mobile flex-col">
       <div className="div">
@@ -71,7 +78,7 @@ const HeaderMobile = () => {
           {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
           <BsSearch className="searchIconMobile cursor-pointer" />
         </div>
-        <BsCart className="inputSearchMobile__inputCart" />
+        <BsCart onClick={onCart} className="inputSearchMobile__inputCart" />
       </section>
     </section>
   );

@@ -6,6 +6,8 @@ import "./detailProductsMobile.scss";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useNavigate, Link } from "react-router-dom";
+import { addToCart } from "../../../store/granjApp/granjAppSlice";
+import { addToCartFirestore } from "../../../store/granjApp/granjAppThunks";
 
 const DetailProductsTablet = ({ product }) => {
   const [countProcut, setCountProcut] = useState(0);
@@ -23,6 +25,13 @@ const DetailProductsTablet = ({ product }) => {
 
   const handleNavigate = () => {
     navigate("/");
+  };
+
+  const handleAddToCart = () => {
+
+    const cantidadProducto = {...product, quantity: countProcut };
+    dispatch(addToCart(cantidadProducto));
+    dispatch(addToCartFirestore(cantidadProducto));
   };
   return (
     <div className="mt-10 w-full h-full flex ">
@@ -77,9 +86,9 @@ const DetailProductsTablet = ({ product }) => {
               >
                 <AiOutlinePlus className="text-center" />
               </button>
-              <button className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-1">
+              <button onClick={handleAddToCart} className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-1">
                 <BsCart3 className="w-5 h-5" />
-                <p className="ml-3">Agregar a la canasta</p>
+                <p className="ml-3">Agregar al carrito</p>
               </button>
             </section>
 

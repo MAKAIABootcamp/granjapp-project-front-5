@@ -5,11 +5,13 @@ import { IoWifi, IoBatteryFullSharp } from "react-icons/io5";
 import "./header.scss";
 import SearchPage from "../../pages/searchPage/searchPage.jsx";
 import DropdownMenu from "../menuDropdown/menuDropdown.jsx";
+import { useNavigate } from "react-router-dom";
 
 const HeaderTablet = () => {
   const [time, setTime] = useState(currentTime());
   const [inputSearch, setInputSearch] = useState();
   const inputRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,6 +28,11 @@ const HeaderTablet = () => {
       setInputSearch("");
     }
   };
+
+  const onCart = () => {
+    navigate("shoppingCart")
+  
+  }
 
   return (
     <div className="tablet flex-col">
@@ -51,7 +58,7 @@ const HeaderTablet = () => {
           />
           {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
           <BsSearch className="searchIconTablet " />
-          <BsCart className="inputSearchTablet__inputCartT " />
+          <BsCart onClick={onCart} className="inputSearchTablet__inputCartT " />
         </div>
       </section>
     </div>

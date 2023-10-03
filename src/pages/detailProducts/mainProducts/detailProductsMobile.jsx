@@ -7,6 +7,8 @@ import "firebase/firestore";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useNavigate, Link } from "react-router-dom";
+import { addToCart } from "../../../store/granjApp/granjAppSlice";
+import { addToCartFirestore } from "../../../store/granjApp/granjAppThunks";
 
 const DetailProductsMobile = ({ product }) => {
   const [countProcut, setCountProcut] = useState(0);
@@ -27,6 +29,12 @@ const DetailProductsMobile = ({ product }) => {
     navigate("/");
   };
 
+  const handleAddToCart = () => {
+
+    const cantidadProducto = {...product, quantity: countProcut };
+    dispatch(addToCart(cantidadProducto));
+    dispatch(addToCartFirestore(cantidadProducto));
+  };
   return (
     <div className="flex-col ml-2 w-full h-full">
       <div className="p-2">
@@ -78,9 +86,9 @@ const DetailProductsMobile = ({ product }) => {
           >
             <AiOutlinePlus className="text-center" />
           </button>
-          <button className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center w-full h-10 p-1">
+          <button onClick={handleAddToCart} className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center w-full h-10 p-1">
             <BsCart3 className="h-5" />
-            <p className="ml-3 ">Agregar a la canasta</p>
+            <p className="ml-3 ">Agregar al carrito</p>
           </button>
         </section>
         <button

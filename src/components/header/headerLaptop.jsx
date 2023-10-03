@@ -1,19 +1,22 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/userAuth/thunks";
 import logo from "../../assets/logo_fixed.png";
 import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import SearchPage from "../../pages/searchPage/searchPage";
 
 const HeaderLaptop = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
+  const navigate = useNavigate();
 
   const [inputSearch, setInputSearch] = useState();
+
+  const cart = useSelector((state) => state.granjApp.cart);
 
   const onSearch = () => {
     if (inputRef.current.value !== "") {
@@ -22,6 +25,10 @@ const HeaderLaptop = () => {
       setInputSearch("");
     }
   };
+
+  const onCart = () => {
+    navigate("shoppingCart")
+  }
 
   return (
     <div className="bg-[#34d116] h-15 w-full flex mx-auto justify-center items-center">
@@ -55,7 +62,14 @@ const HeaderLaptop = () => {
       <div className="flex items-center justify-between space-x-3 p-2 ">
         <AiOutlineUser className=" h-6 w-6" />
         <BsBell className="h-6 w-6" />
-        <BsCart className="h-6 w-6" />
+        <div className="relative">
+          <BsCart onClick={onCart} className="h-6 w-6 cursor-pointer" />
+          {cart.length > 0 && (
+            <div className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px]">
+              {cart.length}
+            </div>
+          )}
+        </div>
       </div>
       <button
         onClick={() => dispatch(startLogout())}

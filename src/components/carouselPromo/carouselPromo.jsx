@@ -87,23 +87,11 @@ import Slider from 'react-slick';
 import { PromoCard } from './PromoCard';
 
 const CarouselPromo = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3, // Cambia esto según tus necesidades
-    slidesToScroll: 1,
-  };
-  const {promos} = useSelector ( state => state.granjApp);
-  return (
-    <div className="story-slider">
-      <Slider {...settings}>
+  
         {promos.map(( index) => (
           <PromoCard key={index} image={image}  />
         ))}
-      </Slider>
-    </div>
-  );
+      
 };
 
 export default CarouselPromo

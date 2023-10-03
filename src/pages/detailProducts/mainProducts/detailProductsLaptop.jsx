@@ -7,11 +7,18 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../../store/granjApp/granjAppSlice";
+import { addToCartFirestore } from "../../../store/granjApp/granjAppThunks";
 
 const DetailProductsLaptop = ({ product }) => {
   const [countProcut, setCountProcut] = useState(0);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.granjApp.cart);
+  const totalQuantity = cart.reduce((total, product) => total + product.quantity, 0);
 
   const handleMinusButton = () => {
     if (countProcut > 0) {
@@ -25,6 +32,13 @@ const DetailProductsLaptop = ({ product }) => {
 
   const handleNavigate = () => {
     navigate("/");
+  };
+
+  const handleAddToCart = () => {
+
+    const cantidadProducto = {...product, quantity: countProcut };
+    dispatch(addToCart(cantidadProducto));
+    dispatch(addToCartFirestore(cantidadProducto));
   };
 
   return (
@@ -80,9 +94,9 @@ const DetailProductsLaptop = ({ product }) => {
                 >
                   <AiOutlinePlus className="text-center" />
                 </button>
-                <button className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-2">
+                <button onClick={handleAddToCart} className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-2">
                   <BsCart3 className="w-5 h-5" />
-                  <p className="ml-3">Agregar a la canasta</p>
+                  <p className="ml-3">Agregar al Carrito</p>
                 </button>
               </section>
 
