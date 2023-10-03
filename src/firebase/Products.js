@@ -8,6 +8,7 @@ import {
   where,
   addDoc,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore/lite";
 
 import {
@@ -81,12 +82,22 @@ export const addProduct = async ({
   // await uploadProduct(docRef.id, url);
 };
 
+export const deleteProduct = async (productId) => {
+  try {
+    const docRef = doc(FirebaseDB, "productos", productId);
+    await deleteDoc(docRef);
+    return {ok:true, message:"Produto eliminado exitosamente"}
+  } catch (error) {
+    return {ok:false, message:error}
+  }
+};
+
 export const getProductById = async (productId) => {
   const productRef = doc(FirebaseDB, "productos/" + productId);
   const productSnapshot = await getDoc(productRef);
 
   if (productSnapshot.exists()) {
-    const productData = productSnapshot.data();
+    const productData = {id:productSnapshot.id,...productSnapshot.data()};
     return productData;
   } else {
     // El documento con el ID especificado no existe

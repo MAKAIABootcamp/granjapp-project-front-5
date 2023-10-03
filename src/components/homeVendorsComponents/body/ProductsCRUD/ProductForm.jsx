@@ -55,7 +55,6 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const ProductForm = ({ storeId }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -68,7 +67,6 @@ const ProductForm = ({ storeId }) => {
   );
 
   const {
-    formState,
     name,
     cost,
     description,
@@ -78,12 +76,11 @@ const ProductForm = ({ storeId }) => {
     onInputChange,
     isFormValid,
     nameValid,
-    costValid,
     descriptionValid,
-    unityValid,
     varietyValid,
+    costValid,
+    unityValid,
     weightValid,
-    // photoURLValid,
   } = useForm(formData, formValidations);
 
   const onSubmit = async (event) => {
@@ -143,7 +140,6 @@ const ProductForm = ({ storeId }) => {
                 label="Descripción del producto"
                 type="text"
                 placeholder="Descripción del producto"
-                fullWidth
                 name="description"
                 value={description}
                 onChange={onInputChange}
@@ -174,15 +170,15 @@ const ProductForm = ({ storeId }) => {
                 <Select
                   labelId="variety"
                   id="variety"
-                  // fullWidth
-                  name={variety}
+                  fullWidth
+                  name={"variety"}
                   value={variety}
                   label="Categoria del producto"
                   onChange={onInputChange}
                 >
                   <MenuItem value={"Frutas"}>Frutas</MenuItem>
                   <MenuItem value={"Hortalizas"}>Hortalizas</MenuItem>
-                  <MenuItem value={"Huevo_lac"}>Huevos y Lácteos</MenuItem>
+                  <MenuItem value={"Huevos y Lacteos"}>Huevos y Lácteos</MenuItem>
                 </Select>
               </Grid>
               <Grid item xs={3}>
@@ -190,12 +186,11 @@ const ProductForm = ({ storeId }) => {
                   label="Cantidad por unidad"
                   type="number"
                   placeholder="Cantidad por unidad"
-                  // fullWidth
+                  fullWidth
                   name="weight"
                   value={weight}
                   onChange={onInputChange}
                   error={!!weightValid && formSubmitted}
-                  helperText={weightValid}
                 />
               </Grid>
               <Grid item xs={3}>
@@ -203,14 +198,14 @@ const ProductForm = ({ storeId }) => {
                   labelId="unity"
                   id="unity"
                   value={unity}
-                  name={unity}
+                  name={"unity"}
                   label="Unidad del producto"
                   onChange={onInputChange}
                 >
                   <MenuItem value={"kg"}>kg</MenuItem>
                   <MenuItem value={"gr"}>gr</MenuItem>
                   <MenuItem value={"lb"}>lb</MenuItem>
-                  <MenuItem value={"L"}>L</MenuItem>
+                  <MenuItem value={"l"}>l</MenuItem>
                   <MenuItem value={"ml"}>ml</MenuItem>
                   <MenuItem value={"unid"}>unid</MenuItem>
                 </Select>

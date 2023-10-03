@@ -30,10 +30,10 @@ export const ProductCarousel = (prop) => {
     <div className='carouselProducts-container'>
 
     {
-
-      products.map ( product => (
-        <ProductCard key={product.id} {...product} />
-      ))
+      prop.products ? products.map ( product => (
+        <ProductCard key={product.id} {...{vendor:true,...product}} />
+      )) : <ProductCard key={product.id} {...product} />
+      
      
     }
    

@@ -45,6 +45,14 @@ export const signInWithGoogle = async (userType) => {
   }
 };
 
+export const getUserById = async (uid) => {
+  const userCol = doc(FirebaseDB, "usuarios",uid)
+  const userDoc = await getDoc(userCol)
+  if (userDoc.exists()){
+    return {id:uid, ...userDoc.data()}
+  }
+}
+
 export const registerUserWithEmailPassword = async ({
   email,
   password,

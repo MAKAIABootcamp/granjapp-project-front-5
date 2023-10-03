@@ -6,7 +6,7 @@ import LocationLaptop from "../location/locationLaptop";
 import { BsBell, BsSearch, BsCart } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import DropdownMenu from "../menuDropdown/menuDropdown";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import SearchPage from "../../pages/searchPage/searchPage";
 import { selectUser } from "../../store/userAuth/userAuthSlice";
 
@@ -19,6 +19,8 @@ const HeaderLaptop = () => {
   const [userName, setUserName] = useState();
 
   const userState = useSelector(selectUser);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     setUserName(userState.displayName);
@@ -62,7 +64,10 @@ const HeaderLaptop = () => {
         {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
       </div>
       {userName && (
-          <div className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2" onClick={() => dispatch(startLogout())}>
+          <div className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2" onClick={() => {
+            dispatch(startLogout())
+            navigate("/login")
+          }}>
             <img className="object-cover h-12 w-12 rounded-full flex items-center mx-auto" src={userState.photoURL} />
             <strong className="text-center">{userName.split(" ")[0]}</strong>
           </div>

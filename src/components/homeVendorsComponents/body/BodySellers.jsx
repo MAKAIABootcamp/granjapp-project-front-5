@@ -21,7 +21,9 @@ const BodySellers = () => {
 
   const [store, setStore] = useState({});
 
-  const [products, setProducts] = useState(useSelector(selectProducts));
+  const productSelector = useSelector(selectProducts)
+
+  const [products, setProducts] = useState(productSelector || []);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
@@ -29,44 +31,34 @@ const BodySellers = () => {
     if (user.uid) {
       const getStore = async () => {
         const storeFire = await getStoreByUser(user.uid);
+
         setStore(storeFire);
+        
+        console.log(storeFire)
+        const products = await getProductByStore(storeFire.id);
+        setProducts(products);
+        dispatch(setProduct(products));
+        
       };
       getStore();
     }
   }, [user]);
 
-  useEffect(() => {
-    if (products.length == 0 && store.id) {
-      const getProducts = async () => {
-        const products = await getProductByStore(store.id);
-        setProducts(products);
-        dispatch(setProduct(products));
-      };
-      getProducts();
-    }
-  });
+
   //* @type HTML.target /
   const activeComponent = (value) => {
-    console.log(value);
-    console.log(products);
     switch (value) {
       case "products":
         setIsProduct(true);
         setIsAdd(false);
-        setIsDelete(false);
-        setIsUpdate(false);
         break;
       case "add":
         setIsProduct(false);
         setIsAdd(true);
-        setIsDelete(false);
-        setIsUpdate(false);
         break;
       case "update":
         setIsProduct(false);
         setIsAdd(false);
-        setIsDelete(false);
-        setIsUpdate(true);
         break;
     }
   };
@@ -77,8 +69,6 @@ const BodySellers = () => {
         <FilterButtons activeComponent={activeComponent} />
         {isProduct && <ProductCarousel products={products} />}
         {isAdd && <ProductForm storeId={store.id} />}
-        {isUpdate && <ProductCarousel products={products} />}
-        {isDelete && <ProductCarousel products={products} />}
       </div>
     </>
   );

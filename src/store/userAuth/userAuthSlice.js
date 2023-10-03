@@ -7,7 +7,7 @@ export const authSlice = createSlice({
     uid: null,
     email: null,
     displayName: null,
-    userType: "comprador",
+    userType: null,
     photoURL: null,
     numberCell: null,
     errorMessage: null,
