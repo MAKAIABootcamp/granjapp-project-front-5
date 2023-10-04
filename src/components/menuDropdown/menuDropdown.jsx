@@ -156,7 +156,7 @@ function DropdownMenu() {
 
               <li>
                 <Link
-                  to="salesTracking"
+                  to="purchaseTracking"
                   className="flex items-center justify-between w-full px-4 py-2  dark:hover:bg-[#b6f1d7] dark:hover:text-black text-[14px] hover:bg-[#b6d1f7]"
                   onClick={toggleDropdown}
                 >

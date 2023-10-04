@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, setDoc, where } from "firebase/firestore/lite";
 import { loadPosts } from "../../helpers/loadPosts";
 import { loadProducts } from "../../helpers/loadProducts";
 import { loadPromos } from "../../helpers/loadPromos";
@@ -15,9 +15,11 @@ import {
   setSaving,
   setShop,
   updatePost,
+  setProcessedPurchase,
+  setCompras
 } from "./granjAppSlice";
 import { FirebaseDB } from "../../firebase/firebaseConfig";
-import { updateDoc } from "firebase/firestore";
+
 
 export const startLoadingShops = () => {
   return async (dispatch, getState) => {
@@ -98,20 +100,19 @@ export const startSavePost = () => {
   };
 };
 
-export const addToCartFirestore = async (item, dispatch) => {
-  try {
-    const cartCollection = collection(FirebaseDB, `carrito`);
-
-    
-    await addDoc(cartCollection, item);
-
-    dispatch(addToCart(item));
-    console.log("Elemento agregado a la colección de carrito Firestore.");
-  } catch (error) {
-    console.error(
-      "Error al agregar elemento a la colección de carrito Firestore:",
-      error
-    );
+export const addToCartFirestore = (item) => {
+  return async (dispatch) => {
+    try {
+      const cartCollection = collection(FirebaseDB, `carrito`);
+      await addDoc(cartCollection, item);
+      dispatch(addToCart(item));
+      console.log("Elemento agregado a la colección de carrito Firestore.");
+    } catch (error) {
+      console.error(
+        "Error al agregar elemento a la colección de carrito Firestore:",
+        error
+      );
+    }
   }
 };
 
@@ -132,17 +133,52 @@ export const updateCartFirestore = async ( productId, newQuantity) => {
   }
 };
 
-export const removeCartItemFirestore = async (item, dispatch) => {
-  try {
-    const cartItemRef = doc(FirebaseDB, `carrito/${item.id}`);
+export const removeCartItemFirestore = async (id) => {
+  console.log("id", id)
+  return async (dispatch) => {
+    try {
+      const cartItemRef = doc(FirebaseDB, `carrito`, id);
+      await deleteDoc(cartItemRef);
+      dispatch(removeFromCart(id));
 
-
-    await deleteDoc(cartItemRef);
-
-    dispatch(removeFromCart(item.id));
-
-    console.log("Producto eliminado del carrito con éxito en Firestore.");
-  } catch (error) {
-    console.error("Error al eliminar el producto del carrito en Firestore:", error);
+      console.log("Producto eliminado del carrito con éxito en Firestore.");
+    } catch (error) {
+      console.error("Error al eliminar el producto del carrito en Firestore:", error);
+    }
   }
 };
+
+export const addToPurchase = (item) => {
+  return async (dispatch) => {
+    try {
+      const comprasCollection = collection(FirebaseDB, `compras`);
+      await addDoc(comprasCollection, item);
+      dispatch(setProcessedPurchase(item));
+      console.log("Elemento agregado a la colección de compras Firestore.");
+    } catch (error) {
+      console.error(
+        "Error al agregar elemento a la colección de carrito Firestore:",
+        error
+      );
+    }
+  }
+};
+
+export const getComprasByUserId = (userId) => {
+  return async (dispatch) => {
+    try {
+      const q = query(collection(FirebaseDB, "compras"), where("compradorId", "==", userId));
+      const querySnapshot = await getDocs(q);
+      const compras = []
+      console.log("compras", querySnapshot)
+      querySnapshot.forEach(item => {
+        const object = {id: item.id, ...item.data()}
+        compras.push(object)
+      })
+      console.log("compras", compras)
+      dispatch(setCompras(compras))
+    } catch(e) {
+
+    }
+  }
+}

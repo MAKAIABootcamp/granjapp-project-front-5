@@ -22,7 +22,7 @@ export const ProductCard = ({
   };
 
   return (
-    <section onClick={onClickProduct} className="card-product-container">
+    <section onClick={onClickProduct} id="card-product-container" className="card-product-container">
       <img src={url} className="img-logo" />
       <div className="infoProduct-card-container">
         <h3 className="h3-title">{name}</h3>

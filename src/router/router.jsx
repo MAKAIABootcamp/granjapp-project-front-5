@@ -9,7 +9,7 @@ import { InsertCode } from "../pages/login/insertCode";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { Support } from "../pages/support/support";
 import { Favorites } from "../pages/favorites/favorites";
-import { SalesTracking } from "../pages/salesTracking/salesTracking";
+import { PurchaseTracking} from "../pages/purchaseTracking/purchaseTracking";
 import ShopDetails from "../pages/shopDetails/shopDetails";
 import Login from "../pages/login/login";
 import ForoPage from "../pages/foro/foro";
@@ -23,6 +23,7 @@ import MetodoPagos from "../pages/metodoPago/metodoPago";
 import { useSelector } from "react-redux";
 import { selectUser } from "../store/userAuth/userAuthSlice";
 import HomeSellers from "../pages/home/HomeSellers";
+import { ProductSelected } from "../pages/purchaseTracking/productSelected";
 
 const Router = () => {
   
@@ -36,7 +37,7 @@ const Router = () => {
             <Route index element={<Home />} />
               <Route path="support" element={<Support />} />
               <Route path="favorites" element={<Favorites />} />
-              <Route path="salesTracking" element={<SalesTracking />} />
+              {/* <Route path="salesTracking" element={<SalesTracking />} /> */}
               <Route path="foro" element={<ForoPage />} />
               <Route path="detailStore" element={<ShopDetails />} />
               <Route path="product/:id" element={<DetailProduct />} />
@@ -46,6 +47,9 @@ const Router = () => {
               <Route path="vegetables" element={<ProductCarousel categorie = {"Hortalizas"}/>} />
               <Route path="shoppingCart" element={<ShoppingCart />} />
               <Route path="shoppingCart/shopping" element={<MetodoPagos />} />
+              <Route path="purchaseTracking" element={<PurchaseTracking />} />
+              <Route path="productSelected" element={<ProductSelected/>} />
+              
           </Route>
         </Route>
         <Route path="/" element={<PublicRoutes isAuthenticate={status === "authenticated"} />}>

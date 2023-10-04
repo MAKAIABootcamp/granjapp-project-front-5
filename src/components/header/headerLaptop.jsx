@@ -14,9 +14,8 @@ const HeaderLaptop = () => {
   const dispatch = useDispatch();
   const inputRef = useRef();
   const navigate = useNavigate();
-
   const [inputSearch, setInputSearch] = useState();
-
+  const {cart} = useSelector ( state => state.granjApp);
   const onSearch = () => {
     if (inputRef.current.value !== "") {
       setInputSearch(inputRef.current.value);
@@ -61,7 +60,12 @@ const HeaderLaptop = () => {
       <div className="flex items-center justify-between space-x-3 p-2 ">
         <AiOutlineUser className=" h-6 w-6" />
         <BsBell className="h-6 w-6" />
-        <BsCart onClick={onCart} className="h-6 w-6" />
+        <BsCart onClick={() =>onCart()} className="h-6 w-6" />
+        {cart.length > 0 && (
+        <span className="absolute top-6 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+          {cart.length}
+        </span>
+      )}
       </div>
     </div>
   );

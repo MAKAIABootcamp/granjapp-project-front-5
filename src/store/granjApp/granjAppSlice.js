@@ -14,11 +14,18 @@ export const granjAppSlice = createSlice({
     isSaving: false,
     newPost: [],
     cart: [],
+    processedPurchase: null,
+    compras: [],
+    activePurchasedProduct: null,
   },
   reducers: {
 
     addToCart: (state, action) => {
-      state.cart.push(action.payload);
+      state.cart.push(action.payload)
+    },
+
+    setCompras: (state, action) => {
+      state.compras = action.payload
     },
 
     removeFromCart: (state, action) => {
@@ -84,13 +91,18 @@ export const granjAppSlice = createSlice({
  setSaving: (state) => {
   state.isSaving = true;
  },
+
+ setProcessedPurchase: (state, action) => {
+  state.processedPurchase = action.payload;
+ },
  
  updateCartItemQuantity: (state, action) => {
   const { productId, newQuantity } = action.payload;
-
+  console.log("productId", productId)
+  console.log("newQuantity", newQuantity)
   // Encuentra el elemento en el carrito con productId y actualiza la cantidad
   const updatedItems = state.cart.map((item) => {
-    if (item.productId === productId) {
+    if (item.id === productId) {
       return {
         ...item,
         quantity: newQuantity,
@@ -98,7 +110,7 @@ export const granjAppSlice = createSlice({
     }
     return item;
   });
-
+  console.log("updatedItems", updatedItems)
   state.cart = updatedItems;
 },
 
@@ -136,6 +148,10 @@ updateCartItemTotal: (state, action) => {
   state.cart = updatedItems;
 },
 
+setActivePurchasedProduct: (state, action) => {
+  state.activePurchasedProduct = action.payload;
+},
+
  
   },
 });
@@ -160,4 +176,7 @@ export const {
   updateCartItemQuantity,
   updateCartItemSubtotal,
   updateCartItemTotal,
+  setProcessedPurchase,
+  setCompras,
+  setActivePurchasedProduct
 } = granjAppSlice.actions;

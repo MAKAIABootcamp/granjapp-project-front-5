@@ -22,12 +22,6 @@ export const SelectionBar = () => {
           <option value="informacion">Información</option>
         </select>
       </div>
-    
-      {selectedOption && (
-        <div>
-          <h2>Contenido para: {selectedOption}</h2>
-        </div>
-      )}
     </>
   );
 };

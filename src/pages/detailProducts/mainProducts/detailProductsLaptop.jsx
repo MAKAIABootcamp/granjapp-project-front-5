@@ -57,7 +57,7 @@ const DetailProductsLaptop = ({ product }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-
+  const { uid } = useSelector((state) => state.auth);
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -87,8 +87,8 @@ const DetailProductsLaptop = ({ product }) => {
   const handleAddToCart = () => {
 
     const cantidadProducto = {...product, quantity: countProcut };
-    dispatch(addToCart(cantidadProducto));
-    dispatch(addToCartFirestore(cantidadProducto));
+    //dispatch(addToCart(cantidadProducto));
+    dispatch(addToCartFirestore({...cantidadProducto, userId: uid}));
   };
 
   const handleRating = async (e) => {
@@ -158,7 +158,7 @@ const DetailProductsLaptop = ({ product }) => {
                       value={ix}
                       name="rating"
                       id={"star" + ix}
-                      checked={rating && rating.ratin == ix ? true : false}
+                      //checked={rating && rating.ratin == ix ? true : false}
                     />
                     <label key={"star" + ix} htmlFor={"star" + ix}>
                       <IoIosStar />

@@ -4,58 +4,64 @@ import { AiFillMinusCircle, AiOutlineDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { BsPlusCircleFill } from "react-icons/bs";
-import { addToCart, updateCartItemSubtotal, updateCartItemTotal } from "../../store/granjApp/granjAppSlice";
+import { addToCart, updateCartItemSubtotal, updateCartItemTotal, updateCartItemQuantity, setProcessedPurchase, removeFromCart } from "../../store/granjApp/granjAppSlice";
 import { addToCartFirestore, removeCartItemFirestore } from "../../store/granjApp/granjAppThunks";
 import { useNavigate } from "react-router-dom";
 
 export const CardAddedProduct = ({
   product,
-  name = "",
-  storeId = "",
-  url = "",
-  weight = "",
-  cost = "",
-  quantity = 1, 
-  productId = "",
-  newQuantity="",
- 
+  name,
+  storeId,
+  url,
+  weight,
+  cost,
+  quantity, 
+  id, 
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [subtotal, setSubtotal] = useState(quantity * cost); 
+  const [subtotal, setSubtotal] = useState(quantity * cost);
+  const [newQuantity, setNewQuantity] = useState(quantity)
   const total = subtotal + 4000;
 
 
   const handleIncrement = () => {
-    const newQuantity = quantity + 1;
+    setNewQuantity(newQuantity+1);
     const newSubtotal = newQuantity * cost;
     setSubtotal(newSubtotal);
-    dispatch(updateCartItemSubtotal(productId, newQuantity, newSubtotal)); 
+    dispatch(updateCartItemSubtotal(id, newQuantity, newSubtotal)); 
 
     const newTotal = newSubtotal + 4000;
-    dispatch(updateCartItemTotal(productId, newTotal));
-    dispatch(updateCartItemFirestore(productId, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
+    dispatch(updateCartItemTotal(id, newTotal));
+    dispatch(updateCartItemFirestore(id, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
   };
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      const newQuantity = quantity - 1;
+      setNewQuantity(newQuantity-1);
       const newSubtotal = newQuantity * cost;
       setSubtotal(newSubtotal);
-      dispatch(updateCartItemSubtotal(productId, newQuantity, newSubtotal));
+      dispatch(updateCartItemSubtotal(id, newQuantity, newSubtotal));
 
       const newTotal = newSubtotal + 4000;
-    dispatch(updateCartItemTotal(productId, newTotal));
-    dispatch(updateCartItemFirestore(productId, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
+    dispatch(updateCartItemTotal(id, newTotal));
+    dispatch(updateCartItemFirestore(id, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
     }
   };
 
   const handleDelete = () => {
-    dispatch(removeCartItemFirestore(productId));
+    dispatch(removeFromCart(id));
   };
 
   const handlePagar = () => {
-  
+    dispatch(updateCartItemQuantity({id: id, newQuantity}))
+    dispatch(setProcessedPurchase(
+      {
+        product: { name, storeId, url, weight, cost, quantity, id,}, 
+        metodoPago: null,
+        fecha: new Date(),
+        comprador: ""
+      }))
     navigate("shopping");
 
   }
@@ -65,7 +71,7 @@ export const CardAddedProduct = ({
         <section className="card-productCart-container">
           <div className="titleShop-deleteButton-container">
             <h3 className="h3-title">{storeId}</h3>
-            <button onClick={handleDelete} className="delete-button-cart">
+            <button onClick={()=>handleDelete()} className="delete-button-cart">
               <AiOutlineDelete className="icon-delete" />
             </button>
           </div>
@@ -80,13 +86,13 @@ export const CardAddedProduct = ({
               </div>
               <div className="quantity-container">
                 <button
-                  onClick={handleDecrement}
+                  onClick={()=>handleDecrement()}
                   className="button-minus-container"
                 >
                   <AiFillMinusCircle className="button" />
                 </button>
                 <div className="number-container">
-                  <p>{quantity}</p>
+                  <p>{newQuantity}</p>
                 </div>
                 <button
                   onClick={handleIncrement}
@@ -107,7 +113,7 @@ export const CardAddedProduct = ({
             <div className="total-container">
               <p>{total}</p>
               <button
-              onClick={handlePagar}>Pagar</button>
+              onClick={() => handlePagar()}>Pagar</button>
             </div>
           </div>
         </section>

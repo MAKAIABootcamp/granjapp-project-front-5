@@ -6,14 +6,61 @@ import PaypalLogo from "../../assets/Paypal.png";
 import { Link } from "react-router-dom";
 
 import "./metodoPago.scss";
-
+import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiArrowRight, FiLock } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "../../hooks/useForm";
+import { setProcessedPurchase } from "../../store/granjApp/granjAppSlice";
+import Swal from "sweetalert2";
+import { addToPurchase } from "../../store/granjApp/granjAppThunks";
+
+const formData = {
+  nameBuyer: "",
+  cardNumber: "",
+};
+
+const formValidation = {
+  nameBuyer: [(value) => value.length >= 2, "Este campo es obligatorio"],
+  cardNumber: [(value) => value.length >= 2, "Este campo es obligatorio"],
+};
 
 function MetodoPagos() {
   const [selectedCard, setSelectedCard] = useState("");
-
+  const { processedPurchase } = useSelector((state) => state.granjApp);
+  const { uid } = useSelector((state) => state.auth);
+  const navigate = useNavigate()
   const handleCardSelection = (cardType) => {
     setSelectedCard(cardType);
+  };
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const {
+    nameBuyer,
+    cardNumber,
+    formState,
+    onInputChange,
+    nameBuyerValid,
+    cardNumberValid,
+  } = useForm(formData, formValidation);
+
+ const dispatch = useDispatch();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+    
+
+    const formData = {
+      ...processedPurchase,
+      comprador:nameBuyer,
+      compradorId: uid,
+      metodoPago: `${selectedCard} ${cardNumber}`,
+    };
+    console.log("data", formData)
+    dispatch(addToPurchase(formData));
+    Swal.fire("Felicitaciones", "Has realizado tu pago exitosamente, puedes ver los detalles de tu pedido en el menú mis pedidos", "success")
+    navigate("/purchaseTracking")
   };
 
   return (
@@ -56,19 +103,36 @@ function MetodoPagos() {
           <h3 className="form-tittle">Tus datos de pago</h3>
           <div className="form-pago">
             <div>
-              <label for="">Titular de la tarjeta</label>
-              <input type="text" placeholder="Ej: Maria Paloma" />
+              <label>Titular de la tarjeta</label>
+              <input
+                onChange={onInputChange}
+                name="nameBuyer"
+                value={nameBuyer}
+                type="text"
+                placeholder="Ej: Maria Paloma"
+              />
             </div>
             <div>
-              <label for="">Número de tarjeta</label>
-              <input type="text" placeholder="XXXX XXXX XXXX XXXX" />
+              <label>Número de tarjeta</label>
+              <input
+                onChange={onInputChange}
+                name="cardNumber"
+                value={cardNumber}
+                type="text"
+                placeholder="XXXX XXXX XXXX XXXX"
+              />
+              {/* {formSubmitted && !nameBuyerValid && (
+                <span className="error-message">
+                  {formValidation.nameBuyer[1]}
+                </span>
+              )} */}
             </div>
             <div>
-              <label for="">Fecha de vencimiento</label>
+              <label>Fecha de vencimiento</label>
               <input type="text" placeholder="MM/YYYY" />
             </div>
             <div>
-              <label for="">
+              <label>
                 CVV <i className="ri-information-line"></i>
               </label>
               <input type="text" placeholder="Ej: 123" />
@@ -81,7 +145,12 @@ function MetodoPagos() {
                 Ver detalles <FiArrowRight></FiArrowRight>
               </p>
             </div>
-            <h3 className="price">$10.000 COP</h3>
+            <h3 className="price">
+              $
+              {processedPurchase?.product?.quantity *
+                processedPurchase?.product?.cost}{" "}
+              COP
+            </h3>
             <span className="check">
               <input type="checkbox" name="" id="" />
               Guardar datos para futuras compras
@@ -89,7 +158,12 @@ function MetodoPagos() {
           </div>
         </form>
         <div className="buttonPagar-container">
-          <button type="submit" className="buttonPagar" id="buttonPagar">
+          <button
+            onClick={onSubmit}
+            type="submit"
+            className="buttonPagar"
+            id="buttonPagar"
+          >
             Pagar ahora
           </button>
         </div>

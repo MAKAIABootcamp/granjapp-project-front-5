@@ -94,7 +94,7 @@ export const ProductCard = ({
               name="rating"
               id={"star" + ix}
               disabled
-              checked={rating === ix ? true : false}
+              //checked={rating === ix ? true : false}
             />
             <label key={"star" + ix} htmlFor={"star" + ix}>
               <IoIosStar />
