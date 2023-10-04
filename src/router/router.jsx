@@ -50,6 +50,10 @@ const Router = () => {
                     path="vegetables"
                     element={<ProductCarousel categorie={"Hortalizas"} />}
                   />
+                  <Route
+                    path="eggs&dairies"
+                    element={<ProductCarousel categorie={"Huevos y Lacteos"} />}
+                  />
                 </>
               ) : (
                 <>

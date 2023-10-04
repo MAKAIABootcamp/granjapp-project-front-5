@@ -68,18 +68,22 @@ export const addProduct = async ({
   variety,
   weight,
 }) => {
-  const docRef = doc(collection(FirebaseDB, "productos"));
-  console.log(docRef);
-  await setDoc(docRef, {
-    name,
-    description,
-    cost,
-    storeId,
-    url,
-    unity,
-    variety,
-    weight,
-  });
+  try {
+    const docRef = doc(collection(FirebaseDB, "productos"));
+    await setDoc(docRef, {
+      name,
+      description,
+      cost,
+      storeId,
+      url,
+      unity,
+      variety,
+      weight,
+    });
+    return {ok:true, message:"¡Producto creado exitósamente! :)"}
+  } catch (error) {
+    return {ok:true, message:e}
+  }
   // await uploadProduct(docRef.id, url);
 };
 
@@ -95,6 +99,7 @@ export const deleteProduct = async (productId) => {
 
 export const updateProduct = async (productId, data) => {
   try {
+    console.log(data);
     const docRef = doc(FirebaseDB, "productos", productId);
     await updateDoc(docRef, data);
     return { ok: true, message: "Produto actualizado exitosamente" };

@@ -13,26 +13,12 @@ import {
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useForm } from "../../../../hooks/useForm";
 import { Textarea } from "@mui/joy";
-import { addProduct, updateProduct } from "../../../../firebase/Products";
+import { updateProduct } from "../../../../firebase/Products";
 import fileUpload from "../../../../services/fileUpload";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 // import "@sweetalert/themes/default.css";
 
-const formValidations = {
-  name: [
-    (value) => value.length > 1,
-    "El nombre debe contener al menos 2 caracteres",
-  ],
-  description: [
-    (value) => value.length >= 20,
-    "La descripción debe contener mas de 20 caracteres.",
-  ],
-  variety: [(value) => value.length > 0, "Este es un campo obligatorio."],
-  cost: [(value) => value > 50, "Este es un campo obligatorio."],
-  unity: [(value) => value.length >= 1, "Este es un campo obligatorio."],
-  weight: [(value) => value > 0, "Este es un campo obligatorio."],
-};
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -68,7 +54,6 @@ const ProductFormUpdate = ({ product }) => {
   });
 
   useEffect(() => {
-    console.log(product);
     setFormData({
       name: product.name,
       cost: product.cost,
@@ -93,19 +78,20 @@ const ProductFormUpdate = ({ product }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
+    
 
-    let imageProduct = url;
+    let imageProduct = product.url;
     if (!isFormValid) return;
-
+    console.log(product)
+    
     if (image) {
       imageProduct = await fileUpload(image);
     }
-
-    await updateProduct(id, {
+    await updateProduct(product.id, {
       name,
       description,
       cost,
-      storeId,
+      storeId:product.storeId,
       unity,
       url: imageProduct,
       variety,
@@ -119,11 +105,7 @@ const ProductFormUpdate = ({ product }) => {
           timer: 1000,
         })
       )
-      .then((result) => {
-        if (result.isConfirmed) {
-          navigate("/");
-        }
-      });
+      .then(() => navigate("/") );
   };
 
   return (
@@ -205,7 +187,7 @@ const ProductFormUpdate = ({ product }) => {
                 <Select
                   labelId="unity"
                   id="unity"
-                  value={unity}
+                  value={unity.toLowerCase()}
                   name={"unity"}
                   label="Unidad del producto"
                   onChange={onInputChange}

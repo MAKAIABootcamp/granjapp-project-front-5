@@ -41,25 +41,19 @@ function toTitleCase(str) {
   return titleCase;
 }
 
-export const ProductCard = ({
-  vendor = false,
-  name = "",
-  url = "",
-  id,
-  weight = "",
-  unity,
-  cost,
-  activeComponent,
-}) => {
+export const ProductCard = ({ product, activeComponent }) => {
   const navigate = useNavigate();
 
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
     const getRating = async () => {
-      const rat = await getRatingByProduct(id);
-      const ratProm = rat.reduce((total, r) => total + r.ratin, 0) / rat.length;
-      setRating(Math.round(ratProm));
+      const rat = await getRatingByProduct(product.id);
+      if (rat){
+        const ratProm = rat.reduce((total, r) => total + r.ratin, 0) / rat.length;
+        setRating(Math.round(ratProm));
+      }
+      
     };
     getRating();
   }, []);
@@ -73,7 +67,7 @@ export const ProductCard = ({
       showDenyButton: true,
     }).then(async (value) => {
       if (value.isConfirmed == true && value.isDenied == false) {
-        await deleteProduct(id)
+        await deleteProduct(product.id)
           .then((value) => {
             Swal.fire({
               title: value.message,
@@ -96,57 +90,54 @@ export const ProductCard = ({
   };
 
   return (
-    vendor && (
-      <section className="card-product-container">
-        <img src={url} className="img-logo" />
-        <div className="infoProduct-card-container">
-          <h3 className="h3-title">{toTitleCase(name)}</h3>
-          <div className="rating">
-            {arrayRange(5, 1, -1).map((ix) => (
-              <>
-                <input
-                  type="radio"
-                  key={ix}
-                  value={ix}
-                  name="rating"
-                  id={"star" + ix}
-                  disabled
-                  checked={rating === ix ? true : false}
-                />
-                <label key={"star" + ix} htmlFor={"star" + ix}>
-                  <IoIosStar />
-                </label>
-              </>
-            ))}
-          </div>
-          <p className="lil-info">
-            x{weight}
-            {unity}
-          </p>
-          <div className="domi-info">
-            <div className="cost-domi-section">
-              {/* <img src={motoIcon} alt="moto-icon" /> */}
-              <p>{currencyFormat(cost)}</p>
-            </div>
+    <section key={product.id+"card"} className="card-product-container">
+      <img src={product.url} className="img-logo" />
+      <div className="infoProduct-card-container">
+        <h3 className="h3-title">{toTitleCase(product.name)}</h3>
+        <div role="group" className="rating">
+          {arrayRange(5, 1, -1).map((ix) => (
+            <React.Fragment key={ix}  >
+              <input
+                type="radio"
+                value={ix}
+                name="rating"
+                id={"star" + ix}
+                disabled
+                checked={rating === ix ? true : false}
+              />
+              <label htmlFor={"star" + ix}>
+                <IoIosStar />
+              </label>
+            </React.Fragment>
+          ))}
+        </div>
+        <p className="lil-info">
+          x{product.weight}
+          {product.unity}
+        </p>
+        <div className="domi-info">
+          <div className="cost-domi-section">
+            {/* <img src={motoIcon} alt="moto-icon" /> */}
+            <p>{currencyFormat(product.cost)}</p>
           </div>
         </div>
-        <div className="flex space-x-5 items-end justify-end w-auto px-3 ml-auto ">
-          <button
-            type="button"
-            onClick={() => activeComponent("update")}
-            className="bg-green-600 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
-          >
-            <GrEdit className="w-5 h-5" />
-          </button>
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="bg-red-400 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
-          >
-            <MdDeleteForever className="w-5 h-5" />{" "}
-          </button>
-        </div>
-      </section>
-    )
+      </div>
+      <div className="flex space-x-5 items-end justify-end w-auto px-3 ml-auto ">
+        <button
+          type="button"
+          onClick={() => activeComponent(product)}
+          className="bg-green-600 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
+        >
+          <GrEdit className="w-5 h-5" />
+        </button>
+        <button
+          type="button"
+          onClick={handleDelete}
+          className="bg-red-400 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
+        >
+          <MdDeleteForever className="w-5 h-5" />{" "}
+        </button>
+      </div>
+    </section>
   );
 };

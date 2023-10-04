@@ -100,17 +100,22 @@ const ProductForm = ({ storeId }) => {
         url: imageProduct,
         variety,
         weight,
-      });
-      Swal.fire({
-        icon: "success",
-        title: "El producto ha sido guardado con éxito!",
-        showConfirmButton: false,
-        timer: 1000,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/");
-        }
-      });
+      }).then(result => {
+        Swal.fire({
+          icon: "success",
+          title: result.message,
+          showConfirmButton: false,
+          timer: 1000,
+        }).then(() => navigate("/") );
+      } ).catch(result => {
+        Swal.fire({
+          icon: "error",
+          title: result.message,
+          showConfirmButton: false,
+          timer: 2000,
+        })
+      })
+      
     }
   };
 
