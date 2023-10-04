@@ -1,4 +1,4 @@
-import { FirebaseDB, storage } from "./firebaseConfig";
+import { FirebaseDB  } from "./firebaseConfig";
 import {
   collection,
   getDocs,

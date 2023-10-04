@@ -1,4 +1,4 @@
-import { FirebaseDB, storage } from "./firebaseConfig";
+import { FirebaseDB } from "./firebaseConfig";
 import {
   collection,
   getDocs,
@@ -11,12 +11,12 @@ import {
   deleteDoc,
 } from "firebase/firestore/lite";
 
-import {
-  getDownloadURL,
-  ref as storageRef,
-  uploadBytes,
-} from "firebase/storage";
-import Swal from "sweetalert2";
+// import {
+//   getDownloadURL,
+//   ref as storageRef,
+//   uploadBytes,
+// } from "firebase/storage";
+// import Swal from "sweetalert2";
 
 export const getProducts = async () => {
   const products = collection(FirebaseDB, "productos");
@@ -28,34 +28,34 @@ export const getProducts = async () => {
   return productsList;
 };
 
-const uploadProduct = async (uid, imageUpload) => {
-  if (imageUpload === null) {
-    Swal.fire("Please select an image");
-    return;
-  }
-  const imageRef = storageRef(storage, `productos/${uid}`);
-  await uploadBytes(imageRef, imageUpload)
-    .then((snapshot) => {
-      getDownloadURL(snapshot.ref)
-        .then((url) => {
-          saveData(url);
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: error.message,
-            icon: "error",
-            timer: 2000,
-          });
-        });
-    })
-    .catch((error) => {
-      Swal.fire({
-        title: error.message,
-        icon: "error",
-        timer: 2000,
-      });
-    });
-};
+// const uploadProduct = async (uid, imageUpload) => {
+//   if (imageUpload === null) {
+//     Swal.fire("Please select an image");
+//     return;
+//   }
+//   const imageRef = storageRef(storage, `productos/${uid}`);
+//   await uploadBytes(imageRef, imageUpload)
+//     .then((snapshot) => {
+//       getDownloadURL(snapshot.ref)
+//         .then((url) => {
+//           saveData(url);
+//         })
+//         .catch((error) => {
+//           Swal.fire({
+//             title: error.message,
+//             icon: "error",
+//             timer: 2000,
+//           });
+//         });
+//     })
+//     .catch((error) => {
+//       Swal.fire({
+//         title: error.message,
+//         icon: "error",
+//         timer: 2000,
+//       });
+//     });
+// };
 
 export const addProduct = async ({
   name,

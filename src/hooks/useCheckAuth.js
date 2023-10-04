@@ -3,7 +3,7 @@ import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FirebaseAuth } from "../firebase/firebaseConfig";
-import { login, logout, selectUser, setUserType } from "../store/userAuth/userAuthSlice";
+import { login, logout, setUserType } from "../store/userAuth/userAuthSlice";
 import { startLoadingPosts, startLoadingProducts, startLoadingPromos, startLoadingShops } from "../store/granjApp/granjAppThunks";
 import { getUserById } from "../firebase/providers";
 import { useState } from "react";
@@ -19,7 +19,8 @@ export const useCheckAuth = () => {
       if (!user) return dispatch(logout());
 
       const { uid, email, displayName, photoURL } = user;
-      const userDoc = await getUserById(uid)
+      const userDoc = await getUserById(uid);
+      console.log(userDoc);
       setUser(userDoc)
 
       dispatch(login({ uid, email, displayName, photoURL,userType:userDoc.userType }));
