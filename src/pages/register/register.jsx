@@ -122,7 +122,7 @@ const Register = () => {
                 label="Nombre completo"
                 type="text"
                 placeholder="Nombre completo"
-                // fullWidth
+                fullWidth
                 name="displayName"
                 value={displayName}
                 onChange={onInputChange}
@@ -136,7 +136,7 @@ const Register = () => {
                 label="Correo"
                 type="email"
                 placeholder="correo@google.com"
-                // fullWidth
+                fullWidth
                 name="email"
                 value={email}
                 onChange={onInputChange}
@@ -150,7 +150,7 @@ const Register = () => {
                 label="Contraseña"
                 type="password"
                 placeholder="Contraseña"
-                // fullWidth
+                fullWidth
                 name="password"
                 value={password}
                 onChange={onInputChange}
@@ -160,17 +160,6 @@ const Register = () => {
             </Grid>
 
             <Grid item xs={12} sx={{ mt: 2 }}>
-              {/* <TextField
-                label="Foto de Perfil (URL)"
-                type="url"
-                placeholder="https://example.com/imagen.jpg"
-                fullWidth
-                name="photoURL"
-                value={photoURL}
-                onChange={onInputChange}
-                error= { !!photoURLValid && formSubmitted } 
-                helperText = {photoURLValid}
-              /> */}
               <Button
                 component="label"
                 variant="contained"
@@ -224,7 +213,8 @@ const Register = () => {
                   sx={{ background: "#70e000" }}
                   type="submit"
                   variant="contained"
-                  // fullWidth
+                  className="mx-auto"
+                  fullWidth
                 >
                   Crear cuenta
                 </Button>
@@ -232,14 +222,19 @@ const Register = () => {
             </Grid>
           </Grid>
         </form>
+        <hr />
         <Grid
           container
           direction="column"
           alignItems={"center"}
           justifyContent="center"
+          textAlign={"center"}
           padding={2}
         >
-          <Typography sx={{ mr: 1 }}>¿Ya tienes cuenta?</Typography>
+          <Grid item xs={12} />
+          <Typography className="mx-auto flex justify-center items-center">
+            ¿Ya tienes cuenta?
+          </Typography>
           <Link
             component={RouterLink}
             className="ingresar mx-auto border-b-2 hover:bg-green-700 p-2"

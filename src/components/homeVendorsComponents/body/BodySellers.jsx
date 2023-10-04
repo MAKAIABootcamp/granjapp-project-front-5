@@ -12,16 +12,17 @@ import {
   setProduct,
 } from "../../../store/granjApp/granjAppSlice";
 import ProductForm from "./ProductsCRUD/ProductForm";
+import ProductFormUpdate from "./ProductsCRUD/ProductFormUpdate";
 
 const BodySellers = () => {
   const [isProduct, setIsProduct] = useState(true);
   const [isAdd, setIsAdd] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
 
   const [store, setStore] = useState({});
+  const [product, setProduct] = useState({});
 
-  const productSelector = useSelector(selectProducts)
+  const productSelector = useSelector(selectProducts);
 
   const [products, setProducts] = useState(productSelector || []);
   const user = useSelector(selectUser);
@@ -33,32 +34,31 @@ const BodySellers = () => {
         const storeFire = await getStoreByUser(user.uid);
 
         setStore(storeFire);
-        
-        console.log(storeFire)
         const products = await getProductByStore(storeFire.id);
         setProducts(products);
         dispatch(setProduct(products));
-        
       };
       getStore();
     }
   }, [user]);
-
 
   //* @type HTML.target /
   const activeComponent = (value) => {
     switch (value) {
       case "products":
         setIsProduct(true);
+        setIsUpdate(false);
         setIsAdd(false);
         break;
       case "add":
         setIsProduct(false);
+        setIsUpdate(false);
         setIsAdd(true);
         break;
       case "update":
         setIsProduct(false);
         setIsAdd(false);
+        setIsUpdate(true);
         break;
     }
   };
@@ -67,8 +67,15 @@ const BodySellers = () => {
       <div className="filterButtons-container">
         {store && <BannerStore store={store} />}
         <FilterButtons activeComponent={activeComponent} />
-        {isProduct && <ProductCarousel products={products} />}
+        {isProduct && (
+          <ProductCarousel
+            activeComponent={activeComponent}
+            products={products}
+            setProduct={setProduct}
+          />
+        )}
         {isAdd && <ProductForm storeId={store.id} />}
+        {isUpdate && <ProductFormUpdate product={product} />}
       </div>
     </>
   );
