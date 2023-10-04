@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getMarketAction } from "../../store/sales/salesThunks";
 import arrow from "../../assets/icons/arrow-circle.svg";
 import "./salesTracking.scss";
 import StatusBar from "../../components/statusBar/StatusBar";
 import save from "../../assets/icons/save.svg";
 
 export const SalesTracking = () => {
+  const dispatch = useDispatch();
+  const { uid } = useSelector((store) => store.auth);
+
+  useEffect(() => {
+    dispatch(getMarketAction(uid));
+  }, [uid]);
+
   return (
     <>
       <div className="h1-SalesTracking-container">
