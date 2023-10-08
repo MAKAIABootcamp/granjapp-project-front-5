@@ -15,7 +15,17 @@ const HeaderLaptop = () => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState();
-  const {cart} = useSelector ( state => state.granjApp);
+  const { cart } = useSelector((state) => state.granjApp);
+  /** @type string */
+  const [userName, setUserName] = useState();
+
+  const userState = useSelector(selectUser);
+
+  useEffect(() => {
+    console.log(userState);
+    setUserName(userState.displayName);
+  }, [userState]);
+
   const onSearch = () => {
     if (inputRef.current.value !== "") {
       setInputSearch(inputRef.current.value);
@@ -25,17 +35,12 @@ const HeaderLaptop = () => {
   };
 
   const onCart = () => {
-    navigate("shoppingCart")
-  }
+    navigate("shoppingCart");
+  };
 
   return (
     <div className="bg-[#34d116] h-15 w-full flex mx-auto justify-center items-center">
-      {/* <DropdownButton /> */}
-      {/* Dropdown menu */}
-
       <DropdownMenu />
-
-      {/* End of Dropdown menu */}
       <NavLink to="/">
         <img src={logo} width={150} height={150} className="p-2 flex" />
       </NavLink>
@@ -60,12 +65,31 @@ const HeaderLaptop = () => {
       <div className="flex items-center justify-between space-x-3 p-2 ">
         <AiOutlineUser className=" h-6 w-6" />
         <BsBell className="h-6 w-6" />
-        <BsCart onClick={() =>onCart()} className="h-6 w-6" />
+        <BsCart onClick={() => onCart()} className="h-6 w-6" />
         {cart.length > 0 && (
-        <span className="absolute top-6 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-          {cart.length}
-        </span>
-      )}
+          <span className="absolute top-6 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+            {cart.length}
+          </span>
+        )}
+        {userName && (
+          <div
+            className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2"
+            onClick={() => {
+              dispatch(startLogout());
+              navigate("/login");
+            }}
+          >
+            <img
+              className="object-cover h-12 w-12 rounded-full flex items-center mx-auto"
+              src={userState.photoURL}
+            />
+            <strong className="text-center">{userName.split(" ")[0]}</strong>
+          </div>
+        )}
+
+        <div className="flex items-center justify-center text-center space-x-3 p-2 mx-3 text-[15px] ">
+          <BsCart className="h-6 w-6" />
+        </div>
       </div>
     </div>
   );

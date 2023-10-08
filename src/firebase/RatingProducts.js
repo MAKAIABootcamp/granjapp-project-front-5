@@ -13,7 +13,6 @@ import {
 
 export const getRatingByProductUser = async (userId, productId) => {
   try {
-    
     const products = query(
       collection(FirebaseDB, "valoracion"),
       where("userId", "==", userId),
@@ -23,16 +22,18 @@ export const getRatingByProductUser = async (userId, productId) => {
     if (productsSnapshot.empty) {
       return null;
     }
-    return {id:productsSnapshot.docs[0].id, ...productsSnapshot.docs[0].data()};
+    return {
+      id: productsSnapshot.docs[0].id,
+      ...productsSnapshot.docs[0].data(),
+    };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return null;
   }
 };
 
 export const getRatingByProduct = async (productId) => {
   try {
-    
     const products = query(
       collection(FirebaseDB, "valoracion"),
       where("productId", "==", productId)
@@ -41,9 +42,11 @@ export const getRatingByProduct = async (productId) => {
     if (productsSnapshot.empty) {
       return null;
     }
-    return productsSnapshot.docs.map(doc => { return {id:doc.id, ...doc.data()} })
+    return productsSnapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return null;
   }
 };
@@ -63,13 +66,13 @@ export const addRating = async ({ productId, userId, ratin }) => {
 };
 
 export const updateRating = async ({ ratinId, ratin }) => {
-    try {
-      const docRef = doc(FirebaseDB, "valoracion",ratinId);
-      await updateDoc(docRef, {
-        ratin: parseInt(ratin),
-      });
-      return { ok: true, message: "Gracias por la valoración" };
-    } catch (error) {
-      return { ok: false, message: error };
-    }
-  };
+  try {
+    const docRef = doc(FirebaseDB, "valoracion", ratinId);
+    await updateDoc(docRef, {
+      ratin: parseInt(ratin),
+    });
+    return { ok: true, message: "Gracias por la valoración" };
+  } catch (error) {
+    return { ok: false, message: error };
+  }
+};

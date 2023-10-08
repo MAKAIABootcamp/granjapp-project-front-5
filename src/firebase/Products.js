@@ -12,13 +12,6 @@ import {
   updateDoc,
 } from "firebase/firestore/lite";
 
-// import {
-//   getDownloadURL,
-//   ref as storageRef,
-//   uploadBytes,
-// } from "firebase/storage";
-// import Swal from "sweetalert2";
-
 export const getProducts = async () => {
   const products = collection(FirebaseDB, "productos");
   const productsSnapshot = await getDocs(products);
@@ -28,35 +21,6 @@ export const getProducts = async () => {
   });
   return productsList;
 };
-
-// const uploadProduct = async (uid, imageUpload) => {
-//   if (imageUpload === null) {
-//     Swal.fire("Please select an image");
-//     return;
-//   }
-//   const imageRef = storageRef(storage, `productos/${uid}`);
-//   await uploadBytes(imageRef, imageUpload)
-//     .then((snapshot) => {
-//       getDownloadURL(snapshot.ref)
-//         .then((url) => {
-//           saveData(url);
-//         })
-//         .catch((error) => {
-//           Swal.fire({
-//             title: error.message,
-//             icon: "error",
-//             timer: 2000,
-//           });
-//         });
-//     })
-//     .catch((error) => {
-//       Swal.fire({
-//         title: error.message,
-//         icon: "error",
-//         timer: 2000,
-//       });
-//     });
-// };
 
 export const addProduct = async ({
   name,
@@ -80,9 +44,9 @@ export const addProduct = async ({
       variety,
       weight,
     });
-    return {ok:true, message:"¡Producto creado exitósamente! :)"}
+    return { ok: true, message: "¡Producto creado exitósamente! :)" };
   } catch (error) {
-    return {ok:true, message:e}
+    return { ok: true, message: e };
   }
   // await uploadProduct(docRef.id, url);
 };
