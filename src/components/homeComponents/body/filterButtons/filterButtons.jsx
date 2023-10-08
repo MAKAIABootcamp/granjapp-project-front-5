@@ -11,9 +11,6 @@ export const FilterButtons = ({ mostrarShops, mostrarProductos }) => {
         <button className="button-filter" onClick={mostrarProductos}>
           <p>Productos</p>
         </button>
-        <button className="button-filter">
-          <p>Categorías</p>
-        </button>
       </div>
     </>
   );

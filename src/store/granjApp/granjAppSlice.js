@@ -10,7 +10,7 @@ export const granjAppSlice = createSlice({
     promos: [],
     activePromos: null,
     posts: [],
-    activePost: null,
+    activePost: false,
     isSaving: false,
     newPost: [],
     cart: [],
@@ -19,17 +19,24 @@ export const granjAppSlice = createSlice({
     activePurchasedProduct: null,
   },
   reducers: {
-
+    setLikes: (state, action) => {
+      state.posts = state.posts.map((item) => {
+        if (action.payload.id == item.id) {
+          return action.payload;
+        }
+        return item;
+      });
+    },
     addToCart: (state, action) => {
-      state.cart.push(action.payload)
+      state.cart.push(action.payload);
     },
 
     setCompras: (state, action) => {
-      state.compras = action.payload
+      state.compras = action.payload;
     },
 
     removeFromCart: (state, action) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload)
+      state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
 
     setActiveShop: (state, action) => {
@@ -75,88 +82,83 @@ export const granjAppSlice = createSlice({
 
     updatePost: (state, action) => {
       state.isSaving = false;
-      state.newPost = state.newPost.map( post => {
+      state.newPost = state.newPost.map((post) => {
+        if (post.id === action.payload.id) {
+          return action.payload;
+        }
 
-          if (post.id === action.payload.id) {
-
-              return action.payload;
-
-          }
-
-          return post;
+        return post;
       });
       // state.messageSaved = `${ action.payload.ti}`
- },
+    },
 
- setSaving: (state) => {
-  state.isSaving = true;
- },
+    setSaving: (state) => {
+      state.isSaving = true;
+    },
 
- setProcessedPurchase: (state, action) => {
-  state.processedPurchase = action.payload;
- },
- 
- updateCartItemQuantity: (state, action) => {
-  const { productId, newQuantity } = action.payload;
-  console.log("productId", productId)
-  console.log("newQuantity", newQuantity)
-  // Encuentra el elemento en el carrito con productId y actualiza la cantidad
-  const updatedItems = state.cart.map((item) => {
-    if (item.id === productId) {
-      return {
-        ...item,
-        quantity: newQuantity,
-      };
-    }
-    return item;
-  });
-  console.log("updatedItems", updatedItems)
-  state.cart = updatedItems;
-},
+    setProcessedPurchase: (state, action) => {
+      state.processedPurchase = action.payload;
+    },
 
-updateCartItemSubtotal: (state, action) => {
-  const { productId, newSubtotal } = action.payload;
+    updateCartItemQuantity: (state, action) => {
+      const { productId, newQuantity } = action.payload;
+      console.log("productId", productId);
+      console.log("newQuantity", newQuantity);
+      // Encuentra el elemento en el carrito con productId y actualiza la cantidad
+      const updatedItems = state.cart.map((item) => {
+        if (item.id === productId) {
+          return {
+            ...item,
+            quantity: newQuantity,
+          };
+        }
+        return item;
+      });
+      console.log("updatedItems", updatedItems);
+      state.cart = updatedItems;
+    },
 
-  // Encuentra el elemento en el carrito con productId y actualiza el subtotal
-  const updatedItems = state.cart.map((item) => {
-    if (item.productId === productId) {
-      return {
-        ...item,
-        subtotal: newSubtotal,
-      };
-    }
-    return item;
-  });
+    updateCartItemSubtotal: (state, action) => {
+      const { productId, newSubtotal } = action.payload;
 
-  state.cart = updatedItems;
-},
+      // Encuentra el elemento en el carrito con productId y actualiza el subtotal
+      const updatedItems = state.cart.map((item) => {
+        if (item.productId === productId) {
+          return {
+            ...item,
+            subtotal: newSubtotal,
+          };
+        }
+        return item;
+      });
 
-updateCartItemTotal: (state, action) => {
-  const { productId, newTotal } = action.payload;
+      state.cart = updatedItems;
+    },
 
-  // Encuentra el elemento en el carrito con productId y actualiza el subtotal
-  const updatedItems = state.cart.map((item) => {
-    if (item.productId === productId) {
-      return {
-        ...item,
-        total: newTotal,
-      };
-    }
-    return item;
-  });
+    updateCartItemTotal: (state, action) => {
+      const { productId, newTotal } = action.payload;
 
-  state.cart = updatedItems;
-},
+      // Encuentra el elemento en el carrito con productId y actualiza el subtotal
+      const updatedItems = state.cart.map((item) => {
+        if (item.productId === productId) {
+          return {
+            ...item,
+            total: newTotal,
+          };
+        }
+        return item;
+      });
 
-setActivePurchasedProduct: (state, action) => {
-  state.activePurchasedProduct = action.payload;
-},
+      state.cart = updatedItems;
+    },
 
- 
+    setActivePurchasedProduct: (state, action) => {
+      state.activePurchasedProduct = action.payload;
+    },
   },
 });
 
-export const selectProducts = (state) => state.granjApp.product
+export const selectProducts = (state) => state.granjApp.product;
 // Action creators are generated for each case reducer function
 export const {
   setActiveShop,
@@ -178,5 +180,6 @@ export const {
   updateCartItemTotal,
   setProcessedPurchase,
   setCompras,
-  setActivePurchasedProduct
+  setActivePurchasedProduct,
+  setLikes
 } = granjAppSlice.actions;

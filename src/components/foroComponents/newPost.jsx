@@ -2,7 +2,7 @@
 // import { ImageGallery } from '../components'
 
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../hooks/useForm"; 
 import { useDispatch, useSelector } from "react-redux";
 import { setActivePost } from "../../store/granjApp/granjAppSlice";
 import { startSavePost } from "../../store/granjApp/granjAppThunks";
@@ -12,29 +12,11 @@ import { SaveOutlined } from "@mui/icons-material";
 
 export const NewPost = () => {
 
-    const {activePost} = useSelector(state => state.granjApp);
 
-    const {description, image, onInputChange, formState} = useForm(activePost);
-
-    const dispatch  = useDispatch();
-    
-    // const [shouldDispatchActivePost, setShouldDispatchActivePost] = useState(false);
-
-    // useEffect(() => {
-    //   if (shouldDispatchActivePost) {
-    //     dispatch(setActivePost(formState));
-    //     setShouldDispatchActivePost(false); // Restablecer la variable de estado
-    //   }
-    // }, [formState, shouldDispatchActivePost, dispatch]);
-
-    useEffect(() => {   
-
-        dispatch(setActivePost(formState));
-    
-    }, [formState])
-    
+    const {onInputChange, formState} = useForm();
+ 
      const onSavePost = () => {
-         dispatch ( startSavePost());
+        console.log(formState)
         }
   return (
     <Grid 
@@ -77,8 +59,8 @@ export const NewPost = () => {
                 fullWidth
                 placeholder="Ingrese un título"
                 label="URL de la foto"
-                name='imageURL'
-                value={image}
+                name='image'
+                value={formState.image}
                 onChange={onInputChange}
                 sx={{ 
                     border: 'none',
@@ -95,7 +77,7 @@ export const NewPost = () => {
                 placeholder="Añade una descripción"
                 minRows={ 2 }
                 name='description'
-                value={description}
+                value={formState.description}
                 onChange={onInputChange}
                 sx={{
                     marginBottom: '20px',

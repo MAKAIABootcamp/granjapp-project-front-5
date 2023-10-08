@@ -52,7 +52,7 @@ const Router = () => {
               
           </Route>
         </Route>
-        <Route path="/" element={<PublicRoutes isAuthenticate={status === "not-authenticated"} />}>
+        <Route path="/" element={<PublicRoutes isAuthenticate={status === "authenticated"} />}>
           <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
               <Route path="loginWithCell" element={<LoginByPhone />} />

@@ -20,11 +20,11 @@ export const useCheckAuth = () => {
 
       const { uid, email, displayName, photoURL } = user;
       const userDoc = await getUserById(uid);
-      console.log(userDoc);
+      console.log(userDoc, uid);
       setUser(userDoc)
 
-      dispatch(login({ uid, email, displayName, photoURL,userType:userDoc.userType }));
-      dispatch(setUserType(userDoc.userType))
+      dispatch(login({ uid, email, displayName, photoURL }));
+      // dispatch(setUserType(userDoc.userType))
       dispatch(startLoadingShops());
       dispatch(startLoadingProducts());
       dispatch(startLoadingPromos());
@@ -36,3 +36,4 @@ export const useCheckAuth = () => {
     status,user
   }
 };
+// ,userType:userDoc.userType

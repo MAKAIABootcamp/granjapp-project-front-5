@@ -12,13 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { startNewPost } from "../../store/granjApp/granjAppThunks";
 import { setActivePost } from "../../store/granjApp/granjAppSlice";
 
-// import "../../styles/mobileNavBar.scss"
+import "../../styles/mobileNavBar.scss"
 
 const MobileNavbar = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {isSaving} = useSelector(state => state.granjApp);
+  const {isSaving, activePost} = useSelector(state => state.granjApp);
   const onHome = () => {
     navigate("/");
   };
@@ -34,6 +34,11 @@ const MobileNavbar = () => {
   }
   const onForo = () => {
     navigate('foro');
+  }
+
+  const handleOpenForm = () => {
+    console.log('abrir modal');
+    dispatch(setActivePost(!activePost))
   }
   return (
     <>
@@ -52,7 +57,7 @@ const MobileNavbar = () => {
             <p>Soporte</p>
           </button>
         </div>
-        <div className='button-add-container'>
+        <div className='button-add-container' onClick={handleOpenForm}>
             <button>
               <img src={cruz} alt="" />
             </button>
