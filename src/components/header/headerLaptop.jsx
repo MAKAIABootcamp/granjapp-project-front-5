@@ -20,9 +20,10 @@ const HeaderLaptop = () => {
 
   const userState = useSelector(selectUser);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(userState);
     setUserName(userState.displayName);
   }, [userState]);
 
@@ -64,14 +65,20 @@ const HeaderLaptop = () => {
         {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
       </div>
       {userName && (
-          <div className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2" onClick={() => {
-            dispatch(startLogout())
-            navigate("/login")
-          }}>
-            <img className="object-cover h-12 w-12 rounded-full flex items-center mx-auto" src={userState.photoURL} />
-            <strong className="text-center">{userName.split(" ")[0]}</strong>
-          </div>
-        )}
+        <div
+          className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2"
+          onClick={() => {
+            dispatch(startLogout());
+            navigate("/login");
+          }}
+        >
+          <img
+            className="object-cover h-12 w-12 rounded-full flex items-center mx-auto"
+            src={userState.photoURL}
+          />
+          <strong className="text-center">{userName.split(" ")[0]}</strong>
+        </div>
+      )}
       <div className="flex items-center justify-center text-center space-x-3 p-2 mx-3 text-[15px] ">
         <BsCart className="h-6 w-6" />
       </div>
