@@ -45,6 +45,7 @@ const arrayRange = (start, stop, step) => {
 };
 
 const DetailProductsLaptop = ({ product }) => {
+  console.log(product);
   const [countProcut, setCountProcut] = useState(0);
 
   const [rating, setRating] = useState({});
@@ -56,7 +57,7 @@ const DetailProductsLaptop = ({ product }) => {
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if (product) {
+    if (product && product.id) {
       const getRating = async () => {
         const rattingFire = await getRatingByProductUser(user.uid, product.id);
         setRating(rattingFire);
@@ -80,8 +81,8 @@ const DetailProductsLaptop = ({ product }) => {
   };
 
   const handleAddToCart = () => {
-    const {id, ...rest} = product
-    const cantidadProducto = { ...rest, productId:id, quantity: countProcut };
+    const { id, ...rest } = product;
+    const cantidadProducto = { ...rest, productId: id, quantity: countProcut };
     //dispatch(addToCart(cantidadProducto));
     dispatch(addToCartFirestore({ ...cantidadProducto, userId: uid }));
   };
@@ -125,26 +126,35 @@ const DetailProductsLaptop = ({ product }) => {
   };
 
   return (
-    product && (
+    product &&
+    product.id && (
       <div className="w-full h-full flex mx-auto my-auto ">
         <div className="flex-col  justify-center mx-auto ">
-          
           <div className="h-auto w-full items-center px-20 pt-5">
-          <div className="text-xl ">
-            <p className="my-2">
-              <Link to="/" className="mr-1 hover:border-b-2 hover:border-green-500">
-                Inicio
-              </Link>
-              /
-              <Link to="/products" className="mr-1 hover:border-b-2 hover:border-green-500">
-                Productos
-              </Link>
-              /
-              <Link to={"/products/" + product.variety} className="mr-1 hover:border-b-2 hover:border-green-500">
-                {product.variety}
-              </Link>
-            </p>
-          </div>
+            <div className="text-xl ">
+              <p className="my-2">
+                <Link
+                  to="/"
+                  className="mr-1 hover:border-b-2 hover:border-green-500"
+                >
+                  Inicio
+                </Link>
+                /
+                <Link
+                  to="/products"
+                  className="mr-1 hover:border-b-2 hover:border-green-500"
+                >
+                  Productos
+                </Link>
+                /
+                <Link
+                  to={"/products/" + product.variety}
+                  className="mr-1 hover:border-b-2 hover:border-green-500"
+                >
+                  {product.variety}
+                </Link>
+              </p>
+            </div>
             <section className="inline-flex items-center h-auto bg-green-200 w-full mx-auto justify-center rounded-md border-2 border-[#3bc83d] p-1">
               <div className="flex-col w-[90%] h-auto p-2 items-center justify-center ">
                 <strong className="items-center m-3 text-lg justify-center mx-auto flex">{`${toTitleCase(
@@ -183,7 +193,10 @@ const DetailProductsLaptop = ({ product }) => {
                           onChange={handleRating}
                         />
                       )}
-                      <label className="flex items-center justify-center w-20 hover:animate-bounce" htmlFor={"star" + ix}>
+                      <label
+                        className="flex items-center justify-center w-20 hover:animate-bounce"
+                        htmlFor={"star" + ix}
+                      >
                         <IoIosStar className="w-[200px] h-auto mx-auto items-center justify-center" />
                       </label>
                     </React.Fragment>

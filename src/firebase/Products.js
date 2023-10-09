@@ -75,7 +75,7 @@ export const updateProduct = async (productId, data) => {
 export const getProductById = async (productId) => {
   const productRef = doc(FirebaseDB, "productos/" + productId);
   const productSnapshot = await getDoc(productRef);
-
+  console.log(productSnapshot);
   if (productSnapshot.exists()) {
     const productData = { id: productSnapshot.id, ...productSnapshot.data() };
     return productData;

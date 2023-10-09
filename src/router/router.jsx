@@ -28,7 +28,7 @@ const Router = () => {
     <BrowserRouter>
       {status === "authenticated" ? (
         <>
-          {user.userType && (<Layout />)}
+          {user.userType && <Layout />}
           <main className="lg:mx-5 pt-4 sm:mx-1">
             <Routes>
               {user.userType && user.userType == "comprador" ? (
@@ -55,7 +55,10 @@ const Router = () => {
               ) : (
                 <>
                   <Route path="/" element={<HomeSellers />} />
-                  <Route path="dispatchProducts" element={<DispatchProducts />} />
+                  <Route
+                    path="dispatchProducts"
+                    element={<DispatchProducts />}
+                  />
                   <Route path="support" element={<Support />} />
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="foro" element={<ForoPage />} />
@@ -69,12 +72,13 @@ const Router = () => {
       ) : (
         status !== "checking" && (
           <Routes>
-            <Route path="/" element={<Login />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="loginWithCell" element={<LoginByPhone />} />
-          <Route path="/insertcode" element={<InsertCode />} />
-        </Routes>
+            {/* <Route path="/" element={<Login />} /> */}
+            <Route path="*" element={<Login />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="loginWithCell" element={<LoginByPhone />} />
+            <Route path="/insertcode" element={<InsertCode />} />
+          </Routes>
         )
       )}
     </BrowserRouter>

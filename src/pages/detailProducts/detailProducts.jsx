@@ -13,17 +13,14 @@ const DetailProduct = () => {
   const params = useParams();
 
   const [product, setproduct] = useState({});
-
   useEffect(() => {
-    if (params.id){
-      const getProduct = async () => {
-        const productData = await getProductById(params.id);
-        setproduct(productData);
-      };
-      getProduct();
-    }
+    const getProduct = async () => {
+      const productData = await getProductById(params.id);
+      console.log(productData);
+      setproduct(productData);
+    };
+    getProduct();
   }, [params.id]);
-
 
   // console.log(`width: ${width}, height: ${height}`);
 
@@ -34,14 +31,16 @@ const DetailProduct = () => {
         <div className="bg-gradient-to-b  w-full fondo">
           <DetailProductsMobile product={product} />
         </div>
-      ) : product && width > 380 && width <= 768  ? (
+      ) : product && width > 380 && width <= 768 ? (
         <div className="bg-gradient-to-b  w-full h-[80vh] max-h-full fondo">
           <DetailProductsTablet product={product} />
         </div>
       ) : (
-        <div className="bg-gradient-to-b  w-full h-[80vh] max-h-full fondo">
-          <DetailProductsLaptop product={product} />
-        </div>
+        product && (
+          <div className="bg-gradient-to-b  w-full h-[80vh] max-h-full fondo">
+            <DetailProductsLaptop product={product} />
+          </div>
+        )
       )}
     </>
   );
