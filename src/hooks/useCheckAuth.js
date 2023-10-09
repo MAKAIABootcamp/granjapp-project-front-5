@@ -1,17 +1,24 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FirebaseAuth } from "../firebase/firebaseConfig";
-import { login, logout, setUserType } from "../store/userAuth/userAuthSlice";
-import { startLoadingCar, startLoadingPosts, startLoadingProducts, startLoadingPromos, startLoadingShops } from "../store/granjApp/granjAppThunks";
+import { login, logout, selectAddress } from "../store/userAuth/userAuthSlice";
+import {
+  startLoadingCar,
+  startLoadingPosts,
+  startLoadingProducts,
+  startLoadingPromos,
+  startLoadingSales,
+  startLoadingShops,
+} from "../store/granjApp/granjAppThunks";
 import { getUserById } from "../firebase/providers";
 import { useState } from "react";
 
-
 export const useCheckAuth = () => {
   const { status } = useSelector((state) => state.auth);
-  const  [user, setUser] = useState({})
+
+  const [user, setUser] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,20 +27,33 @@ export const useCheckAuth = () => {
 
       const { uid, email, displayName, photoURL } = user;
       const userDoc = await getUserById(uid);
-      console.log(userDoc, uid);
-      setUser(userDoc)
 
-      dispatch(login({ uid, email, displayName, photoURL }));
+      setUser({
+        address: localStorage.getItem("address"),
+        ...userDoc,
+      });
+
+      dispatch(
+        login({
+          uid,
+          email,
+          displayName,
+          photoURL,
+          userType: userDoc.userType,
+          address: localStorage.getItem("address"),
+        })
+      );
       // dispatch(setUserType(userDoc.userType))
+      dispatch(startLoadingSales());
       dispatch(startLoadingShops());
       dispatch(startLoadingProducts());
       dispatch(startLoadingPromos());
-      dispatch(startLoadingCar())
+      dispatch(startLoadingCar());
     });
   }, []);
-
-  return{
-    status,user
-  }
+  return {
+    status,
+    user,
+  };
 };
 // ,userType:userDoc.userType

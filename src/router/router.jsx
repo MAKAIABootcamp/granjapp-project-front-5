@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Register from "../pages/register/register";
@@ -20,6 +20,7 @@ import { ShoppingCart } from "../pages/shoppingCart/shoppingCart";
 import MetodoPagos from "../pages/metodoPago/metodoPago";
 import HomeSellers from "../pages/home/HomeSellers";
 import { ProductSelected } from "../pages/purchaseTracking/productSelected";
+import DispatchProducts from "../pages/DispathProducts/DispathProducts";
 
 const Router = () => {
   const { status, user } = useCheckAuth();
@@ -27,7 +28,7 @@ const Router = () => {
     <BrowserRouter>
       {status === "authenticated" ? (
         <>
-          <Layout />
+          {user.userType && (<Layout />)}
           <main className="mx-5 pt-2">
             <Routes>
               {user.userType && user.userType == "comprador" ? (
@@ -55,6 +56,7 @@ const Router = () => {
               ) : (
                 <>
                   <Route path="/" element={<HomeSellers />} />
+                  <Route path="dispatchProducts" element={<DispatchProducts />} />
                   <Route path="support" element={<Support />} />
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="foro" element={<ForoPage />} />
@@ -66,12 +68,14 @@ const Router = () => {
           </main>
         </>
       ) : (
-        <Routes>
+        status !== "checking" && !user && (
+          <Routes>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="loginWithCell" element={<LoginByPhone />} />
           <Route path="/insertcode" element={<InsertCode />} />
         </Routes>
+        )
       )}
     </BrowserRouter>
   );

@@ -1,0 +1,321 @@
+@media (min-width: 780px){
+
+   .productsCart-container{
+        width: 50%;
+        background-color: #34d116;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin: auto;
+        
+        
+        & .card-productCart-container{
+            background-color: white;
+            width: 75%;
+            border-radius: 10px;
+
+            & .titleShop-deleteButton-container{
+                display: flex;
+                justify-content: space-between;
+
+                & .h3-title{
+                    font-family: 'Hind Vadodara', sans-serif;
+                    font-weight: 600;
+                    margin: 10px;
+                }
+
+                & .delete-button-cart{
+                    margin: 10px;
+                    border-radius: 10px;
+                    padding: 5px;
+                    background-color: #fa6b6b;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+
+                    &:hover{
+                        background-color: aliceblue;
+                    }
+
+                    &:active {
+                        background-color: #fa6b6b; /* Cambio de color de fondo al hacer clic */
+                        transform: scale(0.95);
+                    }
+                    & .icon-delete{
+                       
+                        width: 40px;
+                        height: 25px;
+                    }
+                }
+            }
+
+           
+
+            & .infoProduct-add-container{
+
+                width: 90%;
+                margin: auto;
+                padding: 10px;
+                
+                & .info-price-container{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: auto;
+                    & .price-container{
+
+                        width: auto;
+                        
+                        & .price{
+                            font-size: 18px;
+                            font-family: 'Hind Vadodara', sans-serif;
+    
+                        }
+                    }
+                  
+                    & .quantity-container{
+                        display: flex;
+                        gap: 10px;
+                        
+
+                        & button{
+                            
+                            & .button {
+                                width: 20px;
+                                height: 20px;
+                                color: #ff6961;
+                            }
+                        }
+                    }
+
+                }
+                & .img-nameProduct-container{
+                    display: table-column;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 10px;
+
+                    & img {
+                        width: 50%;
+                        height: auto;
+                    }
+
+                    & .lil-info{
+                        font-family: 'Hind Vadodara', sans-serif;
+                        font-size: 20px;
+                    }
+                }
+
+                & .tarifaDomi-container{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    
+
+                    & .title-tarifa{
+                        font-family: 'Hind Vadodara', sans-serif;
+                    }
+
+                    & .price-tarifa{
+                        margin-right: 10%;
+                        font-family: 'Hind Vadodara', sans-serif;
+                        font-size: 16px;
+                    }
+                }
+
+                & .total-container{
+                    border-top: 2px solid black;
+                    padding: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    & p {
+                        font-family: 'Hind Vadodara', sans-serif;
+                        font-size: 20px;
+                    }
+
+                    & button {
+                        width: 80px;
+                        height: 40px;
+                        border-radius: 10px;
+                        background-color: #34d116;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+
+                        &:hover{
+                            background-color: aliceblue;
+                        }
+
+                        &:active {
+                            background-color: #34d116; /* Cambio de color de fondo al hacer clic */
+                            transform: scale(0.95);
+                        }
+                    }
+                }
+            }
+        }
+   } 
+}
+
+@media (max-width: 800px){
+    .productsCart-container{
+        width: 90%;
+        background-color: #34d116;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-left: 20px;
+        margin-top: 30px;
+        
+        
+        & .card-productCart-container{
+            background-color: white;
+            width: 95%;
+            border-radius: 10px;
+
+            & .titleShop-deleteButton-container{
+                display: flex;
+                justify-content: space-between;
+
+                & .h3-title{
+                    font-family: 'Hind Vadodara', sans-serif;
+                    font-weight: 600;
+                    margin: 10px;
+                }
+
+                & .delete-button-cart{
+                    margin: 10px;
+                    border-radius: 10px;
+                    padding: 5px;
+                    background-color: #fa6b6b;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.1s ease; 
+
+                    &:hover {
+                        background-color: aliceblue;
+                        transform: scale(1.05); 
+                    }
+                    
+                    &:active, :focus {
+                        background-color: #fa6b6b; /* Cambio de color de fondo al hacer clic */
+                        transform: scale(0.95); /* Reducción de escala al hacer clic */
+                        outline: none; /* Elimina el resaltado al hacer clic en dispositivos móviles */
+                    }
+                    & .icon-delete{
+                       
+                        width: 30px;
+                        height: 15px;
+                    }
+                }
+            }
+
+           
+
+            & .infoProduct-add-container{
+
+                width: 100%;
+                padding: 5px;
+                
+                & .info-price-container{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    & .price-container{
+
+                        margin-right: 10%;
+                        
+                        & .price{
+                            font-size: 15px;
+                            font-family: 'Hind Vadodara', sans-serif;
+                            margin-left: 10px;
+    
+                        }
+                    }
+
+                    & .quantity-container{
+                        display: flex;
+                        gap: 10px;
+                        
+                        
+
+                        & button{
+                            
+                            & .button {
+                                width: 14px;
+                                height: 14px;
+                                color: #ff6961;
+                            }
+                        }
+                    }
+                  
+                }
+                & .img-nameProduct-container{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    & img {
+                        width: 70px;
+                        height: auto;
+                        margin-right: 5px;
+                    }
+
+                    & .lil-info{
+                        font-family: 'Hind Vadodara', sans-serif;
+                        font-size: 13px;
+                    }
+                }
+
+                & .tarifaDomi-container{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    
+
+                    & .title-tarifa{
+                        font-family: 'Hind Vadodara', sans-serif;
+                    }
+
+                    & .price-tarifa{
+                        margin-right: 10%;
+                        font-family: 'Hind Vadodara', sans-serif;
+                        font-size: 16px;
+                    }
+                }
+
+                & .total-container{
+                    border-top: 2px solid black;
+                    padding: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    & p {
+                        font-family: 'Hind Vadodara', sans-serif;
+                        font-size: 20px;
+                    }
+
+                    & button {
+                        width: 80px;
+                        height: 40px;
+                        border-radius: 10px;
+                        background-color: #34d116;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease;
+
+                        &:hover{
+                            background-color: aliceblue;
+                        }
+                    }
+                }
+            }
+        }
+   } 
+}
+

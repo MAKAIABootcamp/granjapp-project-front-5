@@ -32,6 +32,8 @@ import {
   setCart,
 } from "./granjAppSlice";
 import { FirebaseDB } from "../../firebase/firebaseConfig";
+import { getStoreByUser } from "../../firebase/Store";
+import { getSalesByStore } from "../../firebase/Sales";
 
 export const startLoadingShops = () => {
   return async (dispatch, getState) => {
@@ -42,6 +44,16 @@ export const startLoadingShops = () => {
     dispatch(setShop(shop));
   };
 };
+
+export const startLoadingSales = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    if (!uid) throw new Error("El UID del usuario no existe");
+    const store = await getStoreByUser(uid)
+    const product = await getSalesByStore(store.id);
+    dispatch(setCompras(product));
+  };
+}
 
 export const startLoadingProducts = () => {
   return async (dispatch, getState) => {

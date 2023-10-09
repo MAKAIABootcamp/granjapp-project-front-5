@@ -11,6 +11,7 @@ export const CarouselAddedProduct = () => {
         {cart.map((car) => (
           <CardAddedProduct key={car.id} {...car} />
         ))}
+        
       </div>
     )
   );

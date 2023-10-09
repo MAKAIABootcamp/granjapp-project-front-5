@@ -16,6 +16,8 @@ const HeaderLaptop = () => {
   const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState();
   const { cart } = useSelector((state) => state.granjApp);
+  const { compras } = useSelector((state) => state.granjApp);
+
   /** @type string */
   const [userName, setUserName] = useState();
 
@@ -35,6 +37,10 @@ const HeaderLaptop = () => {
 
   const onCart = () => {
     navigate("shoppingCart");
+  };
+
+  const onInfo = () => {
+    navigate("dispatchProducts");
   };
 
   return (
@@ -62,20 +68,29 @@ const HeaderLaptop = () => {
         {inputSearch !== "" && <SearchPage searchInput={inputSearch} />}
       </div>
       <div className="flex items-center justify-between space-x-3 p-2 ">
-        <AiOutlineUser className=" h-6 w-6" />
-        <BsBell className="h-6 w-6" />
-        <div className="inline-flex mx-auto my-auto">
-          <BsCart
-            onClick={onCart}
-            className="h-6 w-6 hover:border-b-2 hover:cursor-pointer border-green-900"
-          />
-
-          {cart && cart.length > 0 && (
-            <span className="absulute ml-5 mb-5  bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-              {cart.length}
+        
+        {userState && userState.userType == 'vendedor' && compras.length > 0 ? (
+          <div className="inline-flex space-x-0 justify-stretch">
+            <BsBell onClick={onInfo} className="h-6 w-6 hover:border-b-2 hover:cursor-pointer border-green-900"  />
+            <span className="absulute bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+              {compras.length}
             </span>
-          )}
-        </div>
+          </div>
+        ): <BsBell className="h-6 w-6"/>}
+        {userState && userState.userType == "comprador" && (
+          <div className="inline-flex mx-auto">
+            <BsCart
+              onClick={onCart}
+              className="h-6 w-6 hover:border-b-2 hover:cursor-pointer border-green-900"
+            />
+
+            {cart && cart.length > 0 && (
+              <span className="absulute bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                {cart.length}
+              </span>
+            )}
+          </div>
+        )}
         {userName && (
           <div
             className="flex-col items-center justify-center mx-auto p-1 hover:cursor-pointer px-2"
