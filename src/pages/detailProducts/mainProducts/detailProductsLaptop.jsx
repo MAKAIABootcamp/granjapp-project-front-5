@@ -19,7 +19,6 @@ import Swal from "sweetalert2";
 import { addToCart } from "../../../store/granjApp/granjAppSlice";
 import { addToCartFirestore } from "../../../store/granjApp/granjAppThunks";
 
-
 /**
  * Convert a string to title case.
  * @param {string} str - The input string to be converted to title case.
@@ -49,11 +48,7 @@ const DetailProductsLaptop = ({ product }) => {
   console.log(product);
   const [countProcut, setCountProcut] = useState(0);
 
-  const [rating, setRating] = useState({
-    userId: null,
-    productId: product.id,
-    ratin: 0,
-  });
+  const [rating, setRating] = useState({});
 
   const navigate = useNavigate();
 
@@ -89,7 +84,7 @@ const DetailProductsLaptop = ({ product }) => {
     const { id, ...rest } = product;
     const cantidadProducto = { ...rest, productId: id, quantity: countProcut };
     //dispatch(addToCart(cantidadProducto));
-    dispatch(addToCartFirestore({...cantidadProducto, userId: uid}));
+    dispatch(addToCartFirestore({ ...cantidadProducto, userId: uid }));
   };
 
   const handleRating = async (e) => {
@@ -109,9 +104,9 @@ const DetailProductsLaptop = ({ product }) => {
               timer: 2000,
               toast: true,
             })
-          ).then(() => setRating(e.target.value))
+          )
+          .then(() => setRating(e.target.value))
           .catch((e) => Swal.fire({ title: e, icon: "error" }));
-        
       } else {
         await updateRating({ ratinId: rating.id, ratin: e.target.value })
           .then((data) =>
@@ -123,7 +118,8 @@ const DetailProductsLaptop = ({ product }) => {
               timer: 2000,
               toast: true,
             })
-          ).then(() => setRating(e.target.value))
+          )
+          .then(() => setRating(e.target.value))
           .catch((e) => Swal.fire({ title: e, icon: "error" }));
       }
     }
@@ -208,65 +204,62 @@ const DetailProductsLaptop = ({ product }) => {
                 </div>
               </div>
 
-              <img
-                src={product.url}
-                alt={product.name}
-                className="rounded-full h-[250px] w-full flex mx-auto items-center"
-              />
-            </div>
-
-            <div className="flex-col w-full h-full items-center justify-center space-y-5 pl-5">
-              <strong className="text-lg">
-                Costo: ${`${product.cost}/${product.unity}`}
-              </strong>
-
-              <p className="text-md">
-                <strong>Variedad:</strong> {product.description}
-              </p>
-              <section className="bg-transparent w-full rounded-[15px] flex items-center justify-start space-x-3">
-                <button
-                  onClick={handleMinusButton}
-                  className="border-[1px] rounded-[45px] h-10 w-10 text-white bg-[#34d116] text-lg font-bold btn"
-                >
-                  <AiOutlineMinus className="text-center" />
-                </button>
-                <strong className="flex text-center items-center justify-center mx-auto">
-                  {countProcut}
+              <div className="flex-col w-full h-full mb-auto space-y-5 items-center justify-center px-5 py-8">
+                <strong className="text-lg">
+                  Costo: ${`${product.cost}/${product.unity}`}
                 </strong>
-                <button
-                  onClick={handlePlusButton}
-                  className="border-[1px] rounded-[45px] h-10 w-10 text-white bg-[#34d116] text-[13px] font-bold btn"
-                >
-                  <AiOutlinePlus className="text-center" />
-                </button>
-                <button onClick={handleAddToCart} className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-2">
-                  <BsCart3 className="w-5 h-5" />
-                  <p className="ml-3">Agregar al carrito</p>
-                </button>
-              </section>
 
-              <button
-                onClick={handleNavigate}
-                className="flex bg-[#57b145] rounded-[15px] text-white text-left justify-center p-2 items-center"
-              >
-                <IoReturnUpBack className="w-5 h-5" />
-                <p className="ml-3">Volver</p>
-              </button>
+                <p className="text-md">
+                  <strong>Variedad:</strong> {product.description}
+                </p>
+                <section className="bg-transparent w-full rounded-[15px] flex items-center justify-start space-x-3">
+                  <button
+                    onClick={handleMinusButton}
+                    className="border-[1px] rounded-[45px] h-10 w-10 text-white bg-[#34d116] text-lg font-bold btn"
+                  >
+                    <AiOutlineMinus className="text-center" />
+                  </button>
+                  <strong className="flex text-center items-center justify-center mx-auto">
+                    {countProcut}
+                  </strong>
+                  <button
+                    onClick={handlePlusButton}
+                    className="border-[1px] rounded-[45px] h-10 w-10 text-white bg-[#34d116] text-[13px] font-bold btn"
+                  >
+                    <AiOutlinePlus className="text-center" />
+                  </button>
+                  <button
+                    onClick={handleAddToCart}
+                    className="flex bg-[#64be51] rounded-[15px] text-white text-center items-center justify-center p-2"
+                  >
+                    <BsCart3 className="w-5 h-5" />
+                    <p className="ml-3">Agregar al carrito</p>
+                  </button>
+                </section>
+
+                <button
+                  onClick={handleNavigate}
+                  className="flex bg-[#57b145] rounded-[15px] text-white text-left justify-center p-2 items-center"
+                >
+                  <IoReturnUpBack className="w-5 h-5" />
+                  <p className="ml-3">Volver</p>
+                </button>
+              </div>
+            </section>
+          </div>
+
+          <section>
+            <div className="flex mx-auto items-center justify-center space-x-2 mt-2 w-auto h-auto">
+              <p className="mr-2">Comparte:</p>
+              <FaFacebookF width={100} height={100} className="" />
+              <FaLinkedin width={100} height={100} className="" />
+              <RiWhatsappFill width={100} height={100} className="" />
+              <FaPinterest width={100} height={100} className="" />
             </div>
           </section>
         </div>
-
-        <section>
-          <div className="flex mx-auto items-center justify-center space-x-2 mt-10">
-            <p className="mr-5">Comparte:</p>
-            <FaFacebookF width={100} height={100} className="" />
-            <FaLinkedin width={100} height={100} className="" />
-            <RiWhatsappFill width={100} height={100} className="" />
-            <FaPinterest width={100} height={100} className="" />
-          </div>
-        </section>
       </div>
-    </div>
+    )
   );
 };
 
