@@ -68,8 +68,9 @@ const Router = () => {
           </main>
         </>
       ) : (
-        status !== "checking" && !user && (
+        status !== "checking" && (
           <Routes>
+            <Route path="/" element={<Login />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="loginWithCell" element={<LoginByPhone />} />

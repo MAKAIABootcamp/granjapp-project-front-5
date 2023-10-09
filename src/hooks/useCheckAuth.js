@@ -17,6 +17,7 @@ import { useState } from "react";
 
 export const useCheckAuth = () => {
   const { status } = useSelector((state) => state.auth);
+  const addressRef = useSelector(selectAddress)
 
   const [user, setUser] = useState({});
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export const useCheckAuth = () => {
       const userDoc = await getUserById(uid);
 
       setUser({
-        address: localStorage.getItem("address"),
+        address: localStorage.getItem("address") || addressRef,
         ...userDoc,
       });
 
@@ -40,7 +41,7 @@ export const useCheckAuth = () => {
           displayName,
           photoURL,
           userType: userDoc.userType,
-          address: localStorage.getItem("address"),
+          address: localStorage.getItem("address") || addressRef,
         })
       );
       // dispatch(setUserType(userDoc.userType))

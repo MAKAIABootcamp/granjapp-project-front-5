@@ -19,7 +19,7 @@ const LocationLaptop = () => {
   useEffect(() => {
     if (addressState) {
       localStorage.setItem("address", addressState);
-      dispatch(setAddress(addressState))
+      // dispatch(setAddress(addressState))
     }
   }, [addressState]);
 
