@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AmericaExpressLogo from "../../assets/american-express.png";
 import VisaLogo from "../../assets/visa-logo.png";
 import MasterCardLogo from "../../assets/MasterCard.png";
-import PaypalLogo from "../../assets/Paypal.png";
+import PaypalLogo from "../../assets/PayPal.png";
 import { Link } from "react-router-dom";
 
 import "./metodoPago.scss";

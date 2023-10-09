@@ -1,5 +1,5 @@
 import React from "react";
-import BodySellers from "../../components/homeVendorsComponents/body/BodySellers";
+import BodySellers from "../../components/homeSellerComponent/body/BodySellers";
 
 const HomeSellers = () => {
   return (

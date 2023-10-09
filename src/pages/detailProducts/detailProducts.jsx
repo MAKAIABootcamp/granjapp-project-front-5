@@ -15,12 +15,24 @@ const DetailProduct = () => {
   const [product, setproduct] = useState({});
 
   useEffect(() => {
-    const getProduct = async () => {
-      const productData = await getProductById(params.id);
-      setproduct(productData);
-    };
-    getProduct();
+    if (params.id){
+      const getProduct = async () => {
+        const productData = await getProductById(params.id);
+        setproduct(productData);
+      };
+      getProduct();
+    }
   }, [params.id]);
+
+  useEffect(() => {
+    if (params.category){
+      const getProduct = async () => {
+        const productData = await getProductById(params.category);
+        setproduct(productData);
+      };
+      getProduct();
+    }
+  }, [params.category]);
 
   // console.log(`width: ${width}, height: ${height}`);
 
@@ -28,15 +40,15 @@ const DetailProduct = () => {
     <>
       {/* This will disappear when the window is less than 500 pixels wide. */}
       {product && width <= 380 ? (
-        <div className="bg-gradient-to-b from-white to-[#d69f65] w-full fondo">
+        <div className="bg-gradient-to-b  w-full fondo">
           <DetailProductsMobile product={product} />
         </div>
-      ) : product && width > 380 && width <= 768 && height <= 1024 ? (
-        <div className="bg-gradient-to-b from-white to-[#ffbc74] w-full h-[80vh] max-h-full fondo">
+      ) : product && width > 380 && width <= 768  ? (
+        <div className="bg-gradient-to-b  w-full h-[80vh] max-h-full fondo">
           <DetailProductsTablet product={product} />
         </div>
       ) : (
-        <div className="bg-gradient-to-b from-white to-[#ffbc74] w-full h-[80vh] max-h-full fondo">
+        <div className="bg-gradient-to-b  w-full h-[80vh] max-h-full fondo">
           <DetailProductsLaptop product={product} />
         </div>
       )}

@@ -49,11 +49,11 @@ export const ProductCard = ({ product, activeComponent }) => {
   useEffect(() => {
     const getRating = async () => {
       const rat = await getRatingByProduct(product.id);
-      if (rat){
-        const ratProm = rat.reduce((total, r) => total + r.ratin, 0) / rat.length;
+      if (rat) {
+        const ratProm =
+          rat.reduce((total, r) => total + r.ratin, 0) / rat.length;
         setRating(Math.round(ratProm));
       }
-      
     };
     getRating();
   }, []);
@@ -90,53 +90,67 @@ export const ProductCard = ({ product, activeComponent }) => {
   };
 
   return (
-    <section key={product.id+"card"} className="card-product-container">
-      <img src={product.url} className="img-logo" />
-      <div className="infoProduct-card-container">
-        <h3 className="h3-title">{toTitleCase(product.name)}</h3>
-        <div role="group" className="rating">
-          {arrayRange(5, 1, -1).map((ix) => (
-            <React.Fragment key={ix}  >
-              <input
-                type="radio"
-                value={ix}
-                name="rating"
-                id={"star" + ix}
-                disabled
-                checked={rating === ix ? true : false}
-              />
-              <label htmlFor={"star" + ix}>
-                <IoIosStar />
-              </label>
-            </React.Fragment>
-          ))}
-        </div>
-        <p className="lil-info">
-          x{product.weight}
-          {product.unity}
-        </p>
-        <div className="domi-info">
-          <div className="cost-domi-section">
-            {/* <img src={motoIcon} alt="moto-icon" /> */}
-            <p>{currencyFormat(product.cost)}</p>
+    <section
+      key={product.id + "card"}
+      className="flex hover:bg-green-100  m-3 flex-col h-auto items-center rounded-lg border-2 bg-white border-[#34d116] "
+    >
+      <img
+        src={product.url}
+        className="object-cover w-full rounded-t-lg h-[50%]"
+      />
+      <div className="flex items-center justify-center">
+        <div className="flex flex-col justify-between p-4 leading-normal">
+          <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+            {toTitleCase(product.name)}
+          </h3>
+          <hr />
+          <div className="inline-flex space-x-4">
+            <p className="">
+              x{product.weight}
+              {product.unity}
+            </p>
+            <div className="domi-info">
+              <div className="cost-domi-section">
+                {/* <img src={motoIcon} alt="moto-icon" /> */}
+                <p>{currencyFormat(product.cost)}</p>
+              </div>
+            </div>
+          </div>
+          <span>{product.description}</span>
+          <div role="group" className="rating mx-auto py-4">
+            {arrayRange(5, 1, -1).map((ix) => (
+              <React.Fragment key={ix}>
+                <input
+                  type="radio"
+                  value={ix}
+                  name="rating"
+                  id={"star" + ix}
+                  disabled
+                  checked={rating === ix ? true : false}
+                />
+                <label htmlFor={"star" + ix}>
+                  <IoIosStar />
+                </label>
+              </React.Fragment>
+            ))}
           </div>
         </div>
-      </div>
-      <div className="flex space-x-5 items-end justify-end w-auto px-3 ml-auto ">
-        <button
-          type="button"
-          onClick={() => activeComponent(product)}
-          className="bg-green-600 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
-        >
-          <GrEdit className="w-5 h-5" />
-        </button>
-        <button
-          type="button"
-          onClick={handleDelete}
-          className="bg-red-400 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
-        >
-          <MdDeleteForever className="w-5 h-5" />{" "}
-        </button>
+        <div className="flex-col items-center justify-center w-auto px-3 mr-5 space-y-5 ">
+          <button
+            type="button"
+            onClick={() => activeComponent(product)}
+            className="bg-green-600 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
+          >
+            <GrEdit className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="bg-red-400 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
+          >
+            <MdDeleteForever className="w-5 h-5" />{" "}
+          </button>
+        </div>
       </div>
     </section>
   );

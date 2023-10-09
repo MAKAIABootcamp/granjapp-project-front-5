@@ -31,6 +31,10 @@ export const granjAppSlice = createSlice({
       state.cart.push(action.payload);
     },
 
+    setCart: (state, action) => {
+      state.cart = action.payload;
+    },
+
     setCompras: (state, action) => {
       state.compras = action.payload;
     },
@@ -174,6 +178,7 @@ export const {
   updatePost,
   setSaving,
   addToCart,
+  setCart,
   removeFromCart,
   updateCartItemQuantity,
   updateCartItemSubtotal,

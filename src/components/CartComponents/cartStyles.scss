@@ -8,8 +8,7 @@
         justify-content: center;
         align-items: center;
         padding: 10px;
-        margin-left: 20%;
-        margin-top: 30px;
+        margin: auto;
         
         
         & .card-productCart-container{
@@ -56,16 +55,17 @@
             & .infoProduct-add-container{
 
                 width: 90%;
-                margin-left: 5%;
+                margin: auto;
                 padding: 10px;
                 
                 & .info-price-container{
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    margin: auto;
                     & .price-container{
 
-                        margin-right: 10%;
+                        width: auto;
                         
                         & .price{
                             font-size: 18px;
@@ -91,14 +91,14 @@
 
                 }
                 & .img-nameProduct-container{
-                    display: flex;
+                    display: table-column;
                     align-items: center;
+                    justify-content: center;
                     margin-bottom: 10px;
 
                     & img {
-                        width: 100px;
+                        width: 50%;
                         height: auto;
-                        margin-right: 10px;
                     }
 
                     & .lil-info{

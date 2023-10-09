@@ -8,7 +8,7 @@ import {
   setDoc,
   where,
   getDoc,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore/lite";
 import { loadPosts } from "../../helpers/loadPosts";
 import { loadProducts } from "../../helpers/loadProducts";
@@ -29,6 +29,7 @@ import {
   setProcessedPurchase,
   setCompras,
   setLikes,
+  setCart,
 } from "./granjAppSlice";
 import { FirebaseDB } from "../../firebase/firebaseConfig";
 
@@ -49,6 +50,16 @@ export const startLoadingProducts = () => {
 
     const product = await loadProducts();
     dispatch(setProduct(product));
+  };
+};
+
+export const startLoadingCar = () => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    if (!uid) throw new Error("El UID del usuario no existe");
+
+    const car = await getCarByUserId(uid);
+    dispatch(setCart(car));
   };
 };
 
@@ -79,11 +90,6 @@ export const startNewPost = (newPost) => {
     const { uid } = getState().auth;
     if (!uid) throw new Error("El UID del usuario no existe");
 
-    // const newPost = {
-    //   addImage: [],
-    //   image: "",
-    //   description: "",
-    // };
 
     const newDoc = collection(FirebaseDB, `posts`);
     const response = await addDoc(newDoc, newPost);
@@ -114,13 +120,49 @@ export const startSavePost = () => {
   };
 };
 
+export const getCarByProductUserId = async (productId, userId) => {
+  const cartItemRef = query(
+    collection(FirebaseDB, "carrito"),
+    where("productId", "==", productId),
+    where("userId", "==", userId)
+  );
+  const car = await getDocs(cartItemRef);
+  if (!car.empty) {
+    return car.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+  } else {
+    return [];
+  }
+};
+
+export const getCarByUserId = async (userId) => {
+  const cartItemRef = query(
+    collection(FirebaseDB, "carrito"),
+    where("userId", "==", userId)
+  );
+  const car = await getDocs(cartItemRef);
+  if (!car.empty) {
+    return car.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+  } else {
+    return [];
+  }
+};
+
 export const addToCartFirestore = (item) => {
   return async (dispatch) => {
     try {
-      const cartCollection = collection(FirebaseDB, `carrito`);
-      await addDoc(cartCollection, item);
-      dispatch(addToCart(item));
-      console.log("Elemento agregado a la colección de carrito Firestore.");
+      const cars = await getCarByProductUserId(item.productId, item.userId);
+      if (cars.length > 0) {
+        console.log("Elemento ya lo tienes en el carrito");
+      } else {
+        const cartCollection = collection(FirebaseDB, `carrito`);
+        await addDoc(cartCollection, item);
+        dispatch(addToCart(item));
+        console.log("Elemento agregado a la colección de carrito Firestore.");
+      }
     } catch (error) {
       console.error(
         "Error al agregar elemento a la colección de carrito Firestore:",
@@ -130,13 +172,16 @@ export const addToCartFirestore = (item) => {
   };
 };
 
-export const updateCartFirestore = async (productId, newQuantity) => {
+export const updateCartFirestore = async (
+  id,
+  newQuantity,
+  price
+) => {
   try {
-    const cartItemRef = doc(FirebaseDB, "carrito", productId);
-
-    await updateDoc(cartItemRef, {
+    
+    await updateDoc(doc(FirebaseDB, "carrito", id), {
       quantity: newQuantity,
-      subtotal: item.price * newQuantity,
+      subtotal: price * newQuantity,
     });
 
     console.log("Cantidad del producto actualizada con éxito en Firestore.");
@@ -216,20 +261,26 @@ export const likesAction = (idPost, uid) => {
           ...post.data(),
         };
 
-        const {likes: currentLikes} = singlePost;
+        const { likes: currentLikes } = singlePost;
 
-        const likes = (currentLikes && currentLikes.length && Array.isArray(currentLikes))? currentLikes : [];
+        const likes =
+          currentLikes && currentLikes.length && Array.isArray(currentLikes)
+            ? currentLikes
+            : [];
         console.log(likes);
-        console.log(singlePost)
-        console.log(singlePost.likes)
+        console.log(singlePost);
+        console.log(singlePost.likes);
         // const newLikes = likes.some(uid)
         //   ? likes.filter((item) => item !== uid)
         //   : likes.push(uid);
 
-          const otherLikes = Array.isArray(likes)? likes.includes(uid)?likes.filter((item) => item !== uid)
-          : likes.push(uid): [uid]
+        const otherLikes = Array.isArray(likes)
+          ? likes.includes(uid)
+            ? likes.filter((item) => item !== uid)
+            : likes.push(uid)
+          : [uid];
 
-          console.log(otherLikes);
+        console.log(otherLikes);
 
         await updateDoc(postReference, {
           likes: otherLikes,

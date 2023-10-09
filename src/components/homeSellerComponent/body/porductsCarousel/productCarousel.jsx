@@ -14,7 +14,7 @@ export const ProductCarousel = (prop) => {
 
   const [products, setProducts] = useState(product);
   return (
-    <div className="carouselProducts-container">
+    <div className="grid shadow-sm grid-cols-3 border border-gray-200 rounded-lg">
       {prop.products && (
         products.map((product) => (
           <ProductCard

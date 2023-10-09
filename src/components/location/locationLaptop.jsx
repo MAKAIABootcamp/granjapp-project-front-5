@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Map from "../MapComponent/Map";
 import { selectAddress, setAddress } from "../../store/userAuth/userAuthSlice";
-// import GeoLocation from "../../services/geolocalization";
+
 
 const LocationLaptop = () => {
   const [showLocation, setShowLocation] = useState(false);

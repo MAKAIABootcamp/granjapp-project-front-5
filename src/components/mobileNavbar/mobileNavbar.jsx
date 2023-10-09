@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { startNewPost } from "../../store/granjApp/granjAppThunks";
 import { setActivePost } from "../../store/granjApp/granjAppSlice";
 
-import "../../styles/mobileNavBar.scss"
+import "./mobileNavbar.scss"
 
 const MobileNavbar = () => {
 
