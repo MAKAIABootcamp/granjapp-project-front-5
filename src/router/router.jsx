@@ -29,7 +29,7 @@ const Router = () => {
       {status === "authenticated" ? (
         <>
           {user.userType && (<Layout />)}
-          <main className="mx-5 pt-2">
+          <main className="lg:mx-5 pt-4 sm:mx-1">
             <Routes>
               {user.userType && user.userType == "comprador" ? (
                 <>
@@ -39,7 +39,6 @@ const Router = () => {
                   <Route path="foro" element={<ForoPage />} />
                   <Route path="detailStore" element={<ShopDetails />} />
                   <Route path="product/:id" element={<DetailProduct />} />
-                  <Route path="product/:category" element={<DetailProduct />} />
                   <Route path="store" element={<ShopsCarousel />} />
                   <Route path="products" element={<ProductCarousel />} />
                   <Route path="shoppingCart" element={<ShoppingCart />} />

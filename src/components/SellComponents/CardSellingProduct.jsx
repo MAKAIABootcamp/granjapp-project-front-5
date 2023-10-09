@@ -62,9 +62,9 @@ const CardSellingProduct = ({ compra }) => {
   //   navigate("shopping");
   // };
   return (
-    <div className="w-full p-5 m-5 bg-white border border-gray-200 rounded-lg shadow ">
-      <img className="rounded-t-lg" src={url} alt="" />
-      <div className="inline-flex mx-auto items-center justify-between">
+    <div className="w-full lg:p-5 lg:m-5 m-2 p-2 bg-white border border-gray-200 rounded-lg shadow ">
+      <img className="rounded-t-lg object-cover lg:w-full md:w-full" src={url} alt="" />
+      <div className="inline-flex mx-auto w-full items-center justify-between">
         <div className="p-5 flex-col">
           <h2 className="mb-2 capitalize text-xl font-bold tracking-tight text-gray-900 ">
             {name}
@@ -76,7 +76,7 @@ const CardSellingProduct = ({ compra }) => {
           <p>Cantidad: {quantity}</p>
           <span>comprador: {compra.comprador}</span>
         </div>
-        <div className="p-5 flex items-center justify-center w-auto ml-auto">
+        <div className="lg:p-5 p-2 flex items-center justify-center w-auto ml-auto">
           <button className="text-green-600" title="Enviar producto" >
             <BsSendCheck className="w-12 h-12 animate-pulse " />
           </button>

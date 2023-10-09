@@ -50,8 +50,12 @@ export const startLoadingSales = () => {
     const { uid } = getState().auth;
     if (!uid) throw new Error("El UID del usuario no existe");
     const store = await getStoreByUser(uid)
-    const product = await getSalesByStore(store.id);
-    dispatch(setCompras(product));
+    if (store){
+      const product = await getSalesByStore(store.id);
+      dispatch(setCompras(product));
+    }
+    
+    
   };
 }
 

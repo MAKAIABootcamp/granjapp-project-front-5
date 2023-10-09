@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setActiveShop } from "../../../../store/granjApp/granjAppSlice";
-import motoIcon from "../../../../assets/icons/moto-icon.svg";
-import ubiIcon from "../../../../assets/icons/ubi-icon.svg";
 import "./productCarousel.scss";
 import "./productRating.scss";
 import { useNavigate } from "react-router";
 import { GrEdit } from "react-icons/gr";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
-import { deleteProduct } from "../../../../firebase/Products";
-import { getRatingByProduct } from "../../../../firebase/RatingProducts";
+import { deleteProduct } from "../../../../../firebase/Products";
+import { getRatingByProduct } from "../../../../../firebase/RatingProducts";
 import { IoIosStar } from "react-icons/io";
 
 const arrayRange = (start, stop, step) => {
@@ -98,7 +94,7 @@ export const ProductCard = ({ product, activeComponent }) => {
         src={product.url}
         className="object-cover w-full rounded-t-lg h-[50%]"
       />
-      <div className="flex items-center justify-center">
+      <div className="flex-col items-center justify-center">
         <div className="flex flex-col justify-between p-4 leading-normal">
           <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
             {toTitleCase(product.name)}
@@ -135,11 +131,11 @@ export const ProductCard = ({ product, activeComponent }) => {
             ))}
           </div>
         </div>
-        <div className="flex-col items-center justify-center w-auto px-3 mr-5 space-y-5 ">
+        <div className="flex items-center justify-center w-auto mx-auto p-1">
           <button
             type="button"
             onClick={() => activeComponent(product)}
-            className="bg-green-600 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
+            className="bg-green-600 hover:bg-green-800 rounded-full w-10 h-10 mx-auto flex justify-center items-center text-center"
           >
             <GrEdit className="w-5 h-5" />
           </button>

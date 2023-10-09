@@ -56,14 +56,14 @@ const DetailProductsLaptop = ({ product }) => {
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if (product.id) {
+    if (product) {
       const getRating = async () => {
         const rattingFire = await getRatingByProductUser(user.uid, product.id);
         setRating(rattingFire);
       };
       getRating();
     }
-  }, [product.id]);
+  }, [product]);
 
   const handleMinusButton = () => {
     if (countProcut > 0) {
@@ -125,7 +125,7 @@ const DetailProductsLaptop = ({ product }) => {
   };
 
   return (
-    product.id && (
+    product && (
       <div className="w-full h-full flex mx-auto my-auto ">
         <div className="flex-col  justify-center mx-auto ">
           

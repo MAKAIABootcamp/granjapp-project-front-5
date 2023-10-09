@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FilterButtons } from "./filterButtons/filterButtons";
-import { ProductCarousel } from "./porductsCarousel/productCarousel";
+import { ProductCarousel as ProductCarouselLaptop } from "./porductsCarousel/Laptop/productCarousel";
+import { ProductCarousel as ProductCarouselTablet } from "./porductsCarousel/Tablet/productCarousel";
+import { ProductCarousel as ProductCarouselMobil } from "./porductsCarousel/Mobil/productCarousel";
 import "./body.scss";
 import { getStoreByUser } from "../../../firebase/Store";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +16,7 @@ import {
 import ProductForm from "./ProductsCRUD/ProductForm";
 import ProductFormUpdate from "./ProductsCRUD/ProductFormUpdate";
 
-const BodySellers = () => {
+const BodySellers = ({ width }) => {
   const [isProduct, setIsProduct] = useState(true);
   const [isAdd, setIsAdd] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -31,8 +33,8 @@ const BodySellers = () => {
   useEffect(() => {
     if (user.uid) {
       const getStore = async () => {
-        const storeRef = await getStoreByUser(user.uid)
-        setStore(storeRef)
+        const storeRef = await getStoreByUser(user.uid);
+        setStore(storeRef);
 
         const products = await getProductByStore(storeRef.id);
         setProducts(products);
@@ -42,10 +44,6 @@ const BodySellers = () => {
     }
   }, [user]);
 
-   
-
-
-
   //* @type HTML.target /
   const activeComponent = async (value) => {
     const products = await getProductByStore(store.id);
@@ -53,12 +51,12 @@ const BodySellers = () => {
     dispatch(setProductStorage(products));
 
     if (value.id) {
-      setProduct(value)
+      setProduct(value);
       setIsProduct(false);
       setIsUpdate(true);
       setIsAdd(false);
     } else {
-      setProduct({})
+      setProduct({});
       switch (value) {
         case "products":
           setIsProduct(true);
@@ -79,25 +77,48 @@ const BodySellers = () => {
     }
   };
 
- 
   return (
     <>
-    {products.length > 0 && (
-      <div className="filterButtons-container">
+  {products.length > 0 && (
+    <div className="filterButtons-container pb-10">
       {store && <BannerStore store={store} />}
       <FilterButtons activeComponent={activeComponent} />
-      {isProduct && (
-        <ProductCarousel
-          activeComponent={activeComponent}
-          products={products}
-        />
-      )}
-      {isAdd && <ProductForm storeId={store.id} />}
-      {isUpdate && <ProductFormUpdate product={product} />}
+      {width === "Laptop" &&
+        (isProduct ? (
+          <ProductCarouselLaptop
+            activeComponent={activeComponent}
+            products={products}
+          />
+        ) : isAdd ? (
+          <ProductForm storeId={store.id} />
+        ) : (
+          isUpdate && <ProductFormUpdate product={product} />
+        ))}
+      {width === "Tablet" &&
+        (isProduct ? (
+          <ProductCarouselTablet
+            activeComponent={activeComponent}
+            products={products}
+          />
+        ) : isAdd ? (
+          <ProductForm storeId={store.id} />
+        ) : (
+          isUpdate && <ProductFormUpdate product={product} />
+        ))}
+      {width === "Mobil" &&
+        (isProduct ? (
+          <ProductCarouselMobil
+            activeComponent={activeComponent}
+            products={products}
+          />
+        ) : isAdd ? (
+          <ProductForm storeId={store.id} />
+        ) : (
+          isUpdate && <ProductFormUpdate product={product} />
+        ))}
     </div>
-    )}
-      
-    </>
+  )}
+</>
   );
 };
 

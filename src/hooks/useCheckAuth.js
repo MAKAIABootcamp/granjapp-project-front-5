@@ -45,11 +45,11 @@ export const useCheckAuth = () => {
         })
       );
       // dispatch(setUserType(userDoc.userType))
-      dispatch(startLoadingSales());
-      dispatch(startLoadingShops());
-      dispatch(startLoadingProducts());
-      dispatch(startLoadingPromos());
-      dispatch(startLoadingCar());
+      dispatch(await startLoadingSales());
+      dispatch(await startLoadingShops());
+      dispatch(await startLoadingProducts());
+      dispatch(await startLoadingPromos());
+      dispatch(await  startLoadingCar());
     });
   }, []);
   return {

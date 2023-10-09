@@ -24,15 +24,6 @@ const DetailProduct = () => {
     }
   }, [params.id]);
 
-  useEffect(() => {
-    if (params.category){
-      const getProduct = async () => {
-        const productData = await getProductById(params.category);
-        setproduct(productData);
-      };
-      getProduct();
-    }
-  }, [params.category]);
 
   // console.log(`width: ${width}, height: ${height}`);
 
