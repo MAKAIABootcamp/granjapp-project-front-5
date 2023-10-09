@@ -25,6 +25,14 @@ export const signInWithGoogle = async (userType) => {
     // const credentials = GoogleAuthProvider.credentialFromResult (result);
     const { displayName, email, photoURL, uid } = result.user;
 
+    await updateProfile(result.user, { displayName, photoURL });
+
+    await setDoc(doc(FirebaseDB, "usuarios", uid), {
+      email,
+      displayName,
+      userType: "comprador",
+    });
+
     return {
       ok: true,
 
@@ -67,6 +75,7 @@ export const registerUserWithEmailPassword = async ({
       password
     );
     const { uid } = resp.user;
+    
 
     await updateProfile(resp.user, { displayName, photoURL });
 
