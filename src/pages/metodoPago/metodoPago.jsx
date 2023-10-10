@@ -3,16 +3,14 @@ import AmericaExpressLogo from "../../assets/american-express.png";
 import VisaLogo from "../../assets/visa-logo.png";
 import MasterCardLogo from "../../assets/MasterCard.png";
 import PaypalLogo from "../../assets/PayPal.png";
-import { Link } from "react-router-dom";
-
+import { useLocation,useNavigate  } from "react-router-dom";
 import "./metodoPago.scss";
-import { useNavigate } from "react-router-dom";
-import { FiArrowLeft, FiArrowRight, FiLock } from "react-icons/fi";
+import { FiArrowRight} from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
-import { setProcessedPurchase } from "../../store/granjApp/granjAppSlice";
+
 import Swal from "sweetalert2";
-import { addToPurchase } from "../../store/granjApp/granjAppThunks";
+import { addToPurchase, removeCartItemFirestore } from "../../store/granjApp/granjAppThunks";
 
 const formData = {
   nameBuyer: "",
@@ -32,6 +30,11 @@ function MetodoPagos() {
   const handleCardSelection = (cardType) => {
     setSelectedCard(cardType);
   };
+  const location = useLocation();
+const queryParams = new URLSearchParams(location.search);
+
+console.log(queryParams.get("cart"));
+
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -46,7 +49,7 @@ function MetodoPagos() {
 
  const dispatch = useDispatch();
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
     setFormSubmitted(true);
     
@@ -60,7 +63,9 @@ function MetodoPagos() {
     console.log("data", formData)
     dispatch(addToPurchase(formData));
     Swal.fire("Felicitaciones", "Has realizado tu pago exitosamente, puedes ver los detalles de tu pedido en el menú mis pedidos", "success")
+    dispatch(await removeCartItemFirestore(queryParams.get("cart")));
     navigate("/purchaseTracking")
+    
   };
 
   return (

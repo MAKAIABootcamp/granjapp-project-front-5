@@ -30,15 +30,15 @@ export const CardAddedProduct = ({
     setNewQuantity(newQuantity+1);
     const newSubtotal = newQuantity * cost;
     setSubtotal(newSubtotal);
-    dispatch(updateCartItemSubtotal(id, newQuantity, newSubtotal)); 
+    dispatch(updateCartItemSubtotal(id, newQuantity, newSubtotal, productId)); 
 
     const newTotal = newSubtotal + 4000;
     dispatch(updateCartItemTotal(id, newTotal));
-    dispatch(updateCartItemFirestore(id, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
+    // dispatch(updateCartItemFirestore(id, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
   };
 
   const handleDecrement = () => {
-    if (quantity > 1) {
+    if (newQuantity > 1) {
       setNewQuantity(newQuantity-1);
       const newSubtotal = newQuantity * cost;
       setSubtotal(newSubtotal);
@@ -46,7 +46,7 @@ export const CardAddedProduct = ({
 
       const newTotal = newSubtotal + 4000;
     dispatch(updateCartItemTotal(id, newTotal));
-    dispatch(updateCartItemFirestore(id, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
+    // dispatch(updateCartItemFirestore(id, { quantity: newQuantity, subtotal: newSubtotal, total: newTotal }));
     }
   };
 
@@ -65,12 +65,12 @@ export const CardAddedProduct = ({
         fecha: new Date(),
         comprador: ""
       }))
-    navigate("shopping");
+    navigate(`shopping?cart=${id}`);
 
   }
   return (
     <>
-      <div className="productsCart-container">
+  <div className="productsCart-container">
         <section className="card-productCart-container">
           <div className="titleShop-deleteButton-container">
             <h3 className="h3-title">{storeId}</h3>
@@ -121,6 +121,7 @@ export const CardAddedProduct = ({
           </div>
         </section>
       </div>
+     
     </>
   );
 };

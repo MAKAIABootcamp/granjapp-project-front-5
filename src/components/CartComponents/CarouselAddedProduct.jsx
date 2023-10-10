@@ -7,19 +7,21 @@ export const CarouselAddedProduct = () => {
     const {cart} = useSelector ( state => state.granjApp);
 
   return (
-    <div >
+    cart.length > 0 && ( 
+      
+      <div >
 
-    {
-
-      cart.map ( cart => (
-        <CardAddedProduct key={cart.id} {...cart} />
-      ))
-     
-    }
-   
-    
-   
+      {
   
-  </div>
+        cart.map ( cart => (
+          <CardAddedProduct key={cart.id} {...cart} />
+        ))
+       
+      }
+     
+      
+     
+    
+    </div>)
   )
 }

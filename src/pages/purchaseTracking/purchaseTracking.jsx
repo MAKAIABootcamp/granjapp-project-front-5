@@ -1,13 +1,12 @@
 import React from "react";
 import arrow from "../../assets/icons/arrow-circle.svg";
 import "./salesTracking.scss";
-import StatusBar from "../../components/statusBar/StatusBar";
-import save from "../../assets/icons/save.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getComprasByUserId } from "../../store/granjApp/granjAppThunks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { setActivePurchasedProduct } from "../../store/granjApp/granjAppSlice";
+
 
 export const PurchaseTracking = ({
   id,
