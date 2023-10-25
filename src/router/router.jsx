@@ -25,7 +25,7 @@ import DispatchProducts from "../pages/DispathProducts/DispathProducts";
 const Router = () => {
   const { status, user } = useCheckAuth();
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/granjapp-project-front-5">
       {status === "authenticated" ? (
         <>
           {user.userType && <Layout />}
